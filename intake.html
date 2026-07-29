@@ -11,19 +11,29 @@
   body { font-family: 'Instrument Sans', sans-serif; background: #070033; color: #ffffff; min-height: 100vh; }
 
   .header {
-    padding: 20px 40px;
+    padding: 16px 40px;
     border-bottom: 1px solid rgba(255,255,255,0.1);
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  .logo {
+  .logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .logo-wrap img {
+    height: 36px;
+    width: auto;
+  }
+  .logo-text {
     font-family: 'DM Serif Display', serif;
     font-size: 22px;
     color: white;
-    text-decoration: none;
+    letter-spacing: -0.01em;
   }
-  .logo span { color: #FF6632; }
+  .logo-text span { color: #FF6632; }
   .back-link {
     font-size: 13px;
     color: rgba(255,255,255,0.5);
@@ -67,7 +77,7 @@
   }
   .trust-item {
     font-size: 12px;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.45);
     display: flex;
     align-items: center;
     gap: 6px;
@@ -77,12 +87,13 @@
   .form-container {
     max-width: 780px;
     margin: 0 auto;
-    padding: 0 24px 80px;
+    padding: 32px 24px 80px;
   }
   .form-wrap {
     background: white;
     border-radius: 10px;
     overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
   }
   .form-wrap iframe {
     width: 100%;
@@ -93,8 +104,8 @@
     text-align: center;
     margin-top: 24px;
     font-size: 12px;
-    color: rgba(255,255,255,0.35);
-    line-height: 1.6;
+    color: rgba(255,255,255,0.3);
+    line-height: 1.7;
   }
   .neutral-badge {
     display: inline-block;
@@ -110,7 +121,9 @@
   }
 
   @media (max-width: 600px) {
-    .header { padding: 16px 20px; }
+    .header { padding: 14px 20px; }
+    .logo-wrap img { height: 28px; }
+    .logo-text { font-size: 18px; }
     .trust-row { gap: 14px; }
   }
 </style>
@@ -118,7 +131,10 @@
 <body>
 
 <header class="header">
-  <a class="logo" href="/">Valadisse<span>.</span></a>
+  <a class="logo-wrap" href="/">
+    <img src="/logo.png" alt="Valadisse logo">
+    <span class="logo-text">Valadisse<span>.</span></span>
+  </a>
   <a class="back-link" href="/">← Back to site</a>
 </header>
 
