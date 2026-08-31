@@ -1,0 +1,7 @@
+# The consulting intake form is retired. Old outreach links still point here,
+# and the page promised a human-delivered diagnostic emailed back within 48
+# hours -- a thing that no longer exists. 301 rather than 302: the move is
+# permanent, and search engines should transfer any accumulated signal to the
+# scan rather than keep indexing a dead funnel.
+/intake        https://app.valadisse.com/scan  301!
+/intake.html   https://app.valadisse.com/scan  301!
