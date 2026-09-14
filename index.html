@@ -100,7 +100,7 @@
  
     /* Logo */
     .logo-img { height: 78px; width: auto; display: block; }
-    /* Below 640px the nav logo + hamburger no longer have room for the
+    /* Below 660px the nav logo + hamburger no longer have room for the
        full 78px-tall lockup (6.18:1 aspect ratio) without squeezing --
        measured against the app's nav (its tighter constraint: fixed
        "Pricing"/"Sign in" text, no hamburger collapse), which leaves
@@ -108,8 +108,15 @@
        - ~110px text). 24px (width ~148px) keeps a safety margin against
        that budget rather than sizing to the exact edge -- text-metric
        width can shift a few px with font-loading timing, and an exact
-       fit reintroduces the same squeeze on the next measurement. */
-    @media (max-width: 639px) {
+       fit reintroduces the same squeeze on the next measurement.
+
+       Threshold is 660px, not Tailwind's sm (640px): this site doesn't
+       need it -- its cheap hamburger icon clears 640 with room to
+       spare -- but the app's own crossover measured at 478.8/482.4px
+       (still ~1% short) right at 640, only clean by 660. Matched here
+       anyway so both properties switch at the same viewport width,
+       not just avoid distortion independently at each one. */
+    @media (max-width: 659px) {
       .logo-img { height: 24px; }
     }
     .logo-fallback {
