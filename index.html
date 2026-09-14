@@ -100,6 +100,15 @@
  
     /* Logo */
     .logo-img { height: 78px; width: auto; display: block; }
+    /* Below 640px the nav logo + hamburger no longer have room for the
+       full 78px-tall lockup (6.18:1 aspect ratio) without squeezing --
+       measured against the app's nav (its tighter constraint: fixed
+       "Pricing"/"Sign in" text, no hamburger collapse) down to a 320px
+       viewport, 27px is the largest height that stays under budget
+       everywhere from 320-639px on both properties. */
+    @media (max-width: 639px) {
+      .logo-img { height: 27px; }
+    }
     .logo-fallback {
       font-family: 'DM Serif Display', Georgia, serif;
       font-size: 22px;
