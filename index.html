@@ -521,6 +521,9 @@
       <a href="#" class="nav-link" onclick="showPage('how-it-works')" data-page="how-it-works">How It Works</a>
       <a href="#" class="nav-link" onclick="showPage('contact')" data-page="contact">Contact</a>
       <a href="https://app.valadisse.com/#pricing" class="nav-link">Pricing</a>
+      <!-- Added 2026-09-18: no sign-in or account-creation entry point
+           existed anywhere on this site before this. -->
+      <a href="https://app.valadisse.com/login" class="nav-link">Sign in</a>
       <a
         href="https://app.valadisse.com/scan"
         target="_blank"
@@ -548,6 +551,13 @@
   <a href="#" class="mobile-nav-link" onclick="showPage('how-it-works'); closeMobileMenu();">How It Works</a>
   <a href="#" class="mobile-nav-link" onclick="showPage('contact'); closeMobileMenu();">Contact</a>
   <a href="https://app.valadisse.com/#pricing" class="mobile-nav-link" onclick="closeMobileMenu();">Pricing</a>
+  <!-- Added 2026-09-18: no sign-in or account-creation entry point existed
+       anywhere on this site before this. "Create account" points to
+       Pricing -- there's no separate signup page on the marketing site
+       itself; the real Starter/Pro/Advisory forms live on that section
+       of the app. -->
+  <a href="https://app.valadisse.com/login" class="mobile-nav-link" onclick="closeMobileMenu();">Sign in</a>
+  <a href="https://app.valadisse.com/#pricing" class="mobile-nav-link" onclick="closeMobileMenu();">Create account</a>
   <a
     href="https://app.valadisse.com/scan"
     target="_blank"
@@ -1205,6 +1215,10 @@
     <div class="border-t pt-8 flex flex-col sm:flex-row justify-between items-center gap-4" style="border-color:rgba(255,255,255,0.08);">
       <p class="font-mono text-xs" style="color:rgba(255,255,255,0.3);">© 2026 Valadisse. All rights reserved.</p>
       <div class="flex items-center gap-5">
+        <!-- Added 2026-09-18: no sign-in or account-creation entry point
+             existed anywhere on this site before this. -->
+        <a href="https://app.valadisse.com/login" class="font-mono text-xs hover:text-white transition-colors" style="color:rgba(255,255,255,0.5);">Sign in</a>
+        <a href="https://app.valadisse.com/#pricing" class="font-mono text-xs hover:text-white transition-colors" style="color:rgba(255,255,255,0.5);">Create account</a>
         <a href="privacy.html" class="font-mono text-xs hover:text-white transition-colors" style="color:rgba(255,255,255,0.5);">Privacy Policy</a>
         <a href="terms.html" class="font-mono text-xs hover:text-white transition-colors" style="color:rgba(255,255,255,0.5);">Terms of Service</a>
         <span class="font-mono text-xs" style="color:rgba(255,255,255,0.3);">valadisse.com</span>
