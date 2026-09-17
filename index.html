@@ -1183,10 +1183,22 @@
       <!-- Logo + tagline -->
       <div>
         
+        <!-- White-arrow variant, not logo-lockup.svg (2026-09-18): that SVG's
+             arrow and wordmark are navy, near-invisible against this footer's
+             dark navy (#070033) background. logo-footer-white.png is an
+             existing brand asset (not newly created) whose background is
+             baked-in at exactly #070033 -- sampled pixel-for-pixel, not
+             assumed -- so it blends seamlessly despite not being transparent.
+             Sized by height, not width: its 2.61:1 aspect ratio is much
+             taller-per-unit-width than the SVG's 6.18:1 (that one's icon+
+             wordmark got stretched wide to fill the same height once the
+             tagline was dropped), so reusing the old width:100% rule would
+             have rendered this one much taller than before. 54px matches
+             what the SVG rendered at in this same 336px-wide slot. -->
         <img
-          src="logo-lockup.svg"
+          src="logo-footer-white.png"
           alt="Valadisse"
-          style="height:auto; width:100%; max-width:336px; margin-bottom:20px; display:block;"
+          style="height:54px; width:auto; margin-bottom:20px; display:block;"
         >
         <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.55);">San Francisco, CA</p>
       </div>
@@ -1199,6 +1211,11 @@
           <a href="#" onclick="showPage('services')" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">Services</a>
           <a href="#" onclick="showPage('how-it-works')" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">How It Works</a>
           <a href="#" onclick="showPage('contact')" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">Contact</a>
+          <!-- Moved here from the bottom utility row (2026-09-18) -- these
+               are primary navigation, not legal/utility links like Privacy
+               Policy/Terms, so they belong with Home/Services/etc. -->
+          <a href="https://app.valadisse.com/login" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">Sign in</a>
+          <a href="https://app.valadisse.com/#pricing" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">Create account</a>
         </div>
       </div>
  
@@ -1219,10 +1236,6 @@
     <div class="border-t pt-8 flex flex-col sm:flex-row justify-between items-center gap-4" style="border-color:rgba(255,255,255,0.08);">
       <p class="font-mono text-xs" style="color:rgba(255,255,255,0.3);">© 2026 Valadisse. All rights reserved.</p>
       <div class="flex items-center gap-5">
-        <!-- Added 2026-09-18: no sign-in or account-creation entry point
-             existed anywhere on this site before this. -->
-        <a href="https://app.valadisse.com/login" class="font-mono text-xs hover:text-white transition-colors" style="color:rgba(255,255,255,0.5);">Sign in</a>
-        <a href="https://app.valadisse.com/#pricing" class="font-mono text-xs hover:text-white transition-colors" style="color:rgba(255,255,255,0.5);">Create account</a>
         <a href="privacy.html" class="font-mono text-xs hover:text-white transition-colors" style="color:rgba(255,255,255,0.5);">Privacy Policy</a>
         <a href="terms.html" class="font-mono text-xs hover:text-white transition-colors" style="color:rgba(255,255,255,0.5);">Terms of Service</a>
         <span class="font-mono text-xs" style="color:rgba(255,255,255,0.3);">valadisse.com</span>
