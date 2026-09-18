@@ -528,6 +528,10 @@
            fixed here since it's out of scope, but not repeating it on a
            link I'm adding fresh. -->
       <a href="https://app.valadisse.com/login" class="nav-link" style="white-space:nowrap;">Sign in</a>
+      <!-- Missing entirely from desktop (2026-09-18) -- mobile got both
+           links, desktop only got Sign in. Same nowrap fix as Sign in
+           above, needed here too. -->
+      <a href="https://app.valadisse.com/#pricing" class="nav-link" style="white-space:nowrap;">Create account</a>
       <a
         href="https://app.valadisse.com/scan"
         target="_blank"
@@ -1193,12 +1197,19 @@
              taller-per-unit-width than the SVG's 6.18:1 (that one's icon+
              wordmark got stretched wide to fill the same height once the
              tagline was dropped), so reusing the old width:100% rule would
-             have rendered this one much taller than before. 54px matches
-             what the SVG rendered at in this same 336px-wide slot. -->
+             have rendered this one much taller than before.
+
+             78px, not 54px (2026-09-18 revision): 54px matched what the old
+             SVG happened to render at in this slot, but read as a tiny
+             thumbnail against the rest of the footer. 78px matches the
+             header nav logo's own height (.logo-img) exactly -- a real
+             reference point already established elsewhere in this repo,
+             not a new number picked freestanding. Renders ~204px wide at
+             this height, comfortably inside the 336px column. -->
         <img
           src="logo-footer-white.png"
           alt="Valadisse"
-          style="height:54px; width:auto; margin-bottom:20px; display:block;"
+          style="height:78px; width:auto; margin-bottom:20px; display:block;"
         >
         <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.55);">San Francisco, CA</p>
       </div>
