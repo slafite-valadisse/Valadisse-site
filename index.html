@@ -500,10 +500,36 @@
      STICKY NAV
 ════════════════════════════════════════ -->
 <nav id="site-nav" role="navigation" aria-label="Main navigation">
-  <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-24">
- 
+  <!-- max-w-6xl -> max-w-[1360px] 2026-09-30, nav bar only -- rest of the
+       page (hero, sections, footer) keeps max-w-6xl unchanged, same reading
+       width as before. This widens the CAP for very wide screens; it does
+       NOT by itself fix anything at the breakpoint's own edge, since below
+       1360px wide the container is still constrained by the viewport, not
+       by this max-width -- see the breakpoint change on the nav-links div
+       and the hamburger button below, which is the part that actually
+       closes the gap at 1280px. -->
+  <div class="max-w-[1360px] mx-auto px-6 flex items-center justify-between gap-8 h-24">
+
     <!-- Logo -->
-    <a href="#" onclick="showPage('home')" class="flex items-center" aria-label="Valadisse — Home">
+    <!-- flex-shrink-0 added 2026-09-30: at this container's former
+         max-width (1152px), logo (482px natural -- matching the same SVG's
+         natural width on app.valadisse.com exactly) + the desktop
+         nav-links group together exceeded the available space, and default
+         flexbox flex-shrink (1, browsers' own default) silently compressed
+         the logo -- not the nav links -- down to fit, since the logo
+         <img>'s own Tailwind-Preflight `max-width: 100%` rule let its flex
+         item shrink below its intrinsic size. Measured before this fix:
+         logo rendered 326px wide here vs 482px on app.valadisse.com, same
+         file, same 78px height -- a silent, gradually-worsening side
+         effect of nav items accumulating over several sessions (Contact,
+         Pricing, Sign in, Create account, the CTA button all added after
+         this nav's original spacing was set), never the logo intentionally
+         changing size. Never shrinking it again: if space ever runs out
+         here in the future, the nav links (not the logo) should be what
+         visibly needs attention -- which is exactly what would happen now,
+         since the breakpoint below only switches to this layout once
+         there's actually room for everything at its natural size. -->
+    <a href="#" onclick="showPage('home')" class="flex items-center flex-shrink-0" aria-label="Valadisse — Home">
       
       <img
         src="logo-lockup.svg"
@@ -515,7 +541,17 @@
     </a>
  
     <!-- Desktop nav links -->
-    <div class="hidden xl:flex items-center gap-8">
+    <!-- xl (1280px) -> min-[1360px] 2026-09-30, same pattern already used
+         elsewhere in this file for the same underlying problem (the
+         640->660 and lg->xl breakpoint moves above, both for "not enough
+         room yet"). 1280px was measured to be ~170px short of what this
+         layout actually needs once the logo is no longer allowed to shrink
+         (see the logo <a>'s own comment); no amount of trimming gaps alone
+         closed that without visibly cramming seven links plus a button.
+         1360px is the real point this layout first has enough width for
+         everything at its natural size -- matches the hamburger toggle
+         below, which must flip at the exact same threshold. -->
+    <div class="hidden min-[1360px]:flex items-center gap-8">
       <a href="#" class="nav-link active" onclick="showPage('home')" data-page="home">Home</a>
       <a href="#" class="nav-link" onclick="showPage('services')" data-page="services">Services</a>
       <a href="#" class="nav-link" onclick="showPage('how-it-works')" data-page="how-it-works">How It Works</a>
@@ -541,7 +577,10 @@
     </div>
  
     <!-- Mobile hamburger -->
-    <button class="hamburger xl:hidden" id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
+    <!-- xl -> min-[1360px]:hidden 2026-09-30, must match the nav-links
+         breakpoint above exactly -- otherwise there's a band of widths
+         where either both show at once or neither does. -->
+    <button class="hamburger min-[1360px]:hidden" id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
