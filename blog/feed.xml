@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Valadisse Blog</title>
+    <link>https://valadisse.com/blog/</link>
+    <atom:link href="https://valadisse.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>What changed in adtech, and what it means for your inventory.</description>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 09 Oct 2026 12:00:00 GMT</lastBuildDate>
+    <item>
+      <title>Buying agents will soon read your ad products first</title>
+      <link>https://valadisse.com/blog/buying-agents-will-soon-read-your-ad-products-first/</link>
+      <guid isPermaLink="true">https://valadisse.com/blog/buying-agents-will-soon-read-your-ad-products-first/</guid>
+      <pubDate>Fri, 09 Oct 2026 12:00:00 GMT</pubDate>
+      <category>Agentic buying</category>
+      <description>A new draft specification gives publishers a standard way to describe ad products so buying agents can read and compare them against a campaign brief. Inventory that an agent cannot read, verify, or price is unlikely to be part of that comparison.</description>
+    </item>
+  </channel>
+</rss>

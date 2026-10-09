@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <title>Buying agents will soon read your ad products first | Valadisse Blog</title>
+  <meta name="description" content="A new draft specification gives publishers a standard way to describe ad products so buying agents can read and compare them against a campaign brief. Inventory that an agent cannot read, verify, or price is unlikely to be part of that comparison.">
+  <link rel="canonical" href="https://valadisse.com/blog/buying-agents-will-soon-read-your-ad-products-first/">
+  <link rel="alternate" type="application/rss+xml" title="Valadisse Blog" href="https://valadisse.com/blog/feed.xml">
+  <meta property="og:title" content="Buying agents will soon read your ad products first | Valadisse Blog">
+  <meta property="og:description" content="A new draft specification gives publishers a standard way to describe ad products so buying agents can read and compare them against a campaign brief. Inventory that an agent cannot read, verify, or price is unlikely to be part of that comparison.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://valadisse.com/blog/buying-agents-will-soon-read-your-ad-products-first/">
+  <meta property="og:site_name" content="Valadisse">
+  <meta property="og:image" content="https://valadisse.com/logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Buying agents will soon read your ad products first | Valadisse Blog">
+  <meta name="twitter:description" content="A new draft specification gives publishers a standard way to describe ad products so buying agents can read and compare them against a campaign brief. Inventory that an agent cannot read, verify, or price is unlikely to be part of that comparison.">
+  <meta name="twitter:image" content="https://valadisse.com/logo.png">
+  <meta property="article:published_time" content="2026-10-09">
+  <meta property="article:section" content="Agentic buying">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Buying agents will soon read your ad products first","description":"A new draft specification gives publishers a standard way to describe ad products so buying agents can read and compare them against a campaign brief. Inventory that an agent cannot read, verify, or price is unlikely to be part of that comparison.","datePublished":"2026-10-09","dateModified":"2026-10-09","articleSection":"Agentic buying","mainEntityOfPage":"https://valadisse.com/blog/buying-agents-will-soon-read-your-ad-products-first/","image":"https://valadisse.com/logo.png","author":{"@type":"Person","name":"Stephan Lafite"},"publisher":{"@type":"Organization","name":"Valadisse","logo":{"@type":"ImageObject","url":"https://valadisse.com/logo.png"}}}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink:    '#070033',
+            paper:  '#FFFFFF',
+            rule:   '#EEEEEE',
+            muted:  '#4A4A4A',
+            accent: '#FF6632',
+            yellow: '#FBAC41',
+          },
+          fontFamily: {
+            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+            sans:  ['"Instrument Sans"', 'sans-serif'],
+            mono:  ['"DM Mono"', 'monospace'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ── Base ── */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Instrument Sans', sans-serif;
+      background: #FFFFFF;
+      color: #070033;
+      -webkit-font-smoothing: antialiased;
+    }
+ 
+    /* ── Scroll animations ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+ 
+    /* ── Page switching ── */
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+ 
+    /* ── Nav ── */
+    #site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: #FFFFFF;
+      border-bottom: 1px solid #EEEEEE;
+      transition: box-shadow 0.2s ease;
+    }
+    #site-nav.scrolled { box-shadow: 0 2px 16px rgba(7,0,51,0.07); }
+ 
+    /* Logo */
+    .logo-img { height: 78px; width: auto; display: block; }
+    /* Below 660px the nav logo + hamburger no longer have room for the
+       full 78px-tall lockup (6.18:1 aspect ratio) without squeezing --
+       measured against the app's nav (its tighter constraint: fixed
+       "Pricing"/"Sign in" text, no hamburger collapse), which leaves
+       only ~162px for the logo at a 320px viewport (320 - 48px padding
+       - ~110px text). 24px (width ~148px) keeps a safety margin against
+       that budget rather than sizing to the exact edge -- text-metric
+       width can shift a few px with font-loading timing, and an exact
+       fit reintroduces the same squeeze on the next measurement.
+
+       Threshold is 660px, not Tailwind's sm (640px): this site doesn't
+       need it -- its cheap hamburger icon clears 640 with room to
+       spare -- but the app's own crossover measured at 478.8/482.4px
+       (still ~1% short) right at 640, only clean by 660. Matched here
+       anyway so both properties switch at the same viewport width,
+       not just avoid distortion independently at each one. */
+    @media (max-width: 659px) {
+      .logo-img { height: 24px; }
+    }
+    .logo-fallback {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #070033;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+ 
+    /* Nav links */
+    .nav-link {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #4A4A4A;
+      text-decoration: none;
+      padding: 6px 0;
+      position: relative;
+      transition: color 0.15s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #FF6632;
+      transition: width 0.2s ease;
+    }
+    .nav-link:hover { color: #070033; }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link.active { color: #070033; }
+    .nav-link.active::after { width: 100%; }
+ 
+    /* Mobile menu */
+    #mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #FFFFFF;
+      z-index: 100;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    #mobile-menu.open { display: flex; }
+    .mobile-nav-link {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 2rem;
+      color: #070033;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .mobile-nav-link:hover { color: #FF6632; }
+ 
+    /* ── Buttons ── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FF6632;
+      color: #FFFFFF;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 13px 28px;
+      border-radius: 4px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+      white-space: nowrap;
+    }
+    .btn-primary:hover {
+      background: #e5531e;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(255,102,50,0.3);
+    }
+    .btn-primary:active { transform: translateY(0); }
+ 
+    .btn-primary-dark {
+      background: #070033;
+      color: #FFFFFF;
+    }
+    .btn-primary-dark:hover {
+      background: #0e0055;
+      box-shadow: 0 4px 16px rgba(7,0,51,0.25);
+    }
+ 
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      color: #070033;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 12px 24px;
+      border-radius: 4px;
+      border: 1.5px solid #EEEEEE;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+    .btn-ghost:hover {
+      border-color: #070033;
+      background: #f8f8fc;
+    }
+ 
+    /* ── Hero ── */
+    .hero-section {
+      background: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid #EEEEEE;
+    }
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255,102,50,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-section::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: -5%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(251,172,65,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+ 
+    /* ── Positioning statement ── */
+    .positioning-bar {
+      border-left: 3px solid #FF6632;
+      padding-left: 24px;
+    }
+ 
+    /* ── Service tiles (home) ── */
+    .service-tile {
+      background: #FFFFFF;
+      border: 1px solid #EEEEEE;
+      border-radius: 8px;
+      padding: 20px;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      cursor: default;
+    }
+    .service-tile:hover {
+      border-color: #FF6632;
+      box-shadow: 0 4px 24px rgba(255,102,50,0.08);
+      transform: translateY(-2px);
+    }
+ 
+    /* ── Qualifier checks ── */
+    .check-mark {
+      color: #FF6632;
+      font-weight: 700;
+      flex-shrink: 0;
+      font-size: 16px;
+    }
+ 
+    /* ── Service cards (services page) ── */
+    .service-card {
+      background: #FFFFFF;
+      border: 1px solid #EEEEEE;
+      border-radius: 10px;
+      padding: 32px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .service-card:hover {
+      border-color: rgba(255,102,50,0.3);
+      box-shadow: 0 4px 32px rgba(7,0,51,0.06);
+    }
+ 
+    /* ── Services numbered stage format ── */
+    .service-stage {
+      display: flex;
+      gap: 32px;
+      position: relative;
+    }
+    .service-stage-col {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .service-stage-dot {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #070033;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .service-stage-dot.accent {
+      background: #FF6632;
+    }
+    .service-stage-connector {
+      width: 2px;
+      flex: 1;
+      background: linear-gradient(to bottom, #EEEEEE, #EEEEEE 80%, transparent);
+      margin-top: 8px;
+    }
+    .service-stage-body {
+      flex: 1;
+      padding-bottom: 32px;
+    }
+    .service-stage:last-child .service-stage-body {
+      padding-bottom: 0;
+    }
+    @media (max-width: 640px) {
+      .service-stage { gap: 20px; }
+      .service-stage-dot { width: 36px; height: 36px; font-size: 12px; }
+    }
+ 
+    /* Meta pills */
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: #f4f4f8;
+      color: #4A4A4A;
+      border: 1px solid #EEEEEE;
+    }
+    .meta-pill.accent {
+      background: #fff3ee;
+      color: #FF6632;
+      border-color: rgba(255,102,50,0.3);
+    }
+ 
+    /* ── How It Works steps ── */
+    .step-connector {
+      position: absolute;
+      left: 19px;
+      top: 52px;
+      bottom: -8px;
+      width: 2px;
+      background: linear-gradient(to bottom, #EEEEEE, transparent);
+    }
+    .step-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .step-dot.free { background: #FF6632; color: #FFFFFF; }
+    .step-dot.p1   { background: #070033; color: #FFFFFF; }
+    .step-dot.p2   { background: #4A4A4A; color: #FFFFFF; }
+    .step-dot.p3   { background: #FBAC41; color: #070033; }
+ 
+    /* ── Get In Touch band ── */
+    .git-band {
+      background: #070033;
+      border-radius: 12px;
+    }
+ 
+    /* ── Footer ── */
+    .site-footer {
+      background: #070033;
+      color: rgba(255,255,255,0.7);
+    }
+ 
+    /* ── Contact form placeholder ── */
+    .form-placeholder {
+      background: #f8f8fc;
+      border: 2px dashed #EEEEEE;
+      border-radius: 10px;
+      padding: 48px 32px;
+      text-align: center;
+    }
+ 
+    /* ── Divider rule ── */
+    .section-rule {
+      width: 40px;
+      height: 3px;
+      background: #FF6632;
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+ 
+    /* ── Eyebrow label ── */
+    .eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #FF6632;
+    }
+ 
+    /* ── Subtle grid texture on hero ── */
+    .grid-texture {
+      background-image:
+        linear-gradient(rgba(7,0,51,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(7,0,51,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+ 
+    /* ── Micro-interaction on CTA ── */
+    @keyframes pulse-ring {
+      0%   { box-shadow: 0 0 0 0 rgba(255,102,50,0.4); }
+      70%  { box-shadow: 0 0 0 10px rgba(255,102,50,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,102,50,0); }
+    }
+    .btn-primary.pulse { animation: pulse-ring 2s infinite; }
+ 
+    /* ── Hamburger icon ── */
+    .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #070033;
+      border-radius: 2px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+ 
+    /* ── Focus ring (accessibility) ── */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid #FF6632;
+      outline-offset: 3px;
+      border-radius: 3px;
+    }
+ 
+    /* ── Audio banner ── */
+    .audio-banner {
+      background: linear-gradient(90deg, #fff9f6, #fff3ee);
+      border: 1px solid rgba(255,102,50,0.25);
+      border-radius: 8px;
+    }
+ 
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #f4f4f8; }
+    ::-webkit-scrollbar-thumb { background: #EEEEEE; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #FF6632; }
+ 
+    /* ── Page transition ── */
+    .page-section { animation: pageIn 0.3s ease; }
+    @keyframes pageIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+  <style>
+  /* ── Blog ── */
+  .blog-prose { max-width: 760px; }
+  .blog-prose p, .blog-prose li { color: #4A4A4A; font-size: 17px; line-height: 1.75; }
+  .blog-prose p { margin: 0 0 1.25rem; }
+  .blog-prose h2 { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.65rem; line-height: 1.25; color: #070033; margin: 2.5rem 0 1rem; }
+  .blog-prose ol { list-style: decimal; padding-left: 1.5rem; margin: 0 0 1.25rem; }
+  .blog-prose li { margin-bottom: 0.75rem; padding-left: 0.25rem; }
+  .blog-prose strong { color: #070033; font-weight: 600; }
+  /* Ink links with an accent underline: orange text alone fails contrast on white. */
+  .blog-prose a, .sources-list a { color: #070033; text-decoration: underline; text-decoration-color: #FF6632; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  .blog-prose a:hover, .sources-list a:hover { color: #FF6632; }
+  .sources-list { list-style: none; padding: 0; margin: 0; }
+  .sources-list li { color: #4A4A4A; font-size: 14px; line-height: 1.7; margin-bottom: 1rem; padding-left: 1.5rem; text-indent: -1.5rem; overflow-wrap: anywhere; }
+  .glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: #EEEEEE; border: 1px solid #EEEEEE; border-radius: 8px; overflow: hidden; }
+  .glance > div { background: #f8f8fc; padding: 14px 18px; }
+  .glance dt { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #4A4A4A; margin-bottom: 4px; }
+  .glance dd { margin: 0; font-weight: 600; color: #070033; font-size: 15px; }
+  .back-link { font-family: 'DM Mono', monospace; font-size: 12px; color: #4A4A4A; text-decoration: none; }
+  .back-link:hover { color: #FF6632; }
+  .feature-card { border: 1px solid #EEEEEE; border-radius: 12px; overflow: hidden; background: #fff; }
+  .feature-card:hover { border-color: rgba(255,102,50,0.4); box-shadow: 0 4px 32px rgba(7,0,51,0.06); }
+  .feature-panel { background: #070033; color: #fff; }
+  .feature-panel .big { font-family: 'DM Serif Display', Georgia, serif; font-size: 3.25rem; line-height: 1; }
+  .title-link { color: #070033; text-decoration: none; }
+  .title-link:hover { color: #FF6632; }
+</style>
+</head>
+<body>
+<!-- GENERATED by scripts/build-blog.mjs. Edit blog-src/ or index.html, then rebuild. -->
+<nav id="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-24">
+ 
+    <!-- Logo -->
+    <a href="/" class="flex items-center" aria-label="Valadisse — Home">
+      
+      <img
+        src="/logo-lockup.svg"
+        alt="Valadisse"
+        class="logo-img"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+      >
+      <span class="logo-fallback" style="display:none;">VALADISSE</span>
+    </a>
+ 
+    <!-- Desktop nav links -->
+    <div class="hidden xl:flex items-center gap-8">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/#services" class="nav-link">Services</a>
+      <a href="/#how-it-works" class="nav-link">How It Works</a>
+      <a href="/blog/" class="nav-link active" aria-current="page">Blog</a>
+      <a href="/#contact" class="nav-link">Contact</a>
+      <a href="https://app.valadisse.com/#pricing" class="nav-link">Pricing</a>
+      <!-- Added 2026-09-18: no sign-in or account-creation entry point
+           existed anywhere on this site before this. -->
+      <!-- nowrap: .nav-link has no white-space rule, so multi-word items
+           wrap at any width -- pre-existing on "How It Works" too, not
+           fixed here since it's out of scope, but not repeating it on a
+           link I'm adding fresh. -->
+      <a href="https://app.valadisse.com/login" class="nav-link" style="white-space:nowrap;">Sign in</a>
+      <!-- Missing entirely from desktop (2026-09-18) -- mobile got both
+           links, desktop only got Sign in. Same nowrap fix as Sign in
+           above, needed here too. -->
+      <a href="https://app.valadisse.com/#pricing" class="nav-link" style="white-space:nowrap;">Create account</a>
+      <a
+        href="https://app.valadisse.com/scan"
+        target="_blank"
+        class="btn-primary ml-4"
+        style="padding: 9px 20px; font-size: 13px;"
+      >Run Your Free Scan</a>
+    </div>
+ 
+    <!-- Mobile hamburger -->
+    <button class="hamburger xl:hidden" id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <button id="mobile-close" style="position:absolute;top:20px;right:24px;" aria-label="Close menu">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <path d="M6 6L22 22M22 6L6 22" stroke="#070033" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <a href="/" class="mobile-nav-link" onclick="closeMobileMenu();">Home</a>
+  <a href="/#services" class="mobile-nav-link" onclick="closeMobileMenu();">Services</a>
+  <a href="/#how-it-works" class="mobile-nav-link" onclick="closeMobileMenu();">How It Works</a>
+  <a href="/blog/" class="mobile-nav-link" onclick="closeMobileMenu();">Blog</a>
+  <a href="/#contact" class="mobile-nav-link" onclick="closeMobileMenu();">Contact</a>
+  <a href="https://app.valadisse.com/#pricing" class="mobile-nav-link" onclick="closeMobileMenu();">Pricing</a>
+  <!-- Added 2026-09-18: no sign-in or account-creation entry point existed
+       anywhere on this site before this. "Create account" points to
+       Pricing -- there's no separate signup page on the marketing site
+       itself; the real Starter/Pro/Advisory forms live on that section
+       of the app. -->
+  <a href="https://app.valadisse.com/login" class="mobile-nav-link" onclick="closeMobileMenu();">Sign in</a>
+  <a href="https://app.valadisse.com/#pricing" class="mobile-nav-link" onclick="closeMobileMenu();">Create account</a>
+  <a
+    href="https://app.valadisse.com/scan"
+    target="_blank"
+    class="btn-primary mt-4"
+    onclick="closeMobileMenu();"
+  >Run Your Free Scan</a>
+</div>
+
+<main role="main">
+  <article>
+    <header class="pt-12 pb-8">
+      <div class="max-w-6xl mx-auto px-6">
+        <a href="/blog/" class="back-link">← All posts</a>
+        <p class="eyebrow mt-8 mb-3">Agentic buying</p>
+        <h1 class="font-serif text-4xl md:text-5xl text-ink leading-tight max-w-4xl">Buying agents will soon read your ad products first</h1>
+        <p class="font-mono text-sm text-muted mt-5">By Stephan Lafite · <time datetime="2026-10-09">October 9, 2026</time> · 3 min read</p>
+      </div>
+    </header>
+    <div class="max-w-6xl mx-auto px-6 pb-16">
+      <dl class="glance mb-10" aria-label="At a glance">
+        <div><dt>Released</dt><dd>September 22, 2026</dd></div>
+        <div><dt>Status</dt><dd>Draft, not ratified</dd></div>
+        <div><dt>Comment closes</dt><dd>October 22, 2026</dd></div>
+      </dl>
+      <div class="blog-prose">
+        <div>
+          <p>On September 22, 2026, IAB Tech Lab published OpenProposal, a draft specification that gives publishers a standard way to describe their ad products so buying agents can interpret them, according to <a href="https://iabtechlab.com/press-releases/iab-tech-lab-introduces-aamp-3-0-with-openproposal/">IAB Tech Lab's announcement</a>. Agents can then compare those products against a campaign brief. Inventory that an agent cannot read, verify, or price is unlikely to be part of that comparison.</p>
+          <h2>What was released</h2>
+          <p>According to the announcement, sellers can publish a catalog of public packages that buyer agents browse, while keeping some products for custom proposals. A buyer agent can also submit a full brief to request a custom proposal. The draft specification's <a href="https://github.com/IABTechLab/OpenProposal">GitHub repository</a> states that each line item maps to an existing IAB Tech Lab execution standard, with OpenDirect 2.1, the Deals API, and OpenRTB 2.6 listed as options. The same repository states that nothing in it is a ratified IAB Tech Lab standard, and that public comment closes October 22, 2026.</p>
+          <h2>Why it matters for independent publishers</h2>
+          <p>Today, a publisher is considered when a planner happens to think of it. Agents process far more proposals than people can, which cuts both ways. More publishers can enter consideration. Any publisher whose products cannot be described, authorized, and priced in machine-readable form drops out before a bid exists. This is Valadisse's reading of the direction, not a stated rule of the standard, and it is the same eligibility problem ads.txt created for unauthorized sellers, one layer up.</p>
+          <h2>How early this is</h2>
+          <p>This is early. Per the <a href="https://iabtechlab.com/press-releases/iab-tech-lab-introduces-aamp-3-0-with-openproposal/">AAMP 3.0 announcement</a>, IAB Australia has opened expressions of interest for a seller-side pilot using the reference software, which would let publishers test discovery, proposal, and approval workflows in a sandbox before any live spend. The same announcement says the AAMP software development kits aim to build more trust in agent identities. Earlier, <a href="https://ppc.land/aamp-2-3-blocks-ai-agents-from-inventing-ad-prices-iab-tech-lab-says/">PPC Land reported</a> that AAMP 2.3, released July 30, 2026, added a field that records where each price in a negotiation comes from, plus an optional vendor approval gate in the Buyer Agent. Standards that arrive before volume set the entry requirements for when it does.</p>
+          <h2>What to do now</h2>
+          <ol><li><strong>Check that declared sellers are accurate and current.</strong> ads.txt is the authorization record buyers already check against.</li><li><strong>Package inventory as defined deals,</strong> not only open-exchange impressions. Curated and direct deal structures translate into line items; unpackaged impressions do not.</li><li><strong>Use the comment window.</strong> It closes October 22, 2026, and IAB Tech Lab's announcement directs feedback to iabtechlab.com/AAMPv3.</li></ol>
+        </div>
+        <aside class="git-band p-8 md:p-10 my-12" aria-label="Free scan">
+          <p class="font-mono text-xs uppercase tracking-widest mb-3" style="color:rgba(255,255,255,0.6);">Free scan</p>
+          <p class="mb-6" style="color:rgba(255,255,255,0.85); font-size:17px; line-height:1.7;">Valadisse's free scan reads the seller declarations a site already publishes and returns a Supply Chain Health Score, a floor signal, and how much premium demand is missing. Starter puts a revenue-impact range against each gap.</p>
+          <a href="https://app.valadisse.com/scan" target="_blank" class="btn-primary">Run your free scan →</a>
+        </aside>
+        <section aria-labelledby="sources-h" class="pt-8 border-t border-rule">
+          <h2 id="sources-h" style="margin-top:0;">Sources</h2>
+          <ul class="sources-list">
+            <li>IAB Tech Lab. (September 22, 2026). <em>AAMP 3.0 with OpenProposal Specification released</em> [Press release]. <a href="https://iabtechlab.com/press-releases/iab-tech-lab-introduces-aamp-3-0-with-openproposal/">https://iabtechlab.com/press-releases/iab-tech-lab-introduces-aamp-3-0-with-openproposal/</a>. Accessed October 9, 2026.</li>
+            <li>IAB Tech Lab. (2026). <em>OpenProposal, draft 3.0 (public comment)</em> [Specification repository]. GitHub. <a href="https://github.com/IABTechLab/OpenProposal">https://github.com/IABTechLab/OpenProposal</a>. Accessed October 9, 2026.</li>
+            <li>Rijo, L. (July 30, 2026). AAMP 2.3 blocks AI agents from inventing ad prices, IAB Tech Lab says. <em>PPC Land</em>. <a href="https://ppc.land/aamp-2-3-blocks-ai-agents-from-inventing-ad-prices-iab-tech-lab-says/">https://ppc.land/aamp-2-3-blocks-ai-agents-from-inventing-ad-prices-iab-tech-lab-says/</a>. Accessed October 9, 2026.</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </article>
+
+  <section class="py-20 bg-ink" aria-label="Call to action">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h2 class="font-serif text-3xl md:text-4xl text-white mb-4">Start with the free scan.</h2>
+      <p class="text-white/50 mb-8 leading-relaxed">No commitment. No pitch. A clear picture of what your stack is doing, and what it should be doing.</p>
+      <a href="https://app.valadisse.com/scan" target="_blank" class="btn-primary">Run Your Free Scan →</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="grid md:grid-cols-3 gap-12 mb-12">
+ 
+      <!-- Logo + tagline -->
+      <div>
+        
+        <!-- White-arrow variant, not logo-lockup.svg (2026-09-18): that SVG's
+             arrow and wordmark are navy, near-invisible against this footer's
+             dark navy (#070033) background. logo-footer-white.png is an
+             existing brand asset (not newly created) whose background is
+             baked-in at exactly #070033 -- sampled pixel-for-pixel, not
+             assumed -- so it blends seamlessly despite not being transparent.
+             Sized by height, not width: its 2.61:1 aspect ratio is much
+             taller-per-unit-width than the SVG's 6.18:1 (that one's icon+
+             wordmark got stretched wide to fill the same height once the
+             tagline was dropped), so reusing the old width:100% rule would
+             have rendered this one much taller than before.
+
+             78px, not 54px (2026-09-18 revision): 54px matched what the old
+             SVG happened to render at in this slot, but read as a tiny
+             thumbnail against the rest of the footer. 78px matches the
+             header nav logo's own height (.logo-img) exactly -- a real
+             reference point already established elsewhere in this repo,
+             not a new number picked freestanding. Renders ~204px wide at
+             this height, comfortably inside the 336px column. -->
+        <img
+          src="/logo-footer-white.png"
+          alt="Valadisse"
+          style="height:78px; width:auto; margin-bottom:20px; display:block;"
+        >
+        <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.55);">San Francisco, CA</p>
+      </div>
+ 
+      <!-- Nav -->
+      <div>
+        <p class="font-mono text-xs uppercase tracking-widest mb-4" style="color:rgba(255,255,255,0.4);">Pages</p>
+        <div class="space-y-3">
+          <a href="/" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">Home</a>
+          <a href="/#services" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">Services</a>
+          <a href="/#how-it-works" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">How It Works</a>
+          <a href="/blog/" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">Blog</a>
+          <a href="/#contact" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">Contact</a>
+          <!-- Moved here from the bottom utility row (2026-09-18) -- these
+               are primary navigation, not legal/utility links like Privacy
+               Policy/Terms, so they belong with Home/Services/etc. -->
+          <a href="https://app.valadisse.com/login" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">Sign in</a>
+          <a href="https://app.valadisse.com/#pricing" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">Create account</a>
+        </div>
+      </div>
+ 
+      <!-- CTA -->
+      <div>
+        <p class="font-mono text-xs uppercase tracking-widest mb-4" style="color:rgba(255,255,255,0.4);">Get Started</p>
+        <p class="text-sm leading-relaxed mb-5" style="color:rgba(255,255,255,0.55);">Start with the free scan. Results in seconds — no signup, and nothing to install.</p>
+        <a
+          href="https://app.valadisse.com/scan"
+          target="_blank"
+          class="btn-primary"
+          style="font-size:13px; padding:10px 20px;"
+        >Free Scan →</a>
+      </div>
+ 
+    </div>
+ 
+    <div class="border-t pt-8 flex flex-col sm:flex-row justify-between items-center gap-4" style="border-color:rgba(255,255,255,0.08);">
+      <p class="font-mono text-xs" style="color:rgba(255,255,255,0.3);">© 2026 Valadisse. All rights reserved.</p>
+      <div class="flex items-center gap-5">
+        <a href="/privacy.html" class="font-mono text-xs hover:text-white transition-colors" style="color:rgba(255,255,255,0.5);">Privacy Policy</a>
+        <a href="/terms.html" class="font-mono text-xs hover:text-white transition-colors" style="color:rgba(255,255,255,0.5);">Terms of Service</a>
+        <span class="font-mono text-xs" style="color:rgba(255,255,255,0.3);">valadisse.com</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('site-nav').classList.toggle('scrolled', window.scrollY > 10);
+  });
+  const hamburger = document.getElementById('hamburger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  function openMobileMenu() { mobileMenu.classList.add('open'); hamburger.classList.add('open'); hamburger.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+  function closeMobileMenu() { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+  hamburger.addEventListener('click', () => (mobileMenu.classList.contains('open') ? closeMobileMenu() : openMobileMenu()));
+  document.getElementById('mobile-close').addEventListener('click', closeMobileMenu);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMobileMenu(); });
+</script>
+</body>
+</html>

@@ -519,6 +519,7 @@
       <a href="#" class="nav-link active" onclick="showPage('home')" data-page="home">Home</a>
       <a href="#" class="nav-link" onclick="showPage('services')" data-page="services">Services</a>
       <a href="#" class="nav-link" onclick="showPage('how-it-works')" data-page="how-it-works">How It Works</a>
+      <a href="/blog/" class="nav-link" data-page="blog">Blog</a>
       <a href="#" class="nav-link" onclick="showPage('contact')" data-page="contact">Contact</a>
       <a href="https://app.valadisse.com/#pricing" class="nav-link">Pricing</a>
       <!-- Added 2026-09-18: no sign-in or account-creation entry point
@@ -557,6 +558,7 @@
   <a href="#" class="mobile-nav-link" onclick="showPage('home'); closeMobileMenu();">Home</a>
   <a href="#" class="mobile-nav-link" onclick="showPage('services'); closeMobileMenu();">Services</a>
   <a href="#" class="mobile-nav-link" onclick="showPage('how-it-works'); closeMobileMenu();">How It Works</a>
+  <a href="/blog/" class="mobile-nav-link" onclick="closeMobileMenu();">Blog</a>
   <a href="#" class="mobile-nav-link" onclick="showPage('contact'); closeMobileMenu();">Contact</a>
   <a href="https://app.valadisse.com/#pricing" class="mobile-nav-link" onclick="closeMobileMenu();">Pricing</a>
   <!-- Added 2026-09-18: no sign-in or account-creation entry point existed
@@ -621,7 +623,7 @@
   <section class="py-16 border-b border-rule" aria-label="What Valadisse does">
     <div class="max-w-6xl mx-auto px-6">
       <div class="max-w-3xl mx-auto space-y-6 text-muted leading-relaxed reveal">
-        <p>Valadisse gives publishers an overarching view across their entire vendor stack — without asking them to get operationally involved. It's not another system to manage; it's confirmation that revenue is being watched over, synthesized daily into what actually matters. Behind the scenes, Valadisse tracks adtech trends and industry standards, testing each one thoroughly before it ships — including its own AI layer, which stays vendor-neutral and adopts whatever model performs best rather than depending on any single provider's roadmap. It's peace of mind that someone is already looking out for what affects a publisher's revenue.</p>
+        <p>Valadisse gives publishers an overarching view across their entire vendor stack — without asking them to get operationally involved. It's not another system to manage; it's confirmation that revenue is being watched over, synthesized daily into what actually matters. It's peace of mind that someone is already looking out for what affects a publisher's revenue.</p>
         <p>Valadisse comes from over a decade of sell-side experience — watching independent publishers get squeezed by the platforms they had no choice but to depend on. That's the reason this exists.</p>
       </div>
     </div>
@@ -689,6 +691,35 @@
     </div>
   </section>
  
+  <!-- Always current -->
+  <section class="py-20 border-b border-rule" aria-label="Always current">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-16 items-start">
+        <div>
+          <div class="section-rule reveal"></div>
+          <p class="eyebrow mb-3 reveal">Always current</p>
+          <h2 class="font-serif text-3xl text-ink leading-snug mb-6 reveal reveal-delay-1">Built to stay ahead of the market.</h2>
+          <p class="text-muted leading-relaxed mb-8 reveal reveal-delay-2">As buying shifts toward automated and agent-driven selection, inventory that does not meet a buyer's criteria is filtered out before a bid is ever placed. Valadisse's AI agents continuously monitor industry news, product releases, conference sessions, and video and podcast transcripts, then flag what affects publisher revenue. When a development offers meaningful added value, the platform adopts it. The engines behind each analysis, including language models and agents, are interchangeable by design, so a better one can be connected without a rebuild and without exposing client data.</p>
+          <a href="#stays-current" onclick="return goToStaysCurrent();" class="btn-ghost reveal reveal-delay-3">See how it stays current →</a>
+        </div>
+        <div class="space-y-4">
+          <div class="service-tile reveal reveal-delay-1">
+            <p class="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">01</p>
+            <p class="text-sm text-muted leading-relaxed"><strong class="text-ink font-semibold">Watch:</strong> Agents scan the industry around the clock.</p>
+          </div>
+          <div class="service-tile reveal reveal-delay-2">
+            <p class="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">02</p>
+            <p class="text-sm text-muted leading-relaxed"><strong class="text-ink font-semibold">Decide:</strong> Each development is judged on impact to publisher revenue, not novelty.</p>
+          </div>
+          <div class="service-tile reveal reveal-delay-3">
+            <p class="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">03</p>
+            <p class="text-sm text-muted leading-relaxed"><strong class="text-ink font-semibold">Swap:</strong> Better engines are connected as they prove their value.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Who this is for -->
   <section class="py-16 bg-gray-50" aria-label="Who this is for">
     <div class="max-w-6xl mx-auto px-6">
@@ -732,7 +763,7 @@
         <div class="service-tile reveal reveal-delay-1">
           <p class="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">Free scan &middot; Starter</p>
           <h3 class="font-sans font-semibold text-ink text-sm mb-2">Revenue Expansion</h3>
-          <p class="text-muted text-sm leading-relaxed mb-4">The free scan surfaces what your current setup is leaving behind. Starter puts revenue-impact ranges against it.</p>
+          <p class="text-muted text-sm leading-relaxed mb-4">The free scan surfaces inventory your current setup keeps out of buyers' reach. Starter puts revenue-impact ranges against it.</p>
           <a href="#" onclick="showPage('services')" class="font-mono text-xs text-accent hover:underline">Learn more →</a>
         </div>
  
@@ -828,6 +859,16 @@
     </div>
   </section>
  
+  <!-- Why Valadisse exists (home). Unsigned by design. -->
+  <section class="py-16 border-t border-rule" aria-label="Why Valadisse exists">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-3xl mx-auto positioning-bar reveal">
+        <h2 class="font-serif text-2xl md:text-3xl text-ink mb-4">Why Valadisse exists.</h2>
+        <p class="text-muted leading-relaxed">Over a decade on the sell-side shows how independent publishers get squeezed by the platforms they have no choice but to depend on. They rarely get a clear, independent view of what their inventory is worth or what buyers can and cannot see. Valadisse was built to give them that view: continuous, platform-neutral, and calibrated to the market as it is today. No revenue share, no platform affiliations, no agenda except the publisher's.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Home CTA band -->
   <section class="py-20 bg-ink" aria-label="Call to action">
     <div class="max-w-6xl mx-auto px-6 text-center">
@@ -967,6 +1008,7 @@
             <div class="text-muted leading-relaxed space-y-3 mb-6">
               <p>The ad technology landscape is being reshaped by AI — across bidding systems, targeting infrastructure, supply path dynamics, and competitive positioning. Staying current is a full-time job most publishers can't staff.</p>
               <p>Valadisse monitors AI and market developments that affect your specific stack and vertical, and translates them into actionable guidance. Not a general newsletter — a briefing calibrated to what's actually changing in your business.</p>
+              <p>The same monitoring that keeps the platform current powers this briefing, so guidance reflects what changed this week, not last quarter.</p>
               <p><strong class="text-ink font-medium">Who this is for:</strong> Any publisher. Available standalone or added to any engagement.</p>
             </div>
             <div class="flex flex-wrap gap-2">
@@ -1004,7 +1046,7 @@
     <div class="max-w-6xl mx-auto px-6">
       <div class="max-w-3xl mx-auto text-center">
         <p class="eyebrow mb-3 reveal">Security &amp; Data</p>
-        <p class="text-muted leading-relaxed reveal reveal-delay-1">Your data is encrypted in transit and at rest, never shared with third parties beyond what's needed to run the diagnostic, and never used to train any model. Valadisse's infrastructure runs on providers that maintain established security and compliance standards — the same foundation trusted by companies far larger than this one.</p>
+        <p class="text-muted leading-relaxed reveal reveal-delay-1">Your data is encrypted in transit and at rest, never shared with third parties beyond what's needed to run the diagnostic, and never used to train any model. Valadisse's infrastructure runs on providers that maintain established security and compliance standards — the same foundation trusted by companies far larger than this one. The engines behind Valadisse's analysis are interchangeable, and swapping one never changes how client data is protected or that it is never used to train any model.</p>
       </div>
     </div>
   </section>
@@ -1105,6 +1147,54 @@
     </div>
   </section>
  
+  <!-- How the platform stays current -->
+  <section id="stays-current" style="scroll-margin-top:110px;" class="py-20 bg-gray-50 border-t border-rule" aria-label="How the platform stays current">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-3xl mb-12">
+        <p class="eyebrow mb-3 reveal">Always current</p>
+        <h2 class="font-serif text-3xl text-ink mb-4 reveal reveal-delay-1">How the platform stays current</h2>
+        <p class="text-muted text-lg leading-relaxed reveal reveal-delay-2">Programmatic changes monthly. Valadisse is built to notice, judge, and adapt, so publishers do not have to track it themselves.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-8 rounded-xl border border-rule bg-white reveal">
+          <p class="font-mono text-xs text-accent uppercase tracking-widest mb-3">01</p>
+          <h3 class="font-serif text-xl text-ink mb-3">Watch</h3>
+          <p class="text-muted leading-relaxed text-sm">AI agents continuously monitor industry news, product and standards releases, conference sessions, and video and podcast transcripts. They also look for quieter developments that mainstream coverage skips.</p>
+        </div>
+        <div class="p-8 rounded-xl border border-rule bg-white reveal reveal-delay-1">
+          <p class="font-mono text-xs text-accent uppercase tracking-widest mb-3">02</p>
+          <h3 class="font-serif text-xl text-ink mb-3">Decide</h3>
+          <p class="text-muted leading-relaxed text-sm">Each development is assessed for its effect on publisher revenue and on Valadisse's own tools. Valadisse acts when there is meaningful added value, not for novelty.</p>
+        </div>
+        <div class="p-8 rounded-xl border border-rule bg-white reveal reveal-delay-2">
+          <p class="font-mono text-xs text-accent uppercase tracking-widest mb-3">03</p>
+          <h3 class="font-serif text-xl text-ink mb-3">Swap</h3>
+          <p class="text-muted leading-relaxed text-sm">The platform is designed so the engines behind it, including language models and AI agents, can be exchanged through existing connections. A better engine goes in when it earns its place, which keeps the product current without disruption.</p>
+        </div>
+        <div class="p-8 rounded-xl border border-rule bg-white reveal reveal-delay-3">
+          <p class="font-mono text-xs text-accent uppercase tracking-widest mb-3">04</p>
+          <h3 class="font-serif text-xl text-ink mb-3">Learn</h3>
+          <p class="text-muted leading-relaxed text-sm">Historical scan data feeds predictions and recommendations, so the system becomes more accurate the longer a publisher uses it.</p>
+        </div>
+      </div>
+      <div class="max-w-3xl mt-12 space-y-4 text-muted leading-relaxed reveal">
+        <p>Valadisse stays close to adtech developments and acts on them faster than enterprise vendors can. For publishers, that means a diagnostic that reflects how the market works now, not how it worked when a product was last released.</p>
+        <p>Valadisse's indexes are built on established IAB Tech Lab standards, so measurement stays familiar while the analysis behind it keeps improving.</p>
+      </div>
+
+      <!-- Generated by scripts/build-blog.mjs from the three newest posts. Do not edit by hand. -->
+      <div class="max-w-3xl mt-12 pt-8 border-t border-rule reveal">
+        <p class="eyebrow mb-4">Recent platform and market updates</p>
+        <!-- RECENT-POSTS:START -->
+        <ul class="divide-y divide-rule border-y border-rule">
+          <li class="py-4 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1"><a class="font-semibold text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent" href="/blog/buying-agents-will-soon-read-your-ad-products-first/">Buying agents will soon read your ad products first</a><span class="font-mono text-xs text-muted">October 9, 2026</span></li>
+        </ul>
+        <p class="font-mono text-xs mt-4"><a href="/blog/" class="underline hover:text-accent">All posts →</a></p>
+        <!-- RECENT-POSTS:END -->
+      </div>
+    </div>
+  </section>
+
   <!-- How It Works CTA band -->
   <section class="py-20 bg-ink" aria-label="Call to action">
     <div class="max-w-6xl mx-auto px-6 text-center">
@@ -1143,7 +1233,7 @@
       <div class="audio-banner p-4 reveal flex flex-col sm:flex-row sm:items-center gap-3">
         <div class="flex-1">
           <p class="text-sm text-ink">
-            <strong>Ready to find out what your stack is leaving on the table?</strong><br>
+            <strong>Ready to find out what demand can't reach your inventory?</strong><br>
             <span class="text-muted">Run the free scan on your domain — results in seconds, no signup required.</span>
           </p>
         </div>
@@ -1174,6 +1264,16 @@
     </div>
   </section>
  
+  <!-- Why Valadisse exists (contact). Unsigned by design. -->
+  <section class="py-16 border-t border-rule" aria-label="Why Valadisse exists">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-3xl mx-auto positioning-bar reveal">
+        <h2 class="font-serif text-2xl md:text-3xl text-ink mb-4">Why Valadisse exists.</h2>
+        <p class="text-muted leading-relaxed">Over a decade on the sell-side shows how independent publishers get squeezed by the platforms they have no choice but to depend on. They rarely get a clear, independent view of what their inventory is worth or what buyers can and cannot see. Valadisse was built to give them that view: continuous, platform-neutral, and calibrated to the market as it is today. No revenue share, no platform affiliations, no agenda except the publisher's.</p>
+      </div>
+    </div>
+  </section>
+
 </main>
  
  
@@ -1221,6 +1321,7 @@
           <a href="#" onclick="showPage('home')" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">Home</a>
           <a href="#" onclick="showPage('services')" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">Services</a>
           <a href="#" onclick="showPage('how-it-works')" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">How It Works</a>
+          <a href="/blog/" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">Blog</a>
           <a href="#" onclick="showPage('contact')" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">Contact</a>
           <!-- Moved here from the bottom utility row (2026-09-18) -- these
                are primary navigation, not legal/utility links like Privacy
@@ -1312,6 +1413,23 @@
     return false; // prevent anchor jump
   }
  
+  // ── Jump to the "stays current" block on How It Works ──
+  function goToStaysCurrent() {
+    showPage('how-it-works');
+    setTimeout(() => {
+      const el = document.getElementById('stays-current');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 120);
+    return false;
+  }
+
+  // ── Deep links from blog pages (/#services, /#how-it-works, /#contact) ──
+  document.addEventListener('DOMContentLoaded', () => {
+    const id = location.hash.slice(1);
+    if (id === 'stays-current') goToStaysCurrent();
+    else if (id && pageMeta[id]) showPage(id);
+  });
+
   // ── Nav scroll shadow ─────────────────────────
   window.addEventListener('scroll', () => {
     const nav = document.getElementById('site-nav');
