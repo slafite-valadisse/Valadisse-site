@@ -7,19 +7,25 @@ separate repo (app.valadisse.com); the claims here have to stay true to it.
 
 ## Claims
 
-Rules, the same ones the pricing cards in the app follow:
+Rules (the labels are the pricing cards' labels; the definitions here are stricter, see below):
 
 - A claim may be stated as live only if it has shipped and a customer can use
   it today (a service delivered by hand counts, if it is being delivered).
-- Anything not shipped carries a status pill with the same labels as the
-  pricing cards: **Rolling out** (being released in stages, or delivered by
-  hand while the automation is built) or **Coming soon** (in development, not
-  available yet). The pill is `<span class="meta-pill status-pill" title="...">`.
+- Anything not fully live carries a status pill, with the same two labels as
+  the pricing cards: **Rolling out** (partly live: some of it works today) or
+  **Coming soon** (in development, no working code). The pill is
+  `<span class="meta-pill status-pill" title="...">` and the status is stated by
+  the pill only, never in the sentence next to it ("is rolling out", "coming
+  soon" do not appear in prose).
+- The app code decides the label. If a label here or on a pricing card
+  contradicts what the app code does, the code wins: check `origin/main` of the
+  app repo (search for the feature) before choosing or changing a label.
 - When a feature ships, update its row below and drop the pill in the same
   change. When a claim is removed, move it to "Removed" so it is not reinstated.
 - Copy is in the third person, with no em dashes, no scoring formulas and no
   vendor names. Never "continuous", "around the clock", "unlimited" or "beta".
-- `node scripts/check-claims.mjs` fails if a removed claim comes back.
+- `node scripts/check-claims.mjs` fails if a removed claim comes back, if status
+  wording appears outside a pill, or if the pill counts drift from these tables.
 
 ### Live
 
@@ -35,16 +41,21 @@ Rules, the same ones the pricing cards in the app follow:
 | Data is encrypted in transit and at rest | Services | Supabase documents "all customer data is encrypted at rest with AES-256 and in transit via TLS" (supabase.com/security) and "data is encrypted at rest and in transit by Supabase" (docs, shared responsibility model). Scope: the app's HTTPS traffic and the hosted database; direct database connections do not enforce SSL unless switched on |
 | Uploaded data is never used to train any model | Services | Privacy page: no model processes uploaded data today |
 
-### Rolling out (each shows a "Rolling out" pill)
+### Rolling out (partly live; "Rolling out" pill)
 
-| Claim | Where | Basis |
+| Claim | Where | Basis in the app code |
 |---|---|---|
-| Daily monitoring with a summary of what matters | Home (positioning paragraph) | Not built; same item as scheduled monitoring |
-| Same-day anomaly alerts and detection | Home (differentiation), Services (Yield Management) | Not built |
-| Scheduled monitoring of the supply chain and proactive alerts on a chosen cadence | Home tile, Services, How It Works (Pro) | App Pro card: rolling out |
-| Plain-English digest of what moved and what flagged | Services (Yield Management) | Not built |
-| Publisher-controlled curation | Home tile, Services | Not in the app; marked rolling out |
-| Floor Optimization Index and Demand Diversity scores, calculated from the ad server report | How It Works (Starter) | App Starter card: rolling out |
+| Floor Optimization Index and Demand Diversity scores, calculated from the ad server report | How It Works (Starter) | Demand Diversity "Coverage" is live in the scan results; the other parts and the Floor Optimization Index show as "Coming soon" score cards until the report-based calculation ships |
+
+### Coming soon (no working code; "Coming soon" pill)
+
+| Claim | Where | Basis in the app code |
+|---|---|---|
+| Daily monitoring with a summary of what matters | Home (positioning paragraph) | No scheduled job or customer notification exists; same item as scheduled monitoring |
+| Same-day anomaly alerts and detection | Home (differentiation), Services (Yield Management) | None. The only alerts in the code go to the operator (Pro signup pacing), not to customers |
+| Scheduled monitoring of the supply chain and proactive alerts on a chosen cadence | Home tile, Services, How It Works (Pro) | None; the app's Pro card labels this "Rolling out", which the code does not support |
+| Plain-English digest of what moved and what flagged | Services (Yield Management) | None |
+| Publisher-controlled curation (deal packages built through the publisher's supply partners) | Home tile, Services | None; the scan only reports whether curation-ready sellers are declared |
 
 ### Removed (do not reinstate without a shipped feature behind it)
 
