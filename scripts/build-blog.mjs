@@ -239,7 +239,6 @@ const indexMain = `<main role="main">
       <p class="eyebrow mb-4">Blog</p>
       <h1 class="font-serif text-4xl md:text-5xl text-ink max-w-3xl leading-tight">What evolves in adtech, and what it means for your inventory.</h1>
       <p class="text-muted text-lg mt-5 max-w-3xl leading-relaxed">The programmatic market is being rebuilt around software agents that discover, evaluate, and buy supply on their own. Most independent publishers will not hear about these shifts until they show up in revenue. This blog tracks them as they happen, from standards releases to buyer-side changes, and explains what each one means for how publisher inventory is found, verified, and bought.</p>
-      <p class="font-mono text-sm text-ink mt-5">The same monitoring that keeps the platform current, written down.</p>
       <ul class="flex flex-wrap gap-2 mt-6" aria-label="Topics">
         ${topics.map((t) => `<li class="meta-pill">${esc(t)}</li>`).join('\n        ')}
       </ul>

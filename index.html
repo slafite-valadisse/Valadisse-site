@@ -363,6 +363,14 @@
       color: #4A4A4A;
       border: 1px solid #EEEEEE;
     }
+    .status-pill {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 2px 8px;
+      vertical-align: middle;
+      cursor: help;
+    }
     .meta-pill.accent {
       background: #fff3ee;
       color: #FF6632;
@@ -662,7 +670,7 @@
   <section class="py-16 border-b border-rule" aria-label="What Valadisse does">
     <div class="max-w-6xl mx-auto px-6">
       <div class="max-w-3xl mx-auto space-y-6 text-muted leading-relaxed reveal">
-        <p>Valadisse gives publishers an overarching view across their entire vendor stack — without asking them to get operationally involved. It's not another system to manage; it's confirmation that revenue is being watched over, synthesized daily into what actually matters. It's peace of mind that someone is already looking out for what affects a publisher's revenue.</p>
+        <p>Valadisse gives publishers an overarching view across the sellers they declare, without asking them to get operationally involved. It's not another system to manage. The free scan reads a publisher's declared supply chain whenever they run it, and daily monitoring with a summary of what actually matters is rolling out. <span class="meta-pill status-pill ml-1" title="Rolling out means it is being released in stages. Items marked this way are included in the plan as they become available.">Rolling out</span></p>
         <p>Valadisse comes from over a decade of sell-side experience — watching independent publishers get squeezed by the platforms they had no choice but to depend on. That's the reason this exists.</p>
       </div>
     </div>
@@ -677,13 +685,13 @@
  
         <div class="p-8 rounded-xl border border-rule hover:border-accent transition-colors duration-200 reveal reveal-delay-1">
           <p class="font-mono text-xs text-accent uppercase tracking-widest mb-3">01</p>
-          <h3 class="font-serif text-xl text-ink mb-3">AI-native from day one</h3>
-          <p class="text-muted leading-relaxed text-sm">Built AI-first, not retrofitted. Valadisse combines structured monitoring practices with AI-assisted tooling, built from the ground up — surfacing what standard reporting misses and responding the same day, not in next month's report. And because it isn't built inside any single ad server, Valadisse sees across every exchange a publisher runs — unlike a single ad server's free, native optimizer, which only sees that platform's own side of the auction.</p>
+          <h3 class="font-serif text-xl text-ink mb-3">Reads what your supply chain declares</h3>
+          <p class="text-muted leading-relaxed text-sm">Valadisse reads the supply-chain files a publisher's site already declares, such as ads.txt, and checks them against what a healthy stack should show. That surfaces what standard reporting misses. And because it isn't built inside any single ad server, Valadisse reads every seller a publisher declares, unlike a single ad server's free, native optimizer, which only sees that platform's own side of the auction.</p>
         </div>
  
         <div class="p-8 rounded-xl border border-rule hover:border-accent transition-colors duration-200 reveal reveal-delay-2">
           <p class="font-mono text-xs text-accent uppercase tracking-widest mb-3">02</p>
-          <h3 class="font-serif text-xl text-ink mb-3">The only practice built for the full programmatic stack — including audio</h3>
+          <h3 class="font-serif text-xl text-ink mb-3">Built for the full programmatic stack, including audio</h3>
           <p class="text-muted leading-relaxed text-sm">Most programmatic consultancies specialize narrowly and apply the same playbook regardless of how a publisher's inventory is structured. Valadisse has worked across ad formats and devices at an infrastructure level — including hands-on experience with DAI and podcast monetization systems that most vendors have never operated. If you run multiple formats, you get integrated strategy built around your actual setup, not a generic framework retrofitted to it.</p>
         </div>
  
@@ -696,7 +704,7 @@
         <div class="p-8 rounded-xl border border-rule hover:border-accent transition-colors duration-200 reveal reveal-delay-4">
           <p class="font-mono text-xs text-accent uppercase tracking-widest mb-3">04</p>
           <h3 class="font-serif text-xl text-ink mb-3">Pioneering expertise, not a scaled playbook</h3>
-          <p class="text-muted leading-relaxed text-sm">Valadisse is built differently: a boutique practice backed by evolving AI infrastructure, where every engagement is approached with fresh eyes, senior judgment, and tools that keep pace with where the ecosystem is heading. You get proactive strategy, not reactive reporting.</p>
+          <p class="text-muted leading-relaxed text-sm">Valadisse is built differently: a boutique practice where every engagement is approached with fresh eyes and senior judgment. You get proactive strategy, not reactive reporting.</p>
         </div>
  
       </div>
@@ -730,35 +738,6 @@
     </div>
   </section>
  
-  <!-- Always current -->
-  <section class="py-20 border-b border-rule" aria-label="Always current">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="grid md:grid-cols-2 gap-16 items-start">
-        <div>
-          <div class="section-rule reveal"></div>
-          <p class="eyebrow mb-3 reveal">Always current</p>
-          <h2 class="font-serif text-3xl text-ink leading-snug mb-6 reveal reveal-delay-1">Built to stay ahead of the market.</h2>
-          <p class="text-muted leading-relaxed mb-8 reveal reveal-delay-2">As buying shifts toward automated and agent-driven selection, inventory that does not meet a buyer's criteria is filtered out before a bid is ever placed. Valadisse's AI agents continuously monitor industry news, product releases, conference sessions, and video and podcast transcripts, then flag what affects publisher revenue. When a development offers meaningful added value, the platform adopts it. The engines behind each analysis, including language models and agents, are interchangeable by design, so a better one can be connected without a rebuild and without exposing client data.</p>
-          <a href="#stays-current" onclick="return goToStaysCurrent();" class="btn-ghost reveal reveal-delay-3">See how it stays current →</a>
-        </div>
-        <div class="space-y-4">
-          <div class="service-tile reveal reveal-delay-1">
-            <p class="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">01</p>
-            <p class="text-sm text-muted leading-relaxed"><strong class="text-ink font-semibold">Watch:</strong> Agents scan the industry around the clock.</p>
-          </div>
-          <div class="service-tile reveal reveal-delay-2">
-            <p class="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">02</p>
-            <p class="text-sm text-muted leading-relaxed"><strong class="text-ink font-semibold">Decide:</strong> Each development is judged on impact to publisher revenue, not novelty.</p>
-          </div>
-          <div class="service-tile reveal reveal-delay-3">
-            <p class="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">03</p>
-            <p class="text-sm text-muted leading-relaxed"><strong class="text-ink font-semibold">Swap:</strong> Better engines are connected as they prove their value.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Who this is for -->
   <section class="py-16 bg-gray-50" aria-label="Who this is for">
     <div class="max-w-6xl mx-auto px-6">
@@ -802,42 +781,44 @@
         <div class="service-tile reveal reveal-delay-1">
           <p class="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">Free scan &middot; Starter</p>
           <h3 class="font-sans font-semibold text-ink text-sm mb-2">Revenue Expansion</h3>
-          <p class="text-muted text-sm leading-relaxed mb-4">The free scan surfaces inventory your current setup keeps out of buyers' reach. Starter puts revenue-impact ranges against it.</p>
+          <p class="text-muted text-sm leading-relaxed mb-4">The free scan surfaces inventory your current setup keeps out of buyers' reach. Starter puts revenue-impact ranges against it, and compares each rescan against your last so a change to your declared sellers is flagged when you scan.</p>
           <a href="#" onclick="showPage('services')" class="font-mono text-xs text-accent hover:underline">Learn more →</a>
         </div>
  
         <div class="service-tile reveal reveal-delay-2">
           <p class="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">Pro</p>
           <h3 class="font-sans font-semibold text-ink text-sm mb-2">Yield Management &amp; Ad Ops</h3>
-          <p class="text-muted text-sm leading-relaxed mb-4">Every rescan is compared against your last, so a change to your declared sellers is flagged rather than found months later.</p>
+          <p class="text-muted text-sm leading-relaxed mb-3">Scheduled monitoring of your supply chain, with proactive alerts on the cadence you choose.</p>
+          <p class="mb-4"><span class="meta-pill status-pill" title="Rolling out means it is being released in stages. Items marked this way are included in the plan as they become available.">Rolling out</span></p>
           <a href="#" onclick="showPage('services')" class="font-mono text-xs text-accent hover:underline">Learn more →</a>
         </div>
  
         <div class="service-tile reveal reveal-delay-3">
           <p class="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">Pro</p>
           <h3 class="font-sans font-semibold text-ink text-sm mb-2">Publisher-Controlled Curation</h3>
-          <p class="text-muted text-sm leading-relaxed mb-4">Curated deal packages built through your own supply partnerships. You own the deals and the margin.</p>
+          <p class="text-muted text-sm leading-relaxed mb-3">Curated deal packages built through your own supply partnerships. You own the deals and the margin.</p>
+          <p class="mb-4"><span class="meta-pill status-pill" title="Rolling out means it is being released in stages. Items marked this way are included in the plan as they become available.">Rolling out</span></p>
           <a href="#" onclick="showPage('services')" class="font-mono text-xs text-accent hover:underline">Learn more →</a>
         </div>
  
         <div class="service-tile reveal reveal-delay-1">
-          <p class="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">Advisory add-on</p>
+          <p class="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">Advisory &middot; by engagement</p>
           <h3 class="font-sans font-semibold text-ink text-sm mb-2">Identity &amp; Addressability</h3>
           <p class="text-muted text-sm leading-relaxed mb-4">Cookieless signal strategy, first-party data activation, and identity solution implementation.</p>
           <a href="#" onclick="showPage('services')" class="font-mono text-xs text-accent hover:underline">Learn more →</a>
         </div>
  
         <div class="service-tile reveal reveal-delay-2">
-          <p class="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">Advisory add-on</p>
+          <p class="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">Advisory &middot; by engagement</p>
           <h3 class="font-sans font-semibold text-ink text-sm mb-2">Market Intelligence</h3>
           <p class="text-muted text-sm leading-relaxed mb-4">Ongoing intelligence on what's shifting in your stack, your vertical, and the broader AI-driven ecosystem — translated into action.</p>
           <a href="#" onclick="showPage('services')" class="font-mono text-xs text-accent hover:underline">Learn more →</a>
         </div>
  
         <div class="service-tile reveal reveal-delay-3">
-          <p class="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">Advisory add-on</p>
+          <p class="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">Advisory &middot; by engagement</p>
           <h3 class="font-sans font-semibold text-ink text-sm mb-2">Audio &amp; Podcast Yield</h3>
-          <p class="text-muted text-sm leading-relaxed mb-4">Specialist DAI optimization, programmatic audio strategy, and revenue-per-listen improvement. The only practice of its kind.</p>
+          <p class="text-muted text-sm leading-relaxed mb-4">Specialist DAI optimization, programmatic audio strategy, and revenue-per-listen improvement.</p>
           <a href="#" onclick="showPage('services')" class="font-mono text-xs text-accent hover:underline">Learn more →</a>
         </div>
  
@@ -867,8 +848,8 @@
               </svg>
             </div>
             <div>
-              <p class="font-semibold text-ink text-sm mb-1">Real-time, not retrospective</p>
-              <p class="text-muted text-sm">Anomalies caught and addressed the same day — not surfaced in next month's report.</p>
+              <p class="font-semibold text-ink text-sm mb-1">Same-day anomaly alerts <span class="meta-pill status-pill ml-1" title="Rolling out means it is being released in stages. Items marked this way are included in the plan as they become available.">Rolling out</span></p>
+              <p class="text-muted text-sm">Alerts that flag an anomaly the day it appears, rather than in next month's report.</p>
             </div>
           </div>
           <div class="flex gap-4 p-5 rounded-lg border border-rule hover:border-accent transition-colors duration-200">
@@ -903,7 +884,7 @@
     <div class="max-w-6xl mx-auto px-6">
       <div class="max-w-3xl mx-auto positioning-bar reveal">
         <h2 class="font-serif text-2xl md:text-3xl text-ink mb-4">Why Valadisse exists.</h2>
-        <p class="text-muted leading-relaxed">Valadisse was built on more than a decade of working with publishers to monetize their inventory. Independent publishers get squeezed by the platforms they have no choice but to depend on, and they rarely get a clear, independent view of what their inventory is worth or what buyers can and cannot see. Valadisse gives them that view: continuous, platform-neutral, and calibrated to the market as it is today. No revenue share, no platform affiliations, no agenda except the publisher's.</p>
+        <p class="text-muted leading-relaxed">Valadisse was built on more than a decade of working with publishers to monetize their inventory. Independent publishers get squeezed by the platforms they have no choice but to depend on, and they rarely get a clear, independent view of what their inventory is worth or what buyers can and cannot see. Valadisse gives them that view: platform-neutral, and calibrated to the market as it is today. No revenue share, no platform affiliations, no agenda except the publisher's.</p>
       </div>
     </div>
   </section>
@@ -937,7 +918,7 @@
       <h1 class="font-serif text-4xl md:text-5xl text-ink max-w-2xl leading-tight reveal reveal-delay-1">
         What you get. And what you can add.
       </h1>
-      <p class="text-muted text-lg mt-4 max-w-xl leading-relaxed reveal reveal-delay-2">Start with the free scan. Starter and Pro build on it. The three advisory practices sit on top of whichever tier you are on &mdash; they are not standalone retainers.</p>
+      <p class="text-muted text-lg mt-4 max-w-xl leading-relaxed reveal reveal-delay-2">Start with the free scan. Starter and Pro build on it. Advisory is separate: engagements are scoped individually and priced by engagement.</p>
     </div>
   </section>
  
@@ -957,7 +938,7 @@
             <h2 class="font-serif text-2xl text-ink mb-4">Find the gap. Close it.</h2>
             <div class="text-muted leading-relaxed space-y-3 mb-6">
               <p>Fill rate and CPM don't tell you whether your audience is being fully monetized — across display, audio, or video. Revenue per thousand does. That's what we optimize.</p>
-              <p>The diagnostic starts with a structured intake — then a focused review of your stack. We surface the gaps, quantify the opportunity, and agree on a scope to close it.</p>
+              <p>The diagnostic starts with the free scan, then a focused review of what it finds. We surface the gaps, quantify the opportunity, and agree on a scope to close it. Starter also compares each rescan against your last, so a change to your declared sellers is flagged when you scan.</p>
               <p><strong class="text-ink font-medium">Who this is for:</strong> Publishers who want clarity on where revenue is going before committing to ongoing work.</p>
             </div>
             <div class="flex flex-wrap gap-2">
@@ -978,12 +959,13 @@
             <p class="eyebrow mb-3">Yield Management &amp; Ad Ops</p>
             <h2 class="font-serif text-2xl text-ink mb-4">Catch what your report misses.</h2>
             <div class="text-muted leading-relaxed space-y-3 mb-6">
-              <p>Anomalies — a partner underdelivering, a floor misconfiguration, a timeout causing lost bids — cost money every day they go undetected. Most publishers surface them in the monthly report. We catch them the same day.</p>
-              <p>Structured monitoring practices track performance signals across your stack. You receive a plain-English digest of what moved, what flagged, and what was done about it — without needing to manage the process yourself.</p>
-              <p><strong class="text-ink font-medium">Who this is for:</strong> Publishers with meaningful ad revenue and no dedicated programmatic headcount. This is your ad ops function, without the overhead.</p>
+              <p>Anomalies, such as a partner underdelivering, a floor misconfiguration, or a timeout causing lost bids, cost money every day they go undetected. Most publishers surface them in the monthly report. Same-day detection is rolling out.</p>
+              <p>Scheduled monitoring of your supply chain and a plain-English digest of what moved and what flagged are rolling out. An onboarding session, where a person maps priorities for your stack, is available now.</p>
+              <p><strong class="text-ink font-medium">Who this is for:</strong> Publishers with meaningful ad revenue and no dedicated programmatic headcount.</p>
             </div>
             <div class="flex flex-wrap gap-2">
               <span class="meta-pill">Included in Pro</span>
+              <span class="meta-pill status-pill" title="Rolling out means it is being released in stages. Items marked this way are included in the plan as they become available.">Rolling out</span>
               <span class="meta-pill">No revenue share</span>
             </div>
           </article>
@@ -1007,6 +989,7 @@
             </div>
             <div class="flex flex-wrap gap-2">
               <span class="meta-pill">Included in Pro</span>
+              <span class="meta-pill status-pill" title="Rolling out means it is being released in stages. Items marked this way are included in the plan as they become available.">Rolling out</span>
             </div>
           </article>
         </div>
@@ -1028,7 +1011,7 @@
               <p><strong class="text-ink font-medium">Who this is for:</strong> Publishers with $1M+ in ad revenue ready to close the addressability gap.</p>
             </div>
             <div class="flex flex-wrap gap-2">
-              <span class="meta-pill">Advisory add-on · any tier</span>
+              <span class="meta-pill">Advisory · by engagement</span>
             </div>
           </article>
         </div>
@@ -1046,12 +1029,11 @@
             <h2 class="font-serif text-2xl text-ink mb-4">What's changing in your stack. What to do about it.</h2>
             <div class="text-muted leading-relaxed space-y-3 mb-6">
               <p>The ad technology landscape is being reshaped by AI — across bidding systems, targeting infrastructure, supply path dynamics, and competitive positioning. Staying current is a full-time job most publishers can't staff.</p>
-              <p>Valadisse monitors AI and market developments that affect your specific stack and vertical, and translates them into actionable guidance. Not a general newsletter — a briefing calibrated to what's actually changing in your business.</p>
-              <p>The same monitoring that keeps the platform current powers this briefing, so guidance reflects what changed this week, not last quarter.</p>
-              <p><strong class="text-ink font-medium">Who this is for:</strong> Any publisher. Available standalone or added to any engagement.</p>
+              <p>Valadisse follows AI and market developments that affect your specific stack and vertical, and translates them into actionable guidance. Not a general newsletter, but a briefing calibrated to what's actually changing in your business.</p>
+              <p><strong class="text-ink font-medium">Who this is for:</strong> Any publisher. Engagements are scoped individually.</p>
             </div>
             <div class="flex flex-wrap gap-2">
-              <span class="meta-pill">Advisory add-on · any tier</span>
+              <span class="meta-pill">Advisory · by engagement</span>
             </div>
           </article>
         </div>
@@ -1065,13 +1047,13 @@
         <div class="service-stage-body">
           <article class="service-card">
             <p class="eyebrow mb-3">Audio &amp; Podcast Yield</p>
-            <h2 class="font-serif text-2xl text-ink mb-4">The only practice built for audio publishers.</h2>
+            <h2 class="font-serif text-2xl text-ink mb-4">Built for audio publishers.</h2>
             <div class="text-muted leading-relaxed space-y-3 mb-6">
-              <p>DAI configuration, programmatic demand mix, host-read vs. programmatic balance, and revenue-per-listen optimization. Valadisse brings hands-on audio infrastructure experience that no display-first practice can match.</p>
+              <p>DAI configuration, programmatic demand mix, host-read vs. programmatic balance, and revenue-per-listen optimization. Valadisse brings hands-on audio infrastructure experience.</p>
               <p><strong class="text-ink font-medium">Who this is for:</strong> Podcast and streaming publishers whose audio inventory deserves the same level of strategic attention as their display stack.</p>
             </div>
             <div class="flex flex-wrap gap-2">
-              <span class="meta-pill">Advisory add-on · any tier</span>
+              <span class="meta-pill">Advisory · by engagement</span>
             </div>
           </article>
         </div>
@@ -1085,7 +1067,7 @@
     <div class="max-w-6xl mx-auto px-6">
       <div class="max-w-3xl mx-auto text-center">
         <p class="eyebrow mb-3 reveal">Security &amp; Data</p>
-        <p class="text-muted leading-relaxed reveal reveal-delay-1">Your data is encrypted in transit and at rest, never shared with third parties beyond what's needed to run the diagnostic, and never used to train any model. Valadisse's infrastructure runs on providers that maintain established security and compliance standards — the same foundation trusted by companies far larger than this one. The engines behind Valadisse's analysis are interchangeable, and swapping one never changes how client data is protected or that it is never used to train any model.</p>
+        <p class="text-muted leading-relaxed reveal reveal-delay-1">Your data is encrypted in transit and at rest, never shared with third parties beyond what's needed to run the diagnostic, and never used to train any model. Valadisse's infrastructure runs on providers that maintain established security and compliance standards, the same foundation trusted by companies far larger than this one.</p>
       </div>
     </div>
   </section>
@@ -1153,7 +1135,7 @@
           <div class="pb-12">
             <p class="font-mono text-xs text-muted uppercase tracking-widest mb-2">Starter · $299/mo</p>
             <h2 class="font-serif text-2xl text-ink mb-3">The full report</h2>
-            <p class="text-muted leading-relaxed">The complete findings behind the free preview — every gap named, with revenue-impact ranges rather than a score alone. Upload a Google Ad Manager (GAM) export and chart your revenue, eCPM and fill over the period it covers.</p>
+            <p class="text-muted leading-relaxed">The complete findings behind the free preview, with every gap named and revenue-impact ranges rather than a score alone. Every rescan is compared against your last one, so a change to your declared sellers is flagged when you scan. Upload a Google Ad Manager (GAM) export and chart your revenue, eCPM and fill over the period it covers. The Floor Optimization Index and Demand Diversity scores, calculated from your ad server report, are rolling out. <span class="meta-pill status-pill ml-1" title="Rolling out means it is being released in stages. Items marked this way are included in the plan as they become available.">Rolling out</span></p>
           </div>
         </div>
  
@@ -1165,8 +1147,8 @@
           </div>
           <div class="pb-12">
             <p class="font-mono text-xs text-muted uppercase tracking-widest mb-2">Pro · $799/mo</p>
-            <h2 class="font-serif text-2xl text-ink mb-3">Track it over time</h2>
-            <p class="text-muted leading-relaxed">Every rescan is compared against your last one, so a change to your declared sellers is flagged rather than discovered months later — and your Floor Optimization Index is tracked across every exchange you run, not confined to one platform&rsquo;s own auction. Priority support, plus an onboarding session to map priorities for your stack.</p>
+            <h2 class="font-serif text-2xl text-ink mb-3">Built to run for you</h2>
+            <p class="text-muted leading-relaxed">Scheduled monitoring of your supply chain and proactive alerts, on the cadence you choose, are rolling out. <span class="meta-pill status-pill ml-1" title="Rolling out means it is being released in stages. Items marked this way are included in the plan as they become available.">Rolling out</span> An onboarding session to map priorities for your stack is available now.</p>
           </div>
         </div>
  
@@ -1176,7 +1158,7 @@
             <div class="step-dot p3">3</div>
           </div>
           <div class="pb-4">
-            <p class="font-mono text-xs text-muted uppercase tracking-widest mb-2">Advisory · by arrangement</p>
+            <p class="font-mono text-xs text-muted uppercase tracking-widest mb-2">Advisory · by engagement</p>
             <h2 class="font-serif text-2xl text-ink mb-3">Hands-on help, if you want it</h2>
             <p class="text-muted leading-relaxed">Where the findings point to something structural — supply path consolidation, curation strategy, identity gaps — we work directly with a small number of publishers. It is not a prerequisite for the product, and not where most people start.</p>
           </div>
@@ -1186,44 +1168,12 @@
     </div>
   </section>
  
-  <!-- How the platform stays current -->
-  <section id="stays-current" style="scroll-margin-top:110px;" class="py-20 bg-gray-50 border-t border-rule" aria-label="How the platform stays current">
+  <!-- Recent posts -->
+  <section id="recent-updates" class="py-20 bg-gray-50 border-t border-rule" aria-label="Recent posts">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="max-w-3xl mb-12">
-        <p class="eyebrow mb-3 reveal">Always current</p>
-        <h2 class="font-serif text-3xl text-ink mb-4 reveal reveal-delay-1">How the platform stays current</h2>
-        <p class="text-muted text-lg leading-relaxed reveal reveal-delay-2">Programmatic changes monthly. Valadisse is built to notice, judge, and adapt, so publishers do not have to track it themselves.</p>
-      </div>
-      <div class="grid md:grid-cols-2 gap-6">
-        <div class="p-8 rounded-xl border border-rule bg-white reveal">
-          <p class="font-mono text-xs text-accent uppercase tracking-widest mb-3">01</p>
-          <h3 class="font-serif text-xl text-ink mb-3">Watch</h3>
-          <p class="text-muted leading-relaxed text-sm">AI agents continuously monitor industry news, product and standards releases, conference sessions, and video and podcast transcripts. They also look for quieter developments that mainstream coverage skips.</p>
-        </div>
-        <div class="p-8 rounded-xl border border-rule bg-white reveal reveal-delay-1">
-          <p class="font-mono text-xs text-accent uppercase tracking-widest mb-3">02</p>
-          <h3 class="font-serif text-xl text-ink mb-3">Decide</h3>
-          <p class="text-muted leading-relaxed text-sm">Each development is assessed for its effect on publisher revenue and on Valadisse's own tools. Valadisse acts when there is meaningful added value, not for novelty.</p>
-        </div>
-        <div class="p-8 rounded-xl border border-rule bg-white reveal reveal-delay-2">
-          <p class="font-mono text-xs text-accent uppercase tracking-widest mb-3">03</p>
-          <h3 class="font-serif text-xl text-ink mb-3">Swap</h3>
-          <p class="text-muted leading-relaxed text-sm">The platform is designed so the engines behind it, including language models and AI agents, can be exchanged through existing connections. A better engine goes in when it earns its place, which keeps the product current without disruption.</p>
-        </div>
-        <div class="p-8 rounded-xl border border-rule bg-white reveal reveal-delay-3">
-          <p class="font-mono text-xs text-accent uppercase tracking-widest mb-3">04</p>
-          <h3 class="font-serif text-xl text-ink mb-3">Learn</h3>
-          <p class="text-muted leading-relaxed text-sm">Historical scan data feeds predictions and recommendations, so the system becomes more accurate the longer a publisher uses it.</p>
-        </div>
-      </div>
-      <div class="max-w-3xl mt-12 space-y-4 text-muted leading-relaxed reveal">
-        <p>Valadisse stays close to adtech developments and acts on them faster than enterprise vendors can. For publishers, that means a diagnostic that reflects how the market works now, not how it worked when a product was last released.</p>
-        <p>Valadisse's indexes are built on established IAB Tech Lab standards, so measurement stays familiar while the analysis behind it keeps improving.</p>
-      </div>
-
       <!-- Generated by scripts/build-blog.mjs from the three newest posts. Do not edit by hand. -->
-      <div class="max-w-3xl mt-12 pt-8 border-t border-rule reveal">
-        <p class="eyebrow mb-4">Recent platform and market updates</p>
+      <div class="max-w-3xl reveal">
+        <p class="eyebrow mb-4">From the blog</p>
         <!-- RECENT-POSTS:START -->
         <ul class="divide-y divide-rule border-y border-rule">
           <li class="py-4 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1"><a class="font-semibold text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent" href="/blog/buying-agents-will-soon-read-your-ad-products-first/">Buying agents will soon read your ad products first</a><span class="font-mono text-xs text-muted">October 9, 2026</span></li>
@@ -1308,7 +1258,7 @@
     <div class="max-w-6xl mx-auto px-6">
       <div class="max-w-3xl mx-auto positioning-bar reveal">
         <h2 class="font-serif text-2xl md:text-3xl text-ink mb-4">Why Valadisse exists.</h2>
-        <p class="text-muted leading-relaxed">Valadisse was built on more than a decade of working with publishers to monetize their inventory. Independent publishers get squeezed by the platforms they have no choice but to depend on, and they rarely get a clear, independent view of what their inventory is worth or what buyers can and cannot see. Valadisse gives them that view: continuous, platform-neutral, and calibrated to the market as it is today. No revenue share, no platform affiliations, no agenda except the publisher's.</p>
+        <p class="text-muted leading-relaxed">Valadisse was built on more than a decade of working with publishers to monetize their inventory. Independent publishers get squeezed by the platforms they have no choice but to depend on, and they rarely get a clear, independent view of what their inventory is worth or what buyers can and cannot see. Valadisse gives them that view: platform-neutral, and calibrated to the market as it is today. No revenue share, no platform affiliations, no agenda except the publisher's.</p>
       </div>
     </div>
   </section>
@@ -1408,11 +1358,11 @@
     },
     'services': {
       title: 'What you get — Valadisse',
-      desc:  'What the free scan surfaces, what Starter and Pro add, and the advisory add-ons available on top of any tier.'
+      desc:  'What the free scan surfaces, what Starter and Pro add, and Advisory engagements scoped individually.'
     },
     'how-it-works': {
       title: 'How It Works — Valadisse',
-      desc:  'Start with the free scan of your ads.txt, then Starter for the full report, then Pro to track changes over time. Advisory work available separately.'
+      desc:  'Start with the free scan of your ads.txt, then Starter for the full report, then Pro for onboarding and, as it rolls out, monitoring. Advisory work available separately.'
     },
     'contact': {
       title: 'Contact — Valadisse',
