@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 // Keeps the site honest. Zero dependencies: `node scripts/check-claims.mjs`.
+// The rules live in CLAUDE.md ("Claims"); this enforces the mechanical ones.
 //
-//  1. A claim removed from the site (CLAUDE.md, "Removed") must not come back.
-//  2. Status wording ("rolling out", "coming soon") appears only inside a status
-//     pill, never in the sentence next to it.
-//  3. The pills match the CLAUDE.md tables: seven "Coming soon" (no working
-//     code) and one "Rolling out" (Floor Optimization Index and Demand
-//     Diversity scores, which are partly live). Change these numbers only
-//     together with the tables.
+//  1. A claim removed from the site must not come back.
+//  2. One status vocabulary: "Coming soon". "Rolling out" is retired.
+//  3. Status wording appears only inside a pill, never in prose.
+//  4. A pill is always the last pill in its row and sits at the end of its
+//     block: the only content of its own <p>, or the last child of a pill row.
+//     Never mid-paragraph, never in a title.
+//  5. A sentence describing a coming-soon feature is in the future tense.
+//  6. The pill count matches the CLAUDE.md table (change only together).
 import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -16,9 +18,14 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const FILES = ['index.html', 'blog/index.html', 'scripts/build-blog.mjs'];
 const PAGES = ['index.html', 'blog/index.html'];
 
-const EXPECTED_COMING_SOON = 7;
-const EXPECTED_ROLLING_OUT = 1;
-const ROLLING_OUT_LINE_MUST_CONTAIN = 'Floor Optimization Index';
+const EXPECTED_COMING_SOON = 8;
+
+// Coming-soon features: any sentence mentioning one must contain "will".
+const FUTURE_TENSE_PHRASES = [
+  'daily monitoring', 'same-day detection', 'scheduled monitoring',
+  'plain-English digest', 'curated deal packages', 'flag an anomaly',
+  'other Demand Diversity scores',
+];
 
 const BANNED = [
   'AI-native', 'AI-assisted', 'AI agents', 'agents scan', 'AI infrastructure',
@@ -27,46 +34,62 @@ const BANNED = [
   'only practice', 'display-first practice', 'Advisory add-on', 'on top of whichever tier',
   'not standalone retainers', 'Available standalone', 'same monitoring that keeps the platform',
   'sees across every exchange', 'ad ops function', 'faster than enterprise vendors',
+  'rolling out', 'rolls out', 'rolled out',
 ];
 
 const PILL = /<span class="meta-pill status-pill[^"]*"[^>]*>(.*?)<\/span>/gs;
 let failed = 0;
 const fail = (msg) => { console.error(msg); failed++; };
+const snippet = (t, i) => t.slice(Math.max(0, i - 60), i + 60).replace(/\s+/g, ' ');
 
 for (const file of FILES) {
   const text = await readFile(join(ROOT, file), 'utf8');
   for (const phrase of BANNED) {
     if (text.toLowerCase().includes(phrase.toLowerCase())) {
-      fail(`${file}: removed claim is back: "${phrase}"`);
+      fail(`${file}: removed or retired wording is back: "${phrase}"`);
     }
   }
 }
 
-let coming = 0;
-let rolling = 0;
+let pills = 0;
 for (const file of PAGES) {
   const text = await readFile(join(ROOT, file), 'utf8');
+
   for (const m of text.matchAll(PILL)) {
-    const label = m[1].trim();
-    if (label === 'Coming soon') coming++;
-    else if (label === 'Rolling out') {
-      rolling++;
-      const line = text.slice(text.lastIndexOf('\n', m.index) + 1, text.indexOf('\n', m.index));
-      if (!line.includes(ROLLING_OUT_LINE_MUST_CONTAIN)) {
-        fail(`${file}: a "Rolling out" pill is on something other than ${ROLLING_OUT_LINE_MUST_CONTAIN}`);
+    pills++;
+    if (m[1].trim() !== 'Coming soon') fail(`${file}: pill label must be "Coming soon", found "${m[1].trim()}"`);
+
+    const before = text.slice(0, m.index).replace(/\s+$/, '');
+    const after = text.slice(m.index + m[0].length).replace(/^\s+/, '');
+    const soleInP = /<p[^>]*>$/.test(before);
+    let lastInRow = false;
+    if (before.endsWith('</span>')) {
+      const open = before.lastIndexOf('<div');
+      const close = before.lastIndexOf('</div>');
+      lastInRow = open > close && /flex-wrap/.test(before.slice(open, before.indexOf('>', open)));
+    }
+    if (!soleInP && !lastInRow) fail(`${file}: pill is not alone in its block or last in its row: "...${snippet(text, m.index)}..."`);
+    if (!/^<\/(p|div)>/.test(after)) fail(`${file}: pill is not the last thing in its block: "...${snippet(text, m.index)}..."`);
+  }
+
+  const prose = text
+    .replace(PILL, ' ')
+    .replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<!--[\s\S]*?-->/g, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/\s+/g, ' ');
+  for (const m of prose.matchAll(/rolling out|coming soon/gi)) {
+    fail(`${file}: status wording outside a pill: "...${snippet(prose, m.index)}..."`);
+  }
+  for (const sentence of prose.split(/(?<=[.!?])\s+/)) {
+    for (const phrase of FUTURE_TENSE_PHRASES) {
+      if (sentence.toLowerCase().includes(phrase.toLowerCase()) && !/\bwill\b/i.test(sentence)) {
+        fail(`${file}: coming-soon feature not in future tense: "${sentence.slice(0, 120)}"`);
       }
-    } else {
-      fail(`${file}: unknown status pill label "${label}"`);
     }
   }
-  const prose = text.replace(PILL, '');
-  for (const m of prose.matchAll(/rolling out|coming soon/gi)) {
-    const around = prose.slice(Math.max(0, m.index - 50), m.index + 40).replace(/\s+/g, ' ');
-    fail(`${file}: status wording outside a pill: "...${around}..."`);
-  }
 }
-if (coming !== EXPECTED_COMING_SOON) fail(`expected ${EXPECTED_COMING_SOON} "Coming soon" pills, found ${coming}`);
-if (rolling !== EXPECTED_ROLLING_OUT) fail(`expected ${EXPECTED_ROLLING_OUT} "Rolling out" pill, found ${rolling}`);
+if (pills !== EXPECTED_COMING_SOON) fail(`expected ${EXPECTED_COMING_SOON} "Coming soon" pills, found ${pills}`);
 
 if (failed) process.exit(1);
-console.log(`claims check passed (${coming} Coming soon, ${rolling} Rolling out, ${BANNED.length} banned phrases)`);
+console.log(`claims check passed (${pills} Coming soon pills, ${BANNED.length} banned phrases, ${FUTURE_TENSE_PHRASES.length} future-tense phrases)`);
