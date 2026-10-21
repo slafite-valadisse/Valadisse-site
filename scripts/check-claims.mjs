@@ -10,6 +10,8 @@
 //     Never mid-paragraph, never in a title.
 //  5. A sentence describing a coming-soon feature is in the future tense.
 //  6. The pill count matches the CLAUDE.md table (change only together).
+//  7. Audience claims: no audio, podcast, app-first, newsletter-led or
+//     "all qualify" statements in visible copy until the tooling exists.
 import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -35,6 +37,15 @@ const BANNED = [
   'not standalone retainers', 'Available standalone', 'same monitoring that keeps the platform',
   'sees across every exchange', 'ad ops function', 'faster than enterprise vendors',
   'rolling out', 'rolls out', 'rolled out',
+];
+
+// Visible-copy only (CSS class names do not count). Audio, podcast and app-first
+// publishers are not claimed until the tooling for them exists; community-driven
+// publishers are the primary audience.
+const PROSE_BANNED = [
+  [/\baudio\b/i, 'audio'], [/\bpodcasts?\b/i, 'podcast'], [/\bapp-first\b/i, 'app-first'],
+  [/\bnewsletter-led\b/i, 'newsletter-led'], [/\bDAI\b/, 'DAI'], [/\bstreaming\b/i, 'streaming'],
+  [/\ball qualify\b/i, 'all qualify'], [/\bany distribution model\b/i, 'any distribution model'],
 ];
 
 const PILL = /<span class="meta-pill status-pill[^"]*"[^>]*>(.*?)<\/span>/gs;
@@ -80,6 +91,10 @@ for (const file of PAGES) {
     .replace(/\s+/g, ' ');
   for (const m of prose.matchAll(/rolling out|coming soon/gi)) {
     fail(`${file}: status wording outside a pill: "...${snippet(prose, m.index)}..."`);
+  }
+  for (const [re, name] of PROSE_BANNED) {
+    const hit = re.exec(prose);
+    if (hit) fail(`${file}: audience claim not allowed yet ("${name}"): "...${snippet(prose, hit.index)}..."`);
   }
   for (const sentence of prose.split(/(?<=[.!?])\s+/)) {
     for (const phrase of FUTURE_TENSE_PHRASES) {

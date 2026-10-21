@@ -44,7 +44,9 @@ One status vocabulary, the same as the pricing cards in the app: **Coming soon**
 | Upload a Google Ad Manager export and chart revenue, eCPM and fill | How It Works | App `/reports` and dashboard upload |
 | Onboarding session to map priorities (Pro, set up by hand) | Services, How It Works | Manual service |
 | Advisory engagements are scoped individually and priced by engagement: vendor stack review, contract and revenue-share review, identity and addressability strategy, a neutral second opinion | Services, How It Works | Manual service; matches the app's Advisory card and lead form |
-| Identity and addressability, market intelligence and audio practices (advisory work) | Home, Services | Manual service. Market intelligence and audio are not on the app's Advisory card; confirm before expanding |
+| Identity and addressability, and market intelligence (advisory work) | Home, Services | Manual service. Market intelligence is not on the app's Advisory card; confirm before expanding |
+| Community-driven publishers are the primary audience | Home (Who this is for) | Positioning decision (Stephan, 2026-10-21). The scan and the report upload work from any site's ads.txt and a Google Ad Manager export; nothing is built for a specific publisher type |
+| Customers run programmatic inventory declared in an ads.txt file | Home (Who this is for) | The free scan reads ads.txt |
 | Data is encrypted in transit and at rest | Services | Supabase documents "all customer data is encrypted at rest with AES-256 and in transit via TLS" (supabase.com/security) and "data is encrypted at rest and in transit by Supabase" (docs, shared responsibility model). Scope: the app's HTTPS traffic and the hosted database; direct database connections do not enforce SSL unless switched on |
 | Uploaded data is never used to train any model | Services | Privacy page: no model processes uploaded data today |
 
@@ -71,4 +73,4 @@ on top of any tier" and "not standalone retainers"; "the only practice" and
 "no display-first practice can match"; "ad ops function, without the
 overhead"; "continuous" monitoring; acting on developments faster than
 enterprise vendors; indexes built on IAB standards (unverifiable as worded);
-"the same monitoring that keeps the platform current".
+"the same monitoring that keeps the platform current"; the claim that all four ICPs qualify ("audio/podcast, app-first, newsletter-led, or community-driven publishers all qualify", "any distribution model"); every audio, podcast, streaming, DAI and app-first statement (the Audio & Podcast Yield service and tile, "including audio", "audio sellers included", "tell us you're audio-first", the DAI and podcast experience sentence, "display, native, audio, or video"); newsletter-led as a named audience. None of these come back until the tooling for that publisher type exists; `scripts/check-claims.mjs` enforces it.
