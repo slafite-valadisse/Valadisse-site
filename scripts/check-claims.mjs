@@ -45,7 +45,7 @@ const BANNED = [
 const PROSE_BANNED = [
   [/\baudio\b/i, 'audio'], [/\bpodcasts?\b/i, 'podcast'], [/\bapp-first\b/i, 'app-first'],
   [/\bnewsletter-led\b/i, 'newsletter-led'], [/\bDAI\b/, 'DAI'], [/\bstreaming\b/i, 'streaming'],
-  [/\ball qualify\b/i, 'all qualify'], [/\bany distribution model\b/i, 'any distribution model'],
+  [/\bUS-based\b/i, 'US-based'],   [/\ball qualify\b/i, 'all qualify'], [/\bany distribution model\b/i, 'any distribution model'],
 ];
 
 const PILL = /<span class="meta-pill status-pill[^"]*"[^>]*>(.*?)<\/span>/gs;
