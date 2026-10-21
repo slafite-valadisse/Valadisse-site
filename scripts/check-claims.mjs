@@ -10,6 +10,7 @@
 //     Never mid-paragraph, never in a title.
 //  5. A sentence describing a coming-soon feature is in the future tense.
 //  6. The pill count matches the CLAUDE.md table (change only together).
+//  8. No em dashes in visible site copy (HTML comments do not count).
 //  7. Audience claims: no audio, podcast, app-first, newsletter-led or
 //     "all qualify" statements in visible copy until the tooling exists.
 import { readFile } from 'node:fs/promises';
@@ -60,6 +61,16 @@ for (const file of FILES) {
       fail(`${file}: removed or retired wording is back: "${phrase}"`);
     }
   }
+}
+
+// Visible copy, on every page: no em dashes (HTML comments are not copy).
+const EM_DASH_FILES = ['index.html', 'privacy.html', 'terms.html', 'intake.html', 'blog/index.html', 'blog/buying-agents-will-soon-read-your-ad-products-first/index.html'];
+let emDashes = 0;
+for (const file of EM_DASH_FILES) {
+  const visible = (await readFile(join(ROOT, file), 'utf8')).replace(/<!--[\s\S]*?-->/g, '');
+  const n = (visible.match(/—|&mdash;/g) ?? []).length;
+  if (n) fail(`${file}: ${n} em dash(es) in visible copy`);
+  emDashes += n;
 }
 
 let pills = 0;
