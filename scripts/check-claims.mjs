@@ -38,6 +38,8 @@ const BANNED = [
   'not standalone retainers', 'Available standalone', 'same monitoring that keeps the platform',
   'sees across every exchange', 'ad ops function', 'faster than enterprise vendors',
   'rolling out', 'rolls out', 'rolled out',
+  'revenue range on every finding', 'revenue range to your results', 'annualised figure',
+  'how much premium demand', 'revenue-impact ranges', 'every gap named',
 ];
 
 // Visible-copy only (CSS class names do not count). Audio, podcast and app-first

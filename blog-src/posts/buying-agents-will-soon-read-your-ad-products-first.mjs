@@ -22,7 +22,7 @@ export default {
     note: 'OpenProposal is an IAB Tech Lab draft, not yet a ratified standard.',
   },
   cta: {
-    text: "Valadisse's free scan reads the seller declarations a site already publishes and returns a Supply Chain Health Score, a floor signal, and how much premium demand is missing. Starter puts a revenue-impact range against each gap.",
+    text: "Valadisse's free scan reads the seller declarations a site already publishes and returns a Supply Chain Health Score, a floor signal, and how many premium exchanges are missing. Starter names the missing exchanges.",
     button: 'Run your free scan',
     href: 'https://app.valadisse.com/scan',
   },
