@@ -28,6 +28,13 @@ One status vocabulary, the same as the pricing cards in the app: **Coming soon**
   app repo (search for the feature) before choosing or changing a label.
 - When a feature ships, update its row below and drop the pill in the same
   change. When a claim is removed, move it to "Removed" so it is not reinstated.
+- A revenue range is stated as one conditional range per scan, never per
+  finding or per gap. It is conditional on correcting the issues the scan
+  found, and it is a CPM rate range: no dollar total is claimed from a domain
+  scan alone.
+- Pro's call to action is "Apply for Founding Access" until every Coming soon
+  feature ships. Pro is not offered as a self-serve purchase here or in the
+  app before then.
 - Copy is in the third person, with no em dashes, no scoring formulas and no
   vendor names. Never "continuous", "around the clock", "unlimited" or "beta".
 - `node scripts/check-claims.mjs` fails if a removed claim comes back, if the
@@ -45,6 +52,7 @@ One status vocabulary, the same as the pricing cards in the app: **Coming soon**
 | Onboarding session to map priorities (Pro, set up by hand) | Services, How It Works | Manual service |
 | Advisory engagements are scoped individually and priced by engagement: vendor stack review, contract and revenue-share review, identity and addressability strategy, a neutral second opinion | Services, How It Works | Manual service; matches the app's Advisory card and lead form |
 | Identity and addressability, and market intelligence (advisory work) | Home, Services | Manual service. Market intelligence is not on the app's Advisory card; confirm before expanding |
+| Independent publishers with $500K+ in annual ad revenue are the core audience; publishers under $500K are a secondary pool | Home (Who this is for) | Positioning decision (Stephan, 2026-10-28). Replaces the $250K to $5M+ band |
 | Community-driven publishers are the primary audience | Home (Who this is for) | Positioning decision (Stephan, 2026-10-21). The scan and the report upload work from any site's ads.txt and a Google Ad Manager export; nothing is built for a specific publisher type |
 | Customers run programmatic inventory declared in an ads.txt file | Home (Who this is for) | The free scan reads ads.txt |
 | Data is encrypted in transit and at rest | Services | Supabase documents "all customer data is encrypted at rest with AES-256 and in transit via TLS" (supabase.com/security) and "data is encrypted at rest and in transit by Supabase" (docs, shared responsibility model). Scope: the app's HTTPS traffic and the hosted database; direct database connections do not enforce SSL unless switched on |
