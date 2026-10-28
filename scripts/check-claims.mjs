@@ -40,6 +40,19 @@ const BANNED = [
   'rolling out', 'rolls out', 'rolled out',
   'revenue range on every finding', 'revenue range to your results', 'annualised figure',
   'how much premium demand', 'revenue-impact ranges', 'every gap named',
+  // One conditional revenue range per scan, never per finding or gap.
+  'range per finding', 'range for each finding', 'range against each gap', 'range per gap',
+  // Audience: $500K floor with a secondary pool; no "any publisher"; Pro is apply-only.
+  '$250K', '</strong> Any publisher', 'Subscribe to Pro', 'Upgrade to Pro',
+];
+
+// Wording that must stay exactly as decided. Checked against visible text, so a
+// silent edit fails the build. Change these only together with CLAUDE.md.
+const REQUIRED = [
+  ['index.html', 'Independent publishers with $500K+ in annual ad revenue; publishers under $500K are a secondary pool'],
+  ['index.html', 'Who this is for: Publishers running programmatic inventory declared in an ads.txt file. Engagements are scoped individually.'],
+  ['index.html', 'Valadisse shows how many premium exchanges are missing from your declared sellers, free in seconds: no tag, no integration, no revenue share.'],
+  ['index.html', 'Starter shows which exchanges are missing.'],
 ];
 
 // Visible-copy only (CSS class names do not count). Audio, podcast and app-first
@@ -116,6 +129,12 @@ for (const file of PAGES) {
       }
     }
   }
+}
+for (const [file, phrase] of REQUIRED) {
+  const visible = (await readFile(join(ROOT, file), 'utf8'))
+    .replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<!--[\s\S]*?-->/g, ' ')
+    .replace(/<[^>]+>/g, ' ').replace(/&rsquo;/g, '\u2019').replace(/\s+/g, ' ');
+  if (!visible.includes(phrase)) fail(`${file}: pinned wording changed or missing: "${phrase}"`);
 }
 if (pills !== EXPECTED_COMING_SOON) fail(`expected ${EXPECTED_COMING_SOON} "Coming soon" pills, found ${pills}`);
 
