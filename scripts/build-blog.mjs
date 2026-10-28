@@ -79,6 +79,13 @@ for (const f of (await readdir(dir)).filter((f) => f.endsWith('.mjs'))) {
 }
 posts.sort((a, b) => b.date.localeCompare(a.date));
 
+const entries = (await import(pathToFileURL(join(ROOT, 'changelog-src', 'entries.mjs')).href)).default;
+for (const e of entries) {
+  for (const k of ['date', 'title', 'items']) if (!e[k]) throw new Error(`changelog entry missing "${k}"`);
+  if (JSON.stringify(e).includes('\u2014')) throw new Error(`changelog entry "${e.title}": contains an em dash`);
+}
+entries.sort((a, b) => b.date.localeCompare(a.date));
+
 // ── shared chrome, borrowed from index.html ────────────────────────────
 const home = await readFile(INDEX, 'utf8');
 const between = (s, a, b) => {
@@ -192,10 +199,65 @@ ${main}
 
 ${footer}
 ${blogScript}
+${signupScript}
 </body>
 </html>
 `;
 }
+
+// Email signup. The form posts to the app (app.valadisse.com), which stores the
+// address in its Supabase database and sends the confirmation through Resend.
+// The consent sentence is pinned in check-claims.mjs and stored with the row by
+// the app (src/lib/newsletter/consent.ts); change all three together.
+const CONSENT = "I agree to receive Valadisse's blog and product update emails at this address. I can unsubscribe at any time.";
+const signupBlock = `
+  <section class="py-12 bg-gray-50 border-y border-rule" aria-label="Email updates">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-xl">
+        <p class="eyebrow mb-3">Email updates</p>
+        <h2 class="font-serif text-2xl text-ink mb-3">Get new posts and product updates by email.</h2>
+        <form id="signup-form" class="space-y-3" novalidate>
+          <label for="signup-email" class="block text-sm text-ink">Email address</label>
+          <input id="signup-email" name="email" type="email" required autocomplete="email" class="w-full border border-rule rounded px-4 py-3 text-ink bg-white" placeholder="you@example.com">
+          <div style="position:absolute; left:-9999px;" aria-hidden="true"><label>Website <input id="signup-website" type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+          <label class="flex gap-3 items-start text-sm text-muted leading-relaxed">
+            <input id="signup-consent" type="checkbox" required class="mt-1">
+            <span>${esc(CONSENT)}</span>
+          </label>
+          <button type="submit" class="btn-primary">Subscribe</button>
+          <p id="signup-status" class="text-sm text-ink" role="status" aria-live="polite"></p>
+        </form>
+        <p class="text-xs text-muted mt-4 leading-relaxed">Your email address is stored in Valadisse's database (Supabase) and emails are sent through Resend. Every email has an unsubscribe link. See the <a href="/privacy.html" class="underline">privacy policy</a>. Prefer a feed reader? <a href="/blog/feed.xml" class="underline">Blog RSS feed</a>.</p>
+      </div>
+    </div>
+  </section>`;
+
+const signupScript = `
+<script>
+  (function () {
+    var form = document.getElementById('signup-form');
+    if (!form) return;
+    var status = document.getElementById('signup-status');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = document.getElementById('signup-email').value.trim();
+      var consent = document.getElementById('signup-consent').checked;
+      if (!email || email.indexOf('@') < 1) { status.textContent = 'Enter a valid email address.'; return; }
+      if (!consent) { status.textContent = 'Tick the box to agree to receive the emails.'; return; }
+      status.textContent = 'Sending...';
+      fetch('https://app.valadisse.com/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, consent: true, website: document.getElementById('signup-website').value, source: location.pathname.indexOf('changelog') > -1 ? 'changelog' : 'blog' })
+      }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
+        .then(function (res) {
+          if (res.ok) { form.reset(); status.textContent = 'Check your inbox and use the link in the email to confirm your subscription.'; }
+          else { status.textContent = (res.body && res.body.error) || 'Something went wrong. Try again in a moment.'; }
+        })
+        .catch(function () { status.textContent = 'Something went wrong. Try again in a moment.'; });
+    });
+  })();
+</script>`;
 
 const ctaBand = `
   <section class="py-20 bg-ink" aria-label="Call to action">
@@ -245,6 +307,8 @@ const indexMain = `<main role="main">
     </div>
   </section>
 
+${signupBlock}
+
   <section class="py-16" aria-label="Latest post">
     <div class="max-w-6xl mx-auto px-6">
       <p class="eyebrow mb-4">Latest</p>${featured(posts[0])}
@@ -256,6 +320,34 @@ ${posts.length > 1 ? `
     </div>
   </section>
 
+${ctaBand}
+</main>`;
+
+// ── changelog ───────────────────────────────────────────────────────────
+const changelogMain = `<main role="main">
+  <section class="py-16 border-b border-rule" aria-label="Changelog header">
+    <div class="max-w-6xl mx-auto px-6">
+      <p class="eyebrow mb-4">Changelog</p>
+      <h1 class="font-serif text-4xl md:text-5xl text-ink max-w-3xl leading-tight">What changed in Valadisse, and when.</h1>
+      <p class="text-muted text-lg mt-5 max-w-3xl leading-relaxed">Each entry lists only what a customer can use today.</p>
+    </div>
+  </section>
+
+  <section class="py-16" aria-label="Entries">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="blog-prose">
+${entries.map((e) => `        <article class="mb-14">
+          <p class="font-mono text-xs text-muted mb-2"><time datetime="${e.date}">${fmtDate(e.date)}</time></p>
+          <h2 style="margin-top:0;">${esc(e.title)}</h2>
+          <ul style="list-style:disc; padding-left:1.5rem;">
+            ${e.items.map((i) => `<li>${inline(i)}</li>`).join('\n            ')}
+          </ul>
+        </article>`).join('\n')}
+      </div>
+    </div>
+  </section>
+
+${signupBlock}
 ${ctaBand}
 </main>`;
 
@@ -339,6 +431,16 @@ await writeFile(
     main: indexMain,
   }),
 );
+await mkdir(join(ROOT, 'changelog'), { recursive: true });
+await writeFile(
+  join(ROOT, 'changelog', 'index.html'),
+  page({
+    title: 'Changelog | Valadisse',
+    description: 'What changed in Valadisse, and when. Each entry lists only what a customer can use today.',
+    canonical: `${SITE}/changelog/`,
+    main: changelogMain,
+  }),
+);
 for (const p of posts) {
   await mkdir(join(ROOT, 'blog', p.slug), { recursive: true });
   await writeFile(join(ROOT, 'blog', p.slug, 'index.html'), postPage(p));
@@ -374,6 +476,7 @@ ${posts.map((p) => `    <item>
 const urls = [
   [`${SITE}/`, posts[0].date],
   [`${SITE}/blog/`, posts[0].date],
+  [`${SITE}/changelog/`, entries[0].date],
   ...posts.map((p) => [`${SITE}/blog/${p.slug}/`, p.date]),
   [`${SITE}/privacy`, null],
   [`${SITE}/terms`, null],
