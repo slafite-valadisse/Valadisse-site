@@ -206,7 +206,7 @@ ${signupScript}
 }
 
 // Email signup. The form posts to the app (app.valadisse.com), which stores the
-// address in its Supabase database and sends the confirmation through Resend.
+// address in its database and sends the confirmation by email.
 // The consent sentence is pinned in check-claims.mjs and stored with the row by
 // the app (src/lib/newsletter/consent.ts); change all three together.
 const CONSENT = "I agree to receive Valadisse's blog and product update emails at this address. I can unsubscribe at any time.";
@@ -227,7 +227,7 @@ const signupBlock = `
           <button type="submit" class="btn-primary">Subscribe</button>
           <p id="signup-status" class="text-sm text-ink" role="status" aria-live="polite"></p>
         </form>
-        <p class="text-xs text-muted mt-4 leading-relaxed">Your email address is stored in Valadisse's database (Supabase) and emails are sent through Resend. Every email has an unsubscribe link. See the <a href="/privacy.html" class="underline">privacy policy</a>. Prefer a feed reader? <a href="/blog/feed.xml" class="underline">Blog RSS feed</a>.</p>
+        <p class="text-xs text-muted mt-4 leading-relaxed">Your email address is stored in Valadisse's database, hosted by a database provider, and emails are sent through an email delivery provider. Every email has an unsubscribe link. See the <a href="/privacy.html" class="underline">privacy policy</a>. Prefer a feed reader? <a href="/blog/feed.xml" class="underline">Blog RSS feed</a>.</p>
       </div>
     </div>
   </section>`;

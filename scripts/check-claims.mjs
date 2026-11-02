@@ -43,6 +43,8 @@ const BANNED = [
   // One conditional revenue range per scan, never per finding or gap.
   'range per finding', 'range for each finding', 'range against each gap', 'range per gap',
   // Audience: $500K floor with a secondary pool; no "any publisher"; Pro is apply-only.
+  // Public copy names provider categories, not vendors (privacy and Terms keep their processor lists).
+  'Supabase', 'Resend',
   '$250K', '</strong> Any publisher', 'Subscribe to Pro', 'Upgrade to Pro',
 ];
 
