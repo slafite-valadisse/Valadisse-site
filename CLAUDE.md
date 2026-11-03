@@ -34,7 +34,11 @@ One status vocabulary, the same as the pricing cards in the app: **Coming soon**
   scan alone.
 - Pro's call to action is "Apply for Founding Access" until every Coming soon
   feature ships. Pro is not offered as a self-serve purchase here or in the
-  app before then.
+  app before then. Every Founding Cohort or Founding Access button and label
+  reads exactly "Apply for Founding Access"; there is no "Apply Now" variant.
+- Scope: Valadisse works from the ads.txt file a site publishes and, for
+  Starter, the ad server reports a customer uploads. No claim about ad formats,
+  devices or "integrated strategy"; check-claims bans them.
 - Copy is in the third person, with no em dashes, no scoring formulas and no
   vendor names. Never "continuous", "around the clock", "unlimited" or "beta".
 - `node scripts/check-claims.mjs` fails if a removed claim comes back, if the

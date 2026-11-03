@@ -44,6 +44,10 @@ const BANNED = [
   'range per finding', 'range for each finding', 'range against each gap', 'range per gap',
   // Audience: $500K floor with a secondary pool; no "any publisher"; Pro is apply-only.
   '$250K', '</strong> Any publisher', 'Subscribe to Pro', 'Upgrade to Pro',
+  // Scope: ads.txt and uploaded ad server reports. No format or device claims.
+  'across ad formats and devices', 'multiple formats', 'Full-stack fluency', 'integrated strategy',
+  // Every Founding label is "Apply for Founding Access"; never an "Apply Now" variant.
+  'Founding Cohort: Apply Now', 'Founding cohort: apply now', 'Founding Cohort \u2014 Apply Now', 'Apply Now',
 ];
 
 // Wording that must stay exactly as decided. Checked against visible text, so a
