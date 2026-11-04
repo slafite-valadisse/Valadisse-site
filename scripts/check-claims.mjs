@@ -47,6 +47,7 @@ const BANNED = [
   // Scope: ads.txt and uploaded ad server reports. No format or device claims.
   'across ad formats and devices', 'multiple formats', 'Full-stack fluency', 'integrated strategy',
   // Every Founding label is "Apply for Founding Access"; never an "Apply Now" variant.
+  'Google Ad Manager', '(GAM)',
   'Founding Cohort: Apply Now', 'Founding cohort: apply now', 'Founding Cohort \u2014 Apply Now', 'Apply Now',
 ];
 
