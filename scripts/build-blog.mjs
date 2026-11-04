@@ -88,7 +88,9 @@ const between = (s, a, b) => {
 };
 const siteStyle = between(home, '<style>', '</style>');
 const tailwindCfg = between(home, '<script>\n    tailwind.config', '</script>');
-const fonts = between(home, '<link rel="preconnect" href="https://fonts.googleapis.com">', 'rel="stylesheet">');
+// Self-hosted font preloads plus the inline @font-face style (id="fonts", so the
+// bare '<style>' match above never picks it up).
+const fonts = between(home, '<link rel="preload" as="font"', '</style>');
 
 function rewriteLinks(html) {
   return html
