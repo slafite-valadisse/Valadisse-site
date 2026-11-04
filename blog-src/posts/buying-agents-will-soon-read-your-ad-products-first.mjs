@@ -13,12 +13,12 @@ export default {
   atAGlance: [
     ['Released', 'September 22, 2026'],
     ['Status', 'Draft, not ratified'],
-    ['Comment closes', 'October 22, 2026'],
+    ['Public comment', 'Closed October 22, 2026'],
   ],
   // Shown beside the featured card on /blog/ when this is the newest post.
   sidePanel: {
-    label: 'Public comment closes',
-    value: 'Oct 22',
+    label: 'Public comment',
+    value: 'Closed Oct 22',
     note: 'OpenProposal is an IAB Tech Lab draft, not yet a ratified standard.',
   },
   cta: {
@@ -62,7 +62,7 @@ On September 22, 2026, IAB Tech Lab published OpenProposal, a draft specificatio
 
 ### What was released
 
-According to the announcement, sellers can publish a catalog of public packages that buyer agents browse, while keeping some products for custom proposals. A buyer agent can also submit a full brief to request a custom proposal. The draft specification's [GitHub repository](https://github.com/IABTechLab/OpenProposal) states that each line item maps to an existing IAB Tech Lab execution standard, with OpenDirect 2.1, the Deals API, and OpenRTB 2.6 listed as options. The same repository states that nothing in it is a ratified IAB Tech Lab standard, and that public comment closes October 22, 2026.
+According to the announcement, sellers can publish a catalog of public packages that buyer agents browse, while keeping some products for custom proposals. A buyer agent can also submit a full brief to request a custom proposal. The draft specification's [GitHub repository](https://github.com/IABTechLab/OpenProposal) states that each line item maps to an existing IAB Tech Lab execution standard, with OpenDirect 2.1, the Deals API, and OpenRTB 2.6 listed as options. The same repository states that nothing in it is a ratified IAB Tech Lab standard, and that public comment closed on October 22, 2026.
 
 ### Why it matters for independent publishers
 
@@ -76,6 +76,6 @@ This is early. Per the [AAMP 3.0 announcement](https://iabtechlab.com/press-rele
 
 1. **Check that declared sellers are accurate and current.** ads.txt is the authorization record buyers already check against.
 2. **Package inventory as defined deals,** not only open-exchange impressions. Curated and direct deal structures translate into line items; unpackaged impressions do not.
-3. **Use the comment window.** It closes October 22, 2026, and IAB Tech Lab's announcement directs feedback to iabtechlab.com/AAMPv3.
+3. **Follow the specification.** Public comment closed on October 22, 2026. IAB Tech Lab's announcement points to iabtechlab.com/AAMPv3 for updates.
 `,
 };
