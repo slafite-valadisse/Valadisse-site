@@ -42,16 +42,20 @@ const BANNED = [
   'how much premium demand', 'revenue-impact ranges', 'every gap named',
   // One conditional revenue range per scan, never per finding or gap.
   'range per finding', 'range for each finding', 'range against each gap', 'range per gap',
-  // Audience: $500K floor with a secondary pool; no "any publisher"; Pro is apply-only.
   // Public copy names provider categories, not vendors (privacy and Terms keep their processor lists).
   'Supabase', 'Resend',
-  '$250K', '</strong> Any publisher', 'Subscribe to Pro', 'Upgrade to Pro',
+  // Audience: no revenue floor or band anywhere (decision 2026-11-10); no "any publisher"; Pro is apply-only.
+  '$250K', '$500K', 'secondary pool', '</strong> Any publisher', 'Subscribe to Pro', 'Upgrade to Pro',
+  // Scope: ads.txt and uploaded ad server reports. No format or device claims.
+  'across ad formats and devices', 'multiple formats', 'Full-stack fluency', 'integrated strategy',
+  // Every Founding label is "Apply for Founding Access"; never an "Apply Now" variant.
+  'Google Ad Manager', '(GAM)',
+  'Founding Cohort: Apply Now', 'Founding cohort: apply now', 'Founding Cohort \u2014 Apply Now', 'Apply Now',
 ];
 
 // Wording that must stay exactly as decided. Checked against visible text, so a
 // silent edit fails the build. Change these only together with CLAUDE.md.
 const REQUIRED = [
-  ['index.html', 'Independent publishers with $500K+ in annual ad revenue; publishers under $500K are a secondary pool'],
   ['index.html', 'Who this is for: Publishers running programmatic inventory declared in an ads.txt file. Engagements are scoped individually.'],
   ['index.html', 'Valadisse shows how many premium exchanges are missing from your declared sellers, free in seconds: no tag, no integration, no revenue share.'],
   ['index.html', 'Starter shows which exchanges are missing.'],
