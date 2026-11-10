@@ -40,6 +40,23 @@ const BANNED = [
   'rolling out', 'rolls out', 'rolled out',
   'revenue range on every finding', 'revenue range to your results', 'annualised figure',
   'how much premium demand', 'revenue-impact ranges', 'every gap named',
+  // One conditional revenue range per scan, never per finding or gap.
+  'range per finding', 'range for each finding', 'range against each gap', 'range per gap',
+  // Audience: no revenue floor or band anywhere (decision 2026-11-10); no "any publisher"; Pro is apply-only.
+  '$250K', '$500K', 'secondary pool', '</strong> Any publisher', 'Subscribe to Pro', 'Upgrade to Pro',
+  // Scope: ads.txt and uploaded ad server reports. No format or device claims.
+  'across ad formats and devices', 'multiple formats', 'Full-stack fluency', 'integrated strategy',
+  // Every Founding label is "Apply for Founding Access"; never an "Apply Now" variant.
+  'Google Ad Manager', '(GAM)',
+  'Founding Cohort: Apply Now', 'Founding cohort: apply now', 'Founding Cohort \u2014 Apply Now', 'Apply Now',
+];
+
+// Wording that must stay exactly as decided. Checked against visible text, so a
+// silent edit fails the build. Change these only together with CLAUDE.md.
+const REQUIRED = [
+  ['index.html', 'Who this is for: Publishers running programmatic inventory declared in an ads.txt file. Engagements are scoped individually.'],
+  ['index.html', 'Valadisse shows how many premium exchanges are missing from your declared sellers, free in seconds: no tag, no integration, no revenue share.'],
+  ['index.html', 'Starter shows which exchanges are missing.'],
 ];
 
 // Visible-copy only (CSS class names do not count). Audio, podcast and app-first
@@ -116,6 +133,12 @@ for (const file of PAGES) {
       }
     }
   }
+}
+for (const [file, phrase] of REQUIRED) {
+  const visible = (await readFile(join(ROOT, file), 'utf8'))
+    .replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<!--[\s\S]*?-->/g, ' ')
+    .replace(/<[^>]+>/g, ' ').replace(/&rsquo;/g, '\u2019').replace(/\s+/g, ' ');
+  if (!visible.includes(phrase)) fail(`${file}: pinned wording changed or missing: "${phrase}"`);
 }
 if (pills !== EXPECTED_COMING_SOON) fail(`expected ${EXPECTED_COMING_SOON} "Coming soon" pills, found ${pills}`);
 

@@ -28,6 +28,17 @@ One status vocabulary, the same as the pricing cards in the app: **Coming soon**
   app repo (search for the feature) before choosing or changing a label.
 - When a feature ships, update its row below and drop the pill in the same
   change. When a claim is removed, move it to "Removed" so it is not reinstated.
+- A revenue range is stated as one conditional range per scan, never per
+  finding or per gap. It is conditional on correcting the issues the scan
+  found, and it is a CPM rate range: no dollar total is claimed from a domain
+  scan alone.
+- Pro's call to action is "Apply for Founding Access" until every Coming soon
+  feature ships. Pro is not offered as a self-serve purchase here or in the
+  app before then. Every Founding Cohort or Founding Access button and label
+  reads exactly "Apply for Founding Access"; there is no "Apply Now" variant.
+- Scope: Valadisse works from the ads.txt file a site publishes and, for
+  Starter, the ad server reports a customer uploads. No claim about ad formats,
+  devices or "integrated strategy"; check-claims bans them.
 - Copy is in the third person, with no em dashes, no scoring formulas and no
   vendor names. Never "continuous", "around the clock", "unlimited" or "beta".
 - `node scripts/check-claims.mjs` fails if a removed claim comes back, if the
@@ -73,4 +84,4 @@ on top of any tier" and "not standalone retainers"; "the only practice" and
 "no display-first practice can match"; "ad ops function, without the
 overhead"; "continuous" monitoring; acting on developments faster than
 enterprise vendors; indexes built on IAB standards (unverifiable as worded);
-"the same monitoring that keeps the platform current"; "US-based" as a requirement or description of the audience (anywhere: copy, meta, footer); the claim that all four ICPs qualify ("audio/podcast, app-first, newsletter-led, or community-driven publishers all qualify", "any distribution model"); every audio, podcast, streaming, DAI and app-first statement (the Audio & Podcast Yield service and tile, "including audio", "audio sellers included", "tell us you're audio-first", the DAI and podcast experience sentence, "display, native, audio, or video"); newsletter-led as a named audience; "how much premium demand" (the free scan counts exchanges, it does not size demand); "revenue-impact ranges", "revenue range on every finding", "revenue range to your results" and "complete findings" with "every gap named" (Starter shows the same top findings and the same single CPM opportunity card as free, and adds the exchange names); "annualised figure". None of these come back until the tooling for that publisher type exists; `scripts/check-claims.mjs` enforces it.
+"the same monitoring that keeps the platform current"; "US-based" as a requirement or description of the audience (anywhere: copy, meta, footer); any revenue floor, band or "secondary pool" for the audience ("$500K+", "$250K to $5M+"; Stephan, 2026-11-10: the audience is stated without a dollar figure); the claim that all four ICPs qualify ("audio/podcast, app-first, newsletter-led, or community-driven publishers all qualify", "any distribution model"); every audio, podcast, streaming, DAI and app-first statement (the Audio & Podcast Yield service and tile, "including audio", "audio sellers included", "tell us you're audio-first", the DAI and podcast experience sentence, "display, native, audio, or video"); newsletter-led as a named audience; "how much premium demand" (the free scan counts exchanges, it does not size demand); "revenue-impact ranges", "revenue range on every finding", "revenue range to your results" and "complete findings" with "every gap named" (Starter shows the same top findings and the same single CPM opportunity card as free, and adds the exchange names); "annualised figure". None of these come back until the tooling for that publisher type exists; `scripts/check-claims.mjs` enforces it.
