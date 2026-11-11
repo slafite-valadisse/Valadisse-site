@@ -43,7 +43,7 @@ const BANNED = [
   // One conditional revenue range per scan, never per finding or gap.
   'range per finding', 'range for each finding', 'range against each gap', 'range per gap',
   // Audience: no revenue floor or band anywhere (decision 2026-11-10); no "any publisher"; Pro is apply-only.
-  '$250K', '$500K', 'secondary pool', '</strong> Any publisher', 'Subscribe to Pro', 'Upgrade to Pro',
+  '$250K', '$500K', '$1M+', 'secondary pool', '</strong> Any publisher', 'Subscribe to Pro', 'Upgrade to Pro',
   // Scope: ads.txt and uploaded ad server reports. No format or device claims.
   'across ad formats and devices', 'multiple formats', 'Full-stack fluency', 'integrated strategy',
   // Every Founding label is "Apply for Founding Access"; never an "Apply Now" variant.
