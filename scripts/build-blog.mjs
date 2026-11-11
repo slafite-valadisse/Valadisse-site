@@ -273,7 +273,7 @@ function postPage(p) {
     mainEntityOfPage: url,
     image: `${SITE}/logo.png`,
     author: { '@type': 'Person', name: p.author },
-    publisher: { '@type': 'Organization', name: 'Valadisse', logo: { '@type': 'ImageObject', url: `${SITE}/logo.png` } },
+    publisher: { '@type': 'Organization', name: 'Valadisse', sameAs: ['https://www.linkedin.com/company/valadisse/'], logo: { '@type': 'ImageObject', url: `${SITE}/logo.png` } },
   };
   const glance = p.atAGlance?.length
     ? `<dl class="glance mb-10" aria-label="At a glance">
