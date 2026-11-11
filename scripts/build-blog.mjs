@@ -10,12 +10,27 @@
 // at build time, so they cannot drift from the main site. Output is committed;
 // the host needs no build step.
 
-import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises';
-import { dirname, join } from 'node:path';
+import { readdir, readFile, writeFile as fsWrite, mkdir as fsMkdir } from 'node:fs/promises';
+import { dirname, join, relative } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://valadisse.com';
+
+// `node scripts/build-blog.mjs --check` writes nothing: it rebuilds in memory and
+// exits 1 if any committed output differs (scripts/check-claims.mjs runs it), so
+// the committed blog pages, feed, sitemap and the home page's recent-posts list
+// can never fall behind this generator or the nav, CSS and footer it borrows from
+// index.html.
+const CHECK = process.argv.includes('--check');
+const drift = [];
+const mkdir = (...a) => (CHECK ? Promise.resolve() : fsMkdir(...a));
+async function writeFile(path, content) {
+  if (!CHECK) return fsWrite(path, content);
+  let current = null;
+  try { current = await readFile(path, 'utf8'); } catch { /* missing file counts as drift */ }
+  if (current !== content) drift.push(relative(ROOT, path));
+}
 const INDEX = join(ROOT, 'index.html');
 
 // ── helpers ─────────────────────────────────────────────────────────────
@@ -400,3 +415,11 @@ const updated = home.replace(/<!-- RECENT-POSTS:START -->[\s\S]*?<!-- RECENT-POS
 if (updated !== home) await writeFile(INDEX, updated);
 
 console.log(`Built ${posts.length} post(s), blog index, feed, sitemap, robots.`);
+
+if (CHECK) {
+  if (drift.length) {
+    console.error('Blog output is out of date with the generator: ' + drift.join(', ') + '. Run: node scripts/build-blog.mjs');
+    process.exit(1);
+  }
+  console.log('Blog output matches the generator.');
+}

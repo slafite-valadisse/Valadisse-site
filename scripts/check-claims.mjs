@@ -11,9 +11,11 @@
 //  5. A sentence describing a coming-soon feature is in the future tense.
 //  6. The pill count matches the CLAUDE.md table (change only together).
 //  8. No em dashes in visible site copy (HTML comments do not count).
+//  9. Committed blog output equals a fresh rebuild (build-blog.mjs --check).
 //  7. Audience claims: no audio, podcast, app-first, newsletter-led or
 //     "all qualify" statements in visible copy until the tooling exists.
 import { readFile } from 'node:fs/promises';
+import { spawnSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -141,6 +143,14 @@ for (const [file, phrase] of REQUIRED) {
   if (!visible.includes(phrase)) fail(`${file}: pinned wording changed or missing: "${phrase}"`);
 }
 if (pills !== EXPECTED_COMING_SOON) fail(`expected ${EXPECTED_COMING_SOON} "Coming soon" pills, found ${pills}`);
+
+// The committed blog pages must equal a fresh rebuild (generator, nav, CSS and footer
+// all come from scripts/build-blog.mjs and index.html). Run the rebuild after editing
+// index.html, blog-src/ or the generator.
+{
+  const r = spawnSync(process.execPath, [join(ROOT, 'scripts', 'build-blog.mjs'), '--check'], { encoding: 'utf8' });
+  if (r.status !== 0) fail(`blog output differs from a rebuild: ${(r.stderr || r.stdout).trim()}`);
+}
 
 if (failed) process.exit(1);
 console.log(`claims check passed (${pills} Coming soon pills, ${BANNED.length} banned phrases, ${FUTURE_TENSE_PHRASES.length} future-tense phrases)`);
