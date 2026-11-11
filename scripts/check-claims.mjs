@@ -18,7 +18,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const FILES = ['index.html', 'blog/index.html', 'scripts/build-blog.mjs'];
+const FILES = ['index.html', 'blog/index.html', 'changelog/index.html', 'scripts/build-blog.mjs'];
 const PAGES = ['index.html', 'blog/index.html'];
 
 const EXPECTED_COMING_SOON = 8;
@@ -42,6 +42,8 @@ const BANNED = [
   'how much premium demand', 'revenue-impact ranges', 'every gap named',
   // One conditional revenue range per scan, never per finding or gap.
   'range per finding', 'range for each finding', 'range against each gap', 'range per gap',
+  // Public copy names provider categories, not vendors (privacy and Terms keep their processor lists).
+  'Supabase', 'Resend',
   // Audience: no revenue floor or band anywhere (decision 2026-11-10); no "any publisher"; Pro is apply-only.
   '$250K', '$500K', '$1M+', 'secondary pool', '</strong> Any publisher', 'Subscribe to Pro', 'Upgrade to Pro',
   // Scope: ads.txt and uploaded ad server reports. No format or device claims.
@@ -57,6 +59,10 @@ const REQUIRED = [
   ['index.html', 'Who this is for: Publishers running programmatic inventory declared in an ads.txt file. Engagements are scoped individually.'],
   ['index.html', 'Valadisse shows how many premium exchanges are missing from your declared sellers, free in seconds: no tag, no integration, no revenue share.'],
   ['index.html', 'Starter shows which exchanges are missing.'],
+  // Newsletter consent: the same sentence is stored by the app (src/lib/newsletter/consent.ts).
+  ['blog/index.html', "I agree to receive Valadisse's blog and product update emails at this address. I can unsubscribe at any time."],
+  ['blog/index.html', 'Every email has an unsubscribe link.'],
+  ['changelog/index.html', "I agree to receive Valadisse's blog and product update emails at this address. I can unsubscribe at any time."],
 ];
 
 // Visible-copy only (CSS class names do not count). Audio, podcast and app-first
@@ -83,7 +89,7 @@ for (const file of FILES) {
 }
 
 // Visible copy, on every page: no em dashes (HTML comments are not copy).
-const EM_DASH_FILES = ['index.html', 'privacy.html', 'terms.html', 'intake.html', 'blog/index.html', 'blog/buying-agents-will-soon-read-your-ad-products-first/index.html'];
+const EM_DASH_FILES = ['index.html', 'privacy.html', 'terms.html', 'intake.html', 'blog/index.html', 'changelog/index.html', 'blog/buying-agents-will-soon-read-your-ad-products-first/index.html'];
 let emDashes = 0;
 for (const file of EM_DASH_FILES) {
   const visible = (await readFile(join(ROOT, file), 'utf8')).replace(/<!--[\s\S]*?-->/g, '');
