@@ -42,7 +42,7 @@ export default {
       date: '2026',
       title: 'OpenProposal, draft 3.0 (public comment)',
       descriptor: '[Specification repository]',
-      publication: 'GitHub',
+      publication: 'IAB Tech Lab, OpenProposal specification',
       url: 'https://github.com/IABTechLab/OpenProposal',
       accessed: 'October 9, 2026',
       italic: 'title',
@@ -62,7 +62,7 @@ On September 22, 2026, IAB Tech Lab published OpenProposal, a draft specificatio
 
 ### What was released
 
-According to the announcement, sellers can publish a catalog of public packages that buyer agents browse, while keeping some products for custom proposals. A buyer agent can also submit a full brief to request a custom proposal. The draft specification's [GitHub repository](https://github.com/IABTechLab/OpenProposal) states that each line item maps to an existing IAB Tech Lab execution standard, with OpenDirect 2.1, the Deals API, and OpenRTB 2.6 listed as options. The same repository states that nothing in it is a ratified IAB Tech Lab standard, and that public comment closed on October 22, 2026.
+According to the announcement, sellers can publish a catalog of public packages that buyer agents browse, while keeping some products for custom proposals. A buyer agent can also submit a full brief to request a custom proposal. The draft specification's [specification repository](https://github.com/IABTechLab/OpenProposal) states that each line item maps to an existing IAB Tech Lab execution standard, with OpenDirect 2.1, the Deals API, and OpenRTB 2.6 listed as options. The same repository states that nothing in it is a ratified IAB Tech Lab standard, and that public comment closed on October 22, 2026.
 
 ### Why it matters for independent publishers
 
