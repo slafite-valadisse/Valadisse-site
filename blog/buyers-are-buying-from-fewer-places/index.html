@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <title>Buyers are buying from fewer places, and the shortlist is decided before the auction | Valadisse Blog</title>
+  <meta name="description" content="ANA benchmark data shows buyers are shrinking their supply lists, and the cut happens before the auction. What it means for independent publishers.">
+  <link rel="canonical" href="https://valadisse.com/blog/buyers-are-buying-from-fewer-places/">
+  <link rel="alternate" type="application/rss+xml" title="Valadisse Blog" href="https://valadisse.com/blog/feed.xml">
+  <meta property="og:title" content="Buyers are buying from fewer places, and the shortlist is decided before the auction | Valadisse Blog">
+  <meta property="og:description" content="ANA benchmark data shows buyers are shrinking their supply lists, and the cut happens before the auction. What it means for independent publishers.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://valadisse.com/blog/buyers-are-buying-from-fewer-places/">
+  <meta property="og:site_name" content="Valadisse">
+  <meta property="og:image" content="https://valadisse.com/logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Buyers are buying from fewer places, and the shortlist is decided before the auction | Valadisse Blog">
+  <meta name="twitter:description" content="ANA benchmark data shows buyers are shrinking their supply lists, and the cut happens before the auction. What it means for independent publishers.">
+  <meta name="twitter:image" content="https://valadisse.com/logo.png">
+  <meta property="article:published_time" content="2026-11-11">
+  <meta property="article:section" content="Market shifts">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Buyers are buying from fewer places, and the shortlist is decided before the auction","description":"ANA benchmark data shows buyers are shrinking their supply lists, and the cut happens before the auction. What it means for independent publishers.","datePublished":"2026-11-11","dateModified":"2026-11-11","articleSection":"Market shifts","mainEntityOfPage":"https://valadisse.com/blog/buyers-are-buying-from-fewer-places/","image":"https://valadisse.com/logo.png","author":{"@type":"Person","name":"Stephan Lafite"},"publisher":{"@type":"Organization","name":"Valadisse","sameAs":["https://www.linkedin.com/company/valadisse/"],"logo":{"@type":"ImageObject","url":"https://valadisse.com/logo.png"}}}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink:    '#070033',
+            paper:  '#FFFFFF',
+            rule:   '#EEEEEE',
+            muted:  '#4A4A4A',
+            accent: '#FF6632',
+            yellow: '#FBAC41',
+          },
+          fontFamily: {
+            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+            sans:  ['"Instrument Sans"', 'sans-serif'],
+            mono:  ['"DM Mono"', 'monospace'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ── Base ── */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Instrument Sans', sans-serif;
+      background: #FFFFFF;
+      color: #070033;
+      -webkit-font-smoothing: antialiased;
+    }
+ 
+    /* ── Scroll animations ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+ 
+    /* ── Page switching ── */
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+ 
+    /* ── Nav ── */
+    #site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: #FFFFFF;
+      border-bottom: 1px solid #EEEEEE;
+      transition: box-shadow 0.2s ease;
+    }
+    #site-nav.scrolled { box-shadow: 0 2px 16px rgba(7,0,51,0.07); }
+ 
+    /* Logo */
+    .logo-img { height: 78px; width: auto; display: block; }
+    /* Below 660px the nav logo + hamburger no longer have room for the
+       full 78px-tall lockup (6.18:1 aspect ratio) without squeezing --
+       measured against the app's nav (its tighter constraint: fixed
+       "Pricing"/"Sign in" text, no hamburger collapse), which leaves
+       only ~162px for the logo at a 320px viewport (320 - 48px padding
+       - ~110px text). 24px (width ~148px) keeps a safety margin against
+       that budget rather than sizing to the exact edge -- text-metric
+       width can shift a few px with font-loading timing, and an exact
+       fit reintroduces the same squeeze on the next measurement.
+
+       Threshold is 660px, not Tailwind's sm (640px): this site doesn't
+       need it -- its cheap hamburger icon clears 640 with room to
+       spare -- but the app's own crossover measured at 478.8/482.4px
+       (still ~1% short) right at 640, only clean by 660. Matched here
+       anyway so both properties switch at the same viewport width,
+       not just avoid distortion independently at each one. */
+    @media (max-width: 659px) {
+      .logo-img { height: 24px; }
+    }
+    .logo-fallback {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #070033;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+ 
+    /* Nav links */
+    .nav-link {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #4A4A4A;
+      text-decoration: none;
+      padding: 6px 0;
+      position: relative;
+      transition: color 0.15s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #FF6632;
+      transition: width 0.2s ease;
+    }
+    .nav-link:hover { color: #070033; }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link.active { color: #070033; }
+    .nav-link.active::after { width: 100%; }
+ 
+    /* Mobile menu */
+    #mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #FFFFFF;
+      z-index: 100;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    #mobile-menu.open { display: flex; }
+    .mobile-nav-link {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 2rem;
+      color: #070033;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .mobile-nav-link:hover { color: #FF6632; }
+ 
+    /* ── Buttons ── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FF6632;
+      color: #FFFFFF;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 13px 28px;
+      border-radius: 4px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+      white-space: nowrap;
+    }
+    .btn-primary:hover {
+      background: #e5531e;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(255,102,50,0.3);
+    }
+    .btn-primary:active { transform: translateY(0); }
+ 
+    .btn-primary-dark {
+      background: #070033;
+      color: #FFFFFF;
+    }
+    .btn-primary-dark:hover {
+      background: #0e0055;
+      box-shadow: 0 4px 16px rgba(7,0,51,0.25);
+    }
+ 
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      color: #070033;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 12px 24px;
+      border-radius: 4px;
+      border: 1.5px solid #EEEEEE;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+    .btn-ghost:hover {
+      border-color: #070033;
+      background: #f8f8fc;
+    }
+ 
+    /* ── Hero ── */
+    .hero-section {
+      background: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid #EEEEEE;
+    }
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255,102,50,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-section::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: -5%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(251,172,65,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+ 
+    /* ── Positioning statement ── */
+    .positioning-bar {
+      border-left: 3px solid #FF6632;
+      padding-left: 24px;
+    }
+ 
+    /* ── Service tiles (home) ── */
+    .service-tile {
+      background: #FFFFFF;
+      border: 1px solid #EEEEEE;
+      border-radius: 8px;
+      padding: 20px;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      cursor: default;
+    }
+    .service-tile:hover {
+      border-color: #FF6632;
+      box-shadow: 0 4px 24px rgba(255,102,50,0.08);
+      transform: translateY(-2px);
+    }
+ 
+    /* ── Qualifier checks ── */
+    .check-mark {
+      color: #FF6632;
+      font-weight: 700;
+      flex-shrink: 0;
+      font-size: 16px;
+    }
+ 
+    /* ── Service cards (services page) ── */
+    .service-card {
+      background: #FFFFFF;
+      border: 1px solid #EEEEEE;
+      border-radius: 10px;
+      padding: 32px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .service-card:hover {
+      border-color: rgba(255,102,50,0.3);
+      box-shadow: 0 4px 32px rgba(7,0,51,0.06);
+    }
+ 
+    /* ── Services numbered stage format ── */
+    .service-stage {
+      display: flex;
+      gap: 32px;
+      position: relative;
+    }
+    .service-stage-col {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .service-stage-dot {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #070033;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .service-stage-dot.accent {
+      background: #FF6632;
+    }
+    .service-stage-connector {
+      width: 2px;
+      flex: 1;
+      background: linear-gradient(to bottom, #EEEEEE, #EEEEEE 80%, transparent);
+      margin-top: 8px;
+    }
+    .service-stage-body {
+      flex: 1;
+      padding-bottom: 32px;
+    }
+    .service-stage:last-child .service-stage-body {
+      padding-bottom: 0;
+    }
+    @media (max-width: 640px) {
+      .service-stage { gap: 20px; }
+      .service-stage-dot { width: 36px; height: 36px; font-size: 12px; }
+    }
+ 
+    /* Meta pills */
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: #f4f4f8;
+      color: #4A4A4A;
+      border: 1px solid #EEEEEE;
+    }
+    .status-pill {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 2px 8px;
+      vertical-align: middle;
+      cursor: help;
+    }
+    .meta-pill.accent {
+      background: #fff3ee;
+      color: #FF6632;
+      border-color: rgba(255,102,50,0.3);
+    }
+ 
+    /* ── How It Works steps ── */
+    .step-connector {
+      position: absolute;
+      left: 19px;
+      top: 52px;
+      bottom: -8px;
+      width: 2px;
+      background: linear-gradient(to bottom, #EEEEEE, transparent);
+    }
+    .step-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .step-dot.free { background: #FF6632; color: #FFFFFF; }
+    .step-dot.p1   { background: #070033; color: #FFFFFF; }
+    .step-dot.p2   { background: #4A4A4A; color: #FFFFFF; }
+    .step-dot.p3   { background: #FBAC41; color: #070033; }
+ 
+    /* ── Get In Touch band ── */
+    .git-band {
+      background: #070033;
+      border-radius: 12px;
+    }
+ 
+    /* ── Footer ── */
+    .site-footer {
+      background: #070033;
+      color: rgba(255,255,255,0.7);
+    }
+ 
+    /* ── Contact form placeholder ── */
+    .form-placeholder {
+      background: #f8f8fc;
+      border: 2px dashed #EEEEEE;
+      border-radius: 10px;
+      padding: 48px 32px;
+      text-align: center;
+    }
+ 
+    /* ── Divider rule ── */
+    .section-rule {
+      width: 40px;
+      height: 3px;
+      background: #FF6632;
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+ 
+    /* ── Eyebrow label ── */
+    .eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #FF6632;
+    }
+ 
+    /* ── Subtle grid texture on hero ── */
+    .grid-texture {
+      background-image:
+        linear-gradient(rgba(7,0,51,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(7,0,51,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+ 
+    /* ── Micro-interaction on CTA ── */
+    @keyframes pulse-ring {
+      0%   { box-shadow: 0 0 0 0 rgba(255,102,50,0.4); }
+      70%  { box-shadow: 0 0 0 10px rgba(255,102,50,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,102,50,0); }
+    }
+    .btn-primary.pulse { animation: pulse-ring 2s infinite; }
+ 
+    /* ── Hamburger icon ── */
+    .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #070033;
+      border-radius: 2px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+ 
+    /* ── Focus ring (accessibility) ── */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid #FF6632;
+      outline-offset: 3px;
+      border-radius: 3px;
+    }
+ 
+    /* ── Audio banner ── */
+    .audio-banner {
+      background: linear-gradient(90deg, #fff9f6, #fff3ee);
+      border: 1px solid rgba(255,102,50,0.25);
+      border-radius: 8px;
+    }
+ 
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #f4f4f8; }
+    ::-webkit-scrollbar-thumb { background: #EEEEEE; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #FF6632; }
+ 
+    /* ── Page transition ── */
+    .page-section { animation: pageIn 0.3s ease; }
+    @keyframes pageIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    /* Footer social link: 44px tap target, same muted tone as the other footer links, visible keyboard focus. */
+    .social-link { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; color: rgba(255,255,255,0.5); transition: color 0.15s; }
+    .social-link:hover { color: #fff; }
+    .social-link:focus-visible { outline: 2px solid #FF6632; outline-offset: 2px; color: #fff; border-radius: 4px; }
+  </style>
+  <style>
+  /* ── Blog ── */
+  .blog-prose { max-width: 760px; }
+  .blog-prose p, .blog-prose li { color: #4A4A4A; font-size: 17px; line-height: 1.75; }
+  .blog-prose p { margin: 0 0 1.25rem; }
+  .blog-prose h2 { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.65rem; line-height: 1.25; color: #070033; margin: 2.5rem 0 1rem; }
+  .blog-prose ol { list-style: decimal; padding-left: 1.5rem; margin: 0 0 1.25rem; }
+  .blog-prose li { margin-bottom: 0.75rem; padding-left: 0.25rem; }
+  .blog-prose strong { color: #070033; font-weight: 600; }
+  /* Ink links with an accent underline: orange text alone fails contrast on white. */
+  .blog-prose a, .sources-list a { color: #070033; text-decoration: underline; text-decoration-color: #FF6632; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  .blog-prose a:hover, .sources-list a:hover { color: #FF6632; }
+  .sources-list { list-style: none; padding: 0; margin: 0; }
+  .sources-list li { color: #4A4A4A; font-size: 14px; line-height: 1.7; margin-bottom: 1rem; padding-left: 1.5rem; text-indent: -1.5rem; overflow-wrap: anywhere; }
+  .glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: #EEEEEE; border: 1px solid #EEEEEE; border-radius: 8px; overflow: hidden; }
+  .glance > div { background: #f8f8fc; padding: 14px 18px; }
+  .glance dt { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #4A4A4A; margin-bottom: 4px; }
+  .glance dd { margin: 0; font-weight: 600; color: #070033; font-size: 15px; }
+  .back-link { font-family: 'DM Mono', monospace; font-size: 12px; color: #4A4A4A; text-decoration: none; }
+  .back-link:hover { color: #FF6632; }
+  .feature-card { border: 1px solid #EEEEEE; border-radius: 12px; overflow: hidden; background: #fff; }
+  .feature-card:hover { border-color: rgba(255,102,50,0.4); box-shadow: 0 4px 32px rgba(7,0,51,0.06); }
+  .feature-panel { background: #070033; color: #fff; }
+  .feature-panel .big { font-family: 'DM Serif Display', Georgia, serif; font-size: 3.25rem; line-height: 1; }
+  .title-link { color: #070033; text-decoration: none; }
+  .title-link:hover { color: #FF6632; }
+</style>
+</head>
+<body>
+<!-- GENERATED by scripts/build-blog.mjs. Edit blog-src/ or index.html, then rebuild. -->
+<nav id="site-nav" role="navigation" aria-label="Main navigation">
+  <!-- max-w-6xl -> max-w-[1360px] 2026-09-30, nav bar only -- rest of the
+       page (hero, sections, footer) keeps max-w-6xl unchanged, same reading
+       width as before. This widens the CAP for very wide screens; it does
+       NOT by itself fix anything at the breakpoint's own edge, since below
+       1360px wide the container is still constrained by the viewport, not
+       by this max-width -- see the breakpoint change on the nav-links div
+       and the hamburger button below, which is the part that actually
+       closes the gap at 1280px. -->
+  <div class="max-w-[1360px] mx-auto px-6 flex items-center justify-between gap-8 h-24">
+
+    <!-- Logo -->
+    <!-- flex-shrink-0 added 2026-09-30: at this container's former
+         max-width (1152px), logo (482px natural -- matching the same SVG's
+         natural width on app.valadisse.com exactly) + the desktop
+         nav-links group together exceeded the available space, and default
+         flexbox flex-shrink (1, browsers' own default) silently compressed
+         the logo -- not the nav links -- down to fit, since the logo
+         <img>'s own Tailwind-Preflight `max-width: 100%` rule let its flex
+         item shrink below its intrinsic size. Measured before this fix:
+         logo rendered 326px wide here vs 482px on app.valadisse.com, same
+         file, same 78px height -- a silent, gradually-worsening side
+         effect of nav items accumulating over several sessions (Contact,
+         Pricing, Sign in, Create account, the CTA button all added after
+         this nav's original spacing was set), never the logo intentionally
+         changing size. Never shrinking it again: if space ever runs out
+         here in the future, the nav links (not the logo) should be what
+         visibly needs attention -- which is exactly what would happen now,
+         since the breakpoint below only switches to this layout once
+         there's actually room for everything at its natural size. -->
+    <a href="/" class="flex items-center flex-shrink-0" aria-label="Valadisse home">
+      
+      <img
+        src="/logo-lockup.svg"
+        alt="Valadisse"
+        class="logo-img"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+      >
+      <span class="logo-fallback" style="display:none;">VALADISSE</span>
+    </a>
+ 
+    <!-- Desktop nav links -->
+    <!-- xl (1280px) -> min-[1360px] 2026-09-30, same pattern already used
+         elsewhere in this file for the same underlying problem (the
+         640->660 and lg->xl breakpoint moves above, both for "not enough
+         room yet"). 1280px was measured to be ~170px short of what this
+         layout actually needs once the logo is no longer allowed to shrink
+         (see the logo <a>'s own comment); no amount of trimming gaps alone
+         closed that without visibly cramming seven links plus a button.
+         1360px is the real point this layout first has enough width for
+         everything at its natural size -- matches the hamburger toggle
+         below, which must flip at the exact same threshold. -->
+    <div class="hidden min-[1360px]:flex items-center gap-8">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/#services" class="nav-link">Services</a>
+      <a href="/#how-it-works" class="nav-link">How It Works</a>
+      <a href="/blog/" class="nav-link active" aria-current="page">Blog</a>
+      <a href="/#contact" class="nav-link">Contact</a>
+      <a href="https://app.valadisse.com/#pricing" class="nav-link">Pricing</a>
+      <!-- Added 2026-09-18: no sign-in or account-creation entry point
+           existed anywhere on this site before this. -->
+      <!-- nowrap: .nav-link has no white-space rule, so multi-word items
+           wrap at any width -- pre-existing on "How It Works" too, not
+           fixed here since it's out of scope, but not repeating it on a
+           link I'm adding fresh. -->
+      <a href="https://app.valadisse.com/login" class="nav-link" style="white-space:nowrap;">Sign in</a>
+      <!-- Missing entirely from desktop (2026-09-18) -- mobile got both
+           links, desktop only got Sign in. Same nowrap fix as Sign in
+           above, needed here too. -->
+      <a href="https://app.valadisse.com/#pricing" class="nav-link" style="white-space:nowrap;">Create account</a>
+      <a
+        href="https://app.valadisse.com/scan"
+        target="_blank"
+        class="btn-primary ml-4"
+        style="padding: 9px 20px; font-size: 13px;"
+      >Run Your Free Scan</a>
+    </div>
+ 
+    <!-- Mobile hamburger -->
+    <!-- xl -> min-[1360px]:hidden 2026-09-30, must match the nav-links
+         breakpoint above exactly -- otherwise there's a band of widths
+         where either both show at once or neither does. -->
+    <button class="hamburger min-[1360px]:hidden" id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <button id="mobile-close" style="position:absolute;top:20px;right:24px;" aria-label="Close menu">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <path d="M6 6L22 22M22 6L6 22" stroke="#070033" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <a href="/" class="mobile-nav-link" onclick="closeMobileMenu();">Home</a>
+  <a href="/#services" class="mobile-nav-link" onclick="closeMobileMenu();">Services</a>
+  <a href="/#how-it-works" class="mobile-nav-link" onclick="closeMobileMenu();">How It Works</a>
+  <a href="/blog/" class="mobile-nav-link" onclick="closeMobileMenu();">Blog</a>
+  <a href="/#contact" class="mobile-nav-link" onclick="closeMobileMenu();">Contact</a>
+  <a href="https://app.valadisse.com/#pricing" class="mobile-nav-link" onclick="closeMobileMenu();">Pricing</a>
+  <!-- Added 2026-09-18: no sign-in or account-creation entry point existed
+       anywhere on this site before this. "Create account" points to
+       Pricing -- there's no separate signup page on the marketing site
+       itself; the real Starter/Pro/Advisory forms live on that section
+       of the app. -->
+  <a href="https://app.valadisse.com/login" class="mobile-nav-link" onclick="closeMobileMenu();">Sign in</a>
+  <a href="https://app.valadisse.com/#pricing" class="mobile-nav-link" onclick="closeMobileMenu();">Create account</a>
+  <a
+    href="https://app.valadisse.com/scan"
+    target="_blank"
+    class="btn-primary mt-4"
+    onclick="closeMobileMenu();"
+  >Run Your Free Scan</a>
+</div>
+
+<main role="main">
+  <article>
+    <header class="pt-12 pb-8">
+      <div class="max-w-6xl mx-auto px-6">
+        <a href="/blog/" class="back-link">← All posts</a>
+        <p class="eyebrow mt-8 mb-3">Market shifts</p>
+        <h1 class="font-serif text-4xl md:text-5xl text-ink leading-tight max-w-4xl">Buyers are buying from fewer places, and the shortlist is decided before the auction</h1>
+        <p class="font-mono text-sm text-muted mt-5">By Stephan Lafite · <time datetime="2026-11-11">November 11, 2026</time> · 4 min read</p>
+      </div>
+    </header>
+    <div class="max-w-6xl mx-auto px-6 pb-16">
+      
+      <div class="blog-prose">
+        <div>
+          <p>Two figures from the buy side explain more about independent publisher demand than most SSP dashboards. In the second quarter of 2026, transaction costs rose to 27.2% of programmatic spend. And the advertisers who turned the most spend into quality impressions operated across about 19,000 fewer domains and apps than the advertisers who turned the least (ANA, 2026a).</p>
+          <h2>What buyers measured</h2>
+          <p>The ANA's Programmatic Transparency Benchmark reached a record 45.1% TrueAdSpend in Q2 2026, up from 43.3% in Q1 after volatility in late 2025. TrueAdSpend counts only spend that lands on impressions that are measurable, viewable, fraud-free and not on made-for-advertising sites. Higher-performing advertisers converted 52.3% of spend into those impressions. Lower performers converted 31.1% (ANA, 2026a). The gap was nearly the same in Q1, at 54.0% against 32.1% (ANA, 2026b).</p>
+          <p>In Q2, lower performers lost 22.7% of spend to non-measurable inventory, against 10.4% for higher performers (ANA, 2026a). The Q1 report is explicit that quality, not cost, separated the groups: transaction costs differed by only 2.4% between them, while lower performers lost 38.4% of spend to quality issues against 19% for top performers (Inside Radio, 2026). The ANA describes the winners as buying across a concentrated, carefully curated supply footprint.</p>
+          <h2>What access costs</h2>
+          <p>Fees sit on top of that quality bar. Digiday reported on October 21 that a 15-person agency had cleared a major DSP's $100,000 monthly spend threshold and still paid a 17% DSP fee plus a 12% fee to the reseller that gave it access. A 25-person agency in Washington state paid a 10% reseller fee on top of another DSP's 15% fee. Agencies told Digiday that smaller buyers are steered to resellers with the promise of a direct seat later, and that the path keeps shifting (McCoy, 2026).</p>
+          <p>A buyer that gives up roughly a quarter of each dollar before a bid is placed cannot afford to spend the rest on inventory it cannot measure.</p>
+          <h2>Why the shortlist is shrinking</h2>
+          <p>Cost is one pressure. Risk is the other. In October, DecryptAds reported about 400 recipe sites run under AI-made or borrowed author identities, and traced them to a wider pool of more than 2,100 related ad-funded domains monetized through programmatic ads (Vargas, 2026; PPC Land, 2026). Every new batch of low-quality supply gives buyers another reason to prefer a short list of known places over the open market.</p>
+          <p>Publishers have long handled uncertainty by adding SSPs &quot;like insurance,&quot; as AdExchanger put it. More partners bring more demand and more competition for each impression. But even large publishers are tightening: a New York Times revenue operations executive told AdExchanger that every ad tech partner in its stack must justify its place, and that the Times wants value rather than extra transactions (Schiff, 2026). That logic reaches only so far: an added path is worth what buyers still route through.</p>
+          <h2>What it means for an independent publisher</h2>
+          <p>These readings are analysis, not findings from the sources.</p>
+          <p>First, the decision happens upstream of the auction. If a domain falls outside a buyer's footprint, or its supply path is one the buyer has trimmed, the bid never arrives. A floor change cannot recover a bid that was never sent.</p>
+          <p>Second, measurability is a revenue variable. Spend lost to non-measurable inventory is the clearest quality gap in the benchmark. A publisher whose impressions cannot be verified is the first to be cut by a disciplined buyer.</p>
+          <p>Third, blanket quality filters built for low-quality sites can also catch legitimate small publishers. Independents often learn this only when demand quietly thins.</p>
+          <p>Fourth, more SSPs do not fix any of this. Eligibility depends on what a buyer's filters can see and verify about the publisher and its declared supply chain.</p>
+          <p>Valadisse reads the ads.txt declarations that buyer-side path filters check, and shows an independent publisher how that declared picture looks from the buy side.</p>
+          <p><strong>Dates to watch:</strong> the ANA Q3 2026 benchmark release, and whether transaction costs keep rising.</p>
+        </div>
+        
+        <section aria-labelledby="sources-h" class="pt-8 border-t border-rule">
+          <h2 id="sources-h" style="margin-top:0;">Sources</h2>
+          <ul class="sources-list">
+            <li>ANA. (2026a, August 6). <a href="https://www.fiducia.eco/post/ana-programmatic-transparency-benchmark-q2-2026-working-media-efficiency-reaches-a-record-45">Programmatic Transparency Benchmark: Q2 2026 working-media efficiency reaches a record 45%</a>. Fiducia.</li>
+            <li>ANA. (2026b, May 27). <a href="https://www.ana.net/content/show/id/pr-2026-05-programmatic">ANA Programmatic Transparency Benchmark reveals widening gap between top and bottom advertisers</a>.</li>
+            <li>Inside Radio. (2026, June 2). <a href="https://www.insideradio.com/free/as-audio-goes-programmatic-ana-sees-growing-demand-for-premium-supply/article_caea4586-2695-4a51-8b7d-93f28458c7cc.html">As audio goes programmatic, ANA sees growing demand for premium supply</a>.</li>
+            <li>McCoy, K. (2026, October 21). <a href="https://digiday.com/marketing/indie-agencies-want-the-trade-desk-and-amazon-dsp-to-acknowledge-their-buying-power-with-negotiating-leverage/">[Independent agencies seek negotiating leverage with large DSPs]</a>. Digiday.</li>
+            <li>PPC Land. (2026). <a href="https://ppc.land/adobe-and-pepsi-ads-ran-on-ai-recipe-sites-with-fake-chefs-decryptads-finds/">Ads ran on AI recipe sites with fake chefs, DecryptAds finds</a>.</li>
+            <li>Schiff, A. (2026, October 6). <a href="https://www.adexchanger.com/adexchanger-talks/value-over-volume-with-nyts-courtney-glaze/">AdExchanger Talks: Value over volume, with NYT's Courtney Glaze</a> [Podcast]. AdExchanger.</li>
+            <li>Vargas, A. (2026, October 20). <a href="https://www.adexchanger.com/programmatic/ai-slop-sites-are-on-the-rise-is-ad-tech-ready-for-its-new-mfa-challenge/">AI slop sites are on the rise. Is ad tech ready for its new MFA challenge?</a> AdExchanger.</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </article>
+
+  <section class="py-20 bg-ink" aria-label="Call to action">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h2 class="font-serif text-3xl md:text-4xl text-white mb-4">Start with the free scan.</h2>
+      <p class="text-white/50 mb-8 leading-relaxed">No commitment. No pitch. A clear picture of what your stack is doing, and what it should be doing.</p>
+      <a href="https://app.valadisse.com/scan" target="_blank" class="btn-primary">Run Your Free Scan →</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="grid md:grid-cols-3 gap-12 mb-12">
+ 
+      <!-- Logo + tagline -->
+      <div>
+        
+        <!-- White-arrow variant, not logo-lockup.svg (2026-09-18): that SVG's
+             arrow and wordmark are navy, near-invisible against this footer's
+             dark navy (#070033) background. logo-footer-white.png is an
+             existing brand asset (not newly created) whose background is
+             baked-in at exactly #070033 -- sampled pixel-for-pixel, not
+             assumed -- so it blends seamlessly despite not being transparent.
+             Sized by height, not width: its 2.61:1 aspect ratio is much
+             taller-per-unit-width than the SVG's 6.18:1 (that one's icon+
+             wordmark got stretched wide to fill the same height once the
+             tagline was dropped), so reusing the old width:100% rule would
+             have rendered this one much taller than before.
+
+             78px, not 54px (2026-09-18 revision): 54px matched what the old
+             SVG happened to render at in this slot, but read as a tiny
+             thumbnail against the rest of the footer. 78px matches the
+             header nav logo's own height (.logo-img) exactly -- a real
+             reference point already established elsewhere in this repo,
+             not a new number picked freestanding. Renders ~204px wide at
+             this height, comfortably inside the 336px column. -->
+        <img
+          src="/logo-footer-white.png"
+          alt="Valadisse"
+          style="height:78px; width:auto; margin-bottom:20px; display:block;"
+        >
+        <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.55);">San Francisco, CA</p>
+      </div>
+ 
+      <!-- Nav -->
+      <div>
+        <p class="font-mono text-xs uppercase tracking-widest mb-4" style="color:rgba(255,255,255,0.4);">Pages</p>
+        <div class="space-y-3">
+          <a href="/" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">Home</a>
+          <a href="/#services" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">Services</a>
+          <a href="/#how-it-works" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">How It Works</a>
+          <a href="/blog/" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">Blog</a>
+          <a href="/#contact" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">Contact</a>
+          <!-- Moved here from the bottom utility row (2026-09-18) -- these
+               are primary navigation, not legal/utility links like Privacy
+               Policy/Terms, so they belong with Home/Services/etc. -->
+          <a href="https://app.valadisse.com/login" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">Sign in</a>
+          <a href="https://app.valadisse.com/#pricing" class="block text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.6);">Create account</a>
+        </div>
+      </div>
+ 
+      <!-- CTA -->
+      <div>
+        <p class="font-mono text-xs uppercase tracking-widest mb-4" style="color:rgba(255,255,255,0.4);">Get Started</p>
+        <p class="text-sm leading-relaxed mb-5" style="color:rgba(255,255,255,0.55);">Start with the free scan. Results in seconds, no signup, and nothing to install.</p>
+        <a
+          href="https://app.valadisse.com/scan"
+          target="_blank"
+          class="btn-primary"
+          style="font-size:13px; padding:10px 20px;"
+        >Free Scan →</a>
+      </div>
+ 
+    </div>
+ 
+    <div class="border-t pt-8 flex flex-col sm:flex-row justify-between items-center gap-4" style="border-color:rgba(255,255,255,0.08);">
+      <p class="font-mono text-xs" style="color:rgba(255,255,255,0.3);">© 2026 Valadisse. All rights reserved.</p>
+      <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
+        <a href="/privacy.html" class="font-mono text-xs hover:text-white transition-colors" style="color:rgba(255,255,255,0.5);">Privacy Policy</a>
+        <a href="/terms.html" class="font-mono text-xs hover:text-white transition-colors" style="color:rgba(255,255,255,0.5);">Terms of Service</a>
+        <a href="mailto:hello@valadisse.com" class="font-mono text-xs hover:text-white transition-colors" style="color:rgba(255,255,255,0.5);">hello@valadisse.com</a>
+        <span class="font-mono text-xs" style="color:rgba(255,255,255,0.3);">valadisse.com</span>
+        <a href="https://www.linkedin.com/company/valadisse/" target="_blank" rel="noopener noreferrer" aria-label="Valadisse on LinkedIn" class="social-link"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('site-nav').classList.toggle('scrolled', window.scrollY > 10);
+  });
+  const hamburger = document.getElementById('hamburger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  function openMobileMenu() { mobileMenu.classList.add('open'); hamburger.classList.add('open'); hamburger.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+  function closeMobileMenu() { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+  hamburger.addEventListener('click', () => (mobileMenu.classList.contains('open') ? closeMobileMenu() : openMobileMenu()));
+  document.getElementById('mobile-close').addEventListener('click', closeMobileMenu);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMobileMenu(); });
+</script>
+</body>
+</html>

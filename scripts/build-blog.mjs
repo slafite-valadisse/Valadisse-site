@@ -67,8 +67,16 @@ function renderBody(md) {
 }
 
 // "Author. (Date). Title. Publication. URL. Accessed Month D, YYYY."
+// With `linkTitle: true` on a source: "Author. (Date). <linked Title> [Descriptor]. Publication."
+// (the title is the hyperlink; no raw URL, no accessed date). Defaults off.
 function renderSource(s) {
   const dot = (t) => (/[.?!]$/.test(t) ? t : t + '.');
+  if (s.linkTitle) {
+    const desc = s.descriptor ? ` ${esc(s.descriptor)}` : '';
+    const stop = !s.descriptor && /[.?!]$/.test(s.title) ? '' : '.';
+    const pub = s.publication ? ` ${esc(dot(s.publication))}` : '';
+    return `<li>${esc(dot(s.author))} (${esc(s.date)}). <a href="${esc(s.url)}">${esc(s.title)}</a>${desc}${stop}${pub}</li>`;
+  }
   const title = s.italic === 'title' ? `<em>${esc(s.title)}</em>` : esc(s.title);
   const desc = s.descriptor ? ` ${esc(s.descriptor)}` : '';
   const pub = s.publication
