@@ -1,0 +1,3 @@
+# Local environment files hold secrets and never belong in this repo.
+.env*
+!.env.example
