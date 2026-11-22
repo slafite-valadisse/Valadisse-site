@@ -146,7 +146,7 @@
   <ul>
     <li>Visit our website at <a href="https://valadisse.com">https://valadisse.com</a>, or any website of ours that links to this Privacy Notice</li>
     <li>Download and use our mobile application (Valadisse), or any other application of ours that links to this Privacy Notice</li>
-    <li>Use Valadisse. Valadisse is a programmatic yield intelligence platform for independent digital publishers. It analyzes publisher ad stack data to identify supply chain gaps, floor optimization opportunities, and demand diversification strategies. Publishers upload their ad server data to receive diagnostic findings, including a comparison to a domain's previous scan where one exists.</li>
+    <li>Use Valadisse. Valadisse is a programmatic yield intelligence platform for independent digital publishers. It analyzes publisher ad stack data to identify supply chain gaps, floor optimization opportunities, and demand diversification strategies. Publishers upload their ad server data to receive diagnostic findings, including a comparison to a domain's previous scan where one exists. Paying customers can also have their saved domains re-scanned on a schedule and receive reports by email.</li>
     <li>Engage with us in other related ways, including any marketing or events</li>
   </ul>
   <p><strong>Questions or concerns?</strong> Reading this Privacy Notice will help you understand your privacy rights and choices. We are responsible for making decisions about how your personal information is processed. If you do not agree with our policies and practices, please do not use our Services. If you still have any questions or concerns, please contact us at <a href="mailto:hello@valadisse.com">hello@valadisse.com</a>.</p>
@@ -213,6 +213,15 @@
   <h3>Ad Server Data</h3>
   <p>Valadisse reads ad server reports that you upload to the Services as files. It does not connect to your ad server account, and it does not receive data from an ad server on your behalf.</p>
 
+  <h3 id="scheduled">Scheduled Re-scans and Emails</h3>
+  <p>Starter and Pro customers can save domains in account settings. Valadisse re-scans each saved domain on a schedule: weekly on Starter, and daily, weekly or monthly on Pro as the customer chooses in account settings. A scheduled re-scan reads only the public ads.txt file of the saved domain. Scheduled re-scans and the emails below are on for saved domains unless the customer turns them off.</p>
+  <p>Valadisse sends these emails to the email address on the account:</p>
+  <ul>
+    <li><strong>Weekly report</strong> (Starter and Pro). It is sent every week while scheduled emails are on, including a week when nothing changed, and says what changed since the previous report.</li>
+    <li><strong>Change alert</strong> (Pro only). It is sent on the day a scheduled re-scan finds a change in the ads.txt file or the supply chain. Starter does not receive change alerts.</li>
+  </ul>
+  <p>The free scan and the weekly report (Starter and Pro) show counts and plain descriptions only and do not name partners, exchanges or sellers. The change alert, which Pro accounts receive, also names the benchmark demand sources that are no longer declared in a saved domain's ads.txt. It is sent only to the account owner's email address. The change alert is built from the ads.txt copies Valadisse already stores for the saved domain, described under retention below. Valadisse does not save the names as a separate record and does not write them to its logs. The email delivery provider holds a copy of each email it delivers for a limited time. Every email carries a link that turns scheduled emails off without signing in, and scheduled emails can also be changed or turned off in account settings. Turning them off stops the scheduled emails and the scheduled re-scans for that account.</p>
+
   <h2 id="infouse">2. How Do We Process Your Information?</h2>
   <p class="inshort"><strong>In Short:</strong> We process your information to provide, improve, and administer our Services, communicate with you, for security and fraud prevention, and to comply with law. We process the personal information for the purposes listed below. We may also process your information for other purposes only with your prior explicit consent.</p>
   <p><strong>We process your personal information for a variety of reasons, depending on how you interact with our Services, including:</strong></p>
@@ -221,6 +230,7 @@
     <li><strong>To deliver and facilitate delivery of services to the user.</strong> We may process your information to provide you with the requested service.</li>
     <li><strong>To respond to user inquiries/offer support to users.</strong> We may process your information to respond to your inquiries and solve any potential issues you might have with the requested service.</li>
     <li><strong>To send administrative information to you.</strong> We may process your information to send you details about our products and services, changes to our terms and policies, and other similar information.</li>
+    <li><strong>To send scheduled reports and alerts.</strong> Valadisse processes a paying customer's saved domains, the results of scheduled re-scans and the account email address to send the weekly report and, for Pro, change alerts.</li>
     <li><strong>To fulfill and manage your orders.</strong> We may process your information to fulfill and manage your orders, payments, returns, and exchanges made through the Services.</li>
     <li><strong>To request feedback.</strong> We may process your information when necessary to request feedback and to contact you about your use of our Services.</li>
     <li><strong>To protect our Services.</strong> We may process your information as part of our efforts to keep our Services safe and secure, including fraud monitoring and prevention.</li>
@@ -270,7 +280,7 @@
   <ul>
     <li><strong>Database and Hosting</strong>: our database, authentication and application hosting providers</li>
     <li><strong>Payment Processor</strong>: handles all payment data and invoicing</li>
-    <li><strong>Email Delivery</strong>: sends the account and notification emails you ask for</li>
+    <li><strong>Email Delivery</strong>: sends account and notification emails, and the scheduled weekly reports and change alerts (the account email address and the email text: counts and plain descriptions, and, in the Pro change alert, the names of demand sources that are no longer declared)</li>
     <li><strong>Internal Operational Notifications</strong>: a messaging provider (scanned domain name and time only; never uploaded data)</li>
     <li><strong>Data Subject Request Form</strong>: a privacy-request form provider</li>
     <li><strong>Sales Contact Management</strong>: customer relationship and outreach providers (business contact details of prospective customers only; never uploaded data)</li>
@@ -306,6 +316,12 @@
     <li>Raw uploaded files are kept for 30 days.</li>
     <li>Parsed data is kept for 3 months after upload.</li>
     <li>Valadisse deletes uploaded data 30 days after a subscription ends, and at any time on request.</li>
+  </ul>
+  <p><strong>Scheduled re-scans.</strong> For saved domains that Valadisse re-scans on a schedule, it keeps data for these periods:</p>
+  <ul>
+    <li>The stored ads.txt text and its parsed copy from each scheduled re-scan are kept for 3 months, then removed by a nightly job.</li>
+    <li>Scores, counts and summaries of changes (counts only, no partner names), together with the account's scheduled email settings and a record of which reports and alerts were sent, are kept for as long as the subscription lasts.</li>
+    <li>Valadisse deletes all scheduled re-scan data for the account 30 days after the subscription ends.</li>
   </ul>
   <p>When we have no ongoing legitimate business need to process your personal information, we will either delete or anonymize such information, or, if this is not possible (for example, because your personal information has been stored in backup archives), then we will securely store your personal information and isolate it from any further processing until deletion is possible.</p>
 
@@ -345,6 +361,7 @@
   <p id="withdrawconsent"><strong>Withdrawing your consent:</strong> If we are relying on your consent to process your personal information, which may be express and/or implied consent depending on the applicable law, you have the right to withdraw your consent at any time. You can withdraw your consent at any time by contacting us by using the contact details provided in the section "<a href="#contact">How Can You Contact Us About This Notice?</a>" below or updating your preferences.</p>
   <p>However, please note that this will not affect the lawfulness of the processing before its withdrawal nor, when applicable law allows, will it affect the processing of your personal information conducted in reliance on lawful processing grounds other than consent.</p>
   <p><strong>Opting out of marketing and promotional communications:</strong> You can unsubscribe from our marketing and promotional communications at any time by replying "STOP" or "UNSUBSCRIBE" to the SMS messages that we send, or by contacting us using the details provided in the section "<a href="#contact">How Can You Contact Us About This Notice?</a>" below. You will then be removed from the marketing lists. However, we may still communicate with you, for example, to send you service-related messages that are necessary for the administration and use of your account, to respond to service requests, or for other non-marketing purposes.</p>
+  <p><strong>Scheduled emails:</strong> Every weekly report and change alert carries a link that turns scheduled emails off without signing in. They can also be changed or turned off in your account settings. See "<a href="#scheduled">Scheduled Re-scans and Emails</a>" above.</p>
   <p>No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. Information sharing to subcontractors in support services, such as customer service, is permitted. All other use case categories exclude text messaging originator opt-in data and consent; this information will not be shared with third parties.</p>
   <h3>Account Information</h3>
   <p>If you would at any time like to review or change the information in your account or terminate your account, you can:</p>
