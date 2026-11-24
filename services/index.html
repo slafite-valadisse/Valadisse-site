@@ -86,47 +86,48 @@
     .reveal-delay-5 { transition-delay: 0.5s; }
  
     /* ── Page switching ── */
-    /* ── Services page (approved mockup, 2026-11-24) ── */
-    .svc-flow { margin-top: 72px; display: flex; flex-wrap: wrap; gap: 16px 0; align-items: stretch; }
-    .svc-steps { margin-top: 36px; }
-    .svc-col { flex: 1 1 260px; display: flex; flex-direction: column; gap: 12px; }
-    .svc-wire { flex: 0 0 48px; height: 2px; background: #FF6632; position: relative; align-self: center; }
-    .svc-wire::after { content: ''; position: absolute; right: -1px; top: -4px; border-left: 8px solid #FF6632; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
-    .svc-node { border: 1px solid #EEEEEE; background: #FFFFFF; border-radius: 8px; padding: 14px 18px; font-size: 14px; line-height: 1.45; color: #070033; }
-    .svc-node small { display: block; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #C2410C; margin-bottom: 4px; }
-    .svc-node-soft { padding: 22px; background: #F8F8FC; }
-    .svc-node-soft strong { font-size: 17px; }
-    .svc-core { flex: 1; background: #070033; color: #FFFFFF; border-radius: 10px; padding: 28px; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
-    .svc-core-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #FBAC41; }
-    .svc-core-title { font-size: 28px; line-height: 1.15; }
-    .svc-core-sub { font-size: 14px; line-height: 1.5; color: #D9D8EC; }
-    .svc-panel { background: #F8F8FC; border: 1px solid #EEEEEE; border-radius: 12px; padding: 40px; display: flex; flex-wrap: wrap; gap: 40px; }
-    .svc-intro { flex: 0 0 270px; }
-    .svc-cards { flex: 1 1 560px; display: flex; flex-wrap: wrap; gap: 20px; min-width: 0; }
-    .svc-dot { width: 44px; height: 44px; border-radius: 50%; background: #070033; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; margin-bottom: 20px; }
-    .svc-card { flex: 1 1 300px; min-width: 0; background: #FFFFFF; border: 1px solid #EEEEEE; border-radius: 10px; padding: 28px; display: flex; flex-direction: column; gap: 12px; transition: border-color 0.2s; }
-    .svc-card:hover { border-color: rgba(255,102,50,.35); }
-    .svc-card.wide { flex: 1 1 100%; }
-    .svc-card.road { background: transparent; border: 1px dashed #070033; }
-    .svc-card h3 { font-size: 19px; line-height: 1.3; margin: 0; font-weight: 600; color: #070033; }
-    .svc-card p { margin: 0; font-size: 15px; line-height: 1.6; color: #4A4A4A; }
-    .svc-card p.svc-nl { background: #FFF3EE; border-radius: 6px; padding: 10px 12px; color: #070033; }
-    .svc-card p.svc-why { color: #070033; }
-    .svc-card p.svc-cn { font-family: 'DM Mono', monospace; font-size: 12px; line-height: 1.5; color: #C2410C; border-top: 1px solid #EEEEEE; padding-top: 12px; margin-top: auto; }
-    .svc-link { display: flex; flex-direction: column; align-items: center; padding: 6px 24px; }
-    .svc-vl { width: 2px; height: 26px; background: #FF6632; }
-    .svc-lbl { font-family: 'DM Mono', monospace; font-size: 12px; border: 1px solid #EEEEEE; background: #FFFFFF; border-radius: 20px; padding: 8px 18px; text-align: center; max-width: 560px; margin: 0; }
-    .svc-step { flex: 1 1 180px; min-width: 0; background: #FFFFFF; border: 1px solid #EEEEEE; border-radius: 10px; padding: 22px; display: flex; flex-direction: column; gap: 10px; }
-    .svc-step p { margin: 0; font-size: 14px; line-height: 1.55; color: #4A4A4A; }
-    .svc-sd { width: 32px; height: 32px; border-radius: 50%; background: #FF6632; color: #FFFFFF; font-family: 'DM Mono', monospace; font-weight: 500; display: flex; align-items: center; justify-content: center; font-size: 13px; }
-    .svc-advisory { border: 1px solid #EEEEEE; border-radius: 12px; padding: 48px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center; }
-    .svc-advisory-main { flex: 1 1 420px; }
-    .svc-advisory-side { flex: 1 1 380px; display: flex; flex-direction: column; gap: 16px; }
-    @media (max-width: 760px) {
-      .svc-panel, .svc-advisory { padding: 24px; }
-      .svc-wire { display: none; }
-      .svc-intro { flex-basis: 100%; }
-    }
+    /* ── Services page: the approved mockup's own styles, scoped (2026-11-24) ── */
+    :where(#page-services .vm) a { color: #070033; }
+    :where(#page-services .vm) a:hover { color: #C2410C; }
+    #page-services .vm{line-height:normal;font-family:'Instrument Sans',sans-serif;color:#070033;background:#fff;-webkit-font-smoothing:antialiased}
+    #page-services .vm-wrap{max-width:1152px;margin:0 auto;padding:0 24px}
+    #page-services .vm-eb{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#C2410C;margin:0 0 16px}
+    #page-services .vm-serif{font-family:'DM Serif Display',Georgia,serif;font-weight:400}
+    #page-services .vm-h2{font-family:'DM Serif Display',Georgia,serif;font-weight:400;font-size:40px;line-height:1.15;margin:0 0 16px}
+    #page-services .vm-lead{font-size:18px;line-height:1.65;color:#4A4A4A;margin:0}
+    #page-services .vm-btn{display:inline-flex;align-items:center;gap:6px;background:#FF6632;color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:13px 28px;border-radius:4px;white-space:nowrap}
+    #page-services .vm-btn:hover{background:#E5531E;color:#fff}
+    #page-services .vm-btn.vm-dk{background:#070033}
+    #page-services .vm-btn.vm-dk:hover{background:#0E0055}
+    #page-services .vm-wire{flex:0 0 48px;height:2px;background:#FF6632;position:relative;align-self:center}
+    #page-services .vm-wire::after{content:'';position:absolute;right:-1px;top:-4px;border-left:8px solid #FF6632;border-top:5px solid transparent;border-bottom:5px solid transparent}
+    #page-services .vm-node{border:1px solid #EEEEEE;background:#fff;border-radius:8px;padding:14px 18px;font-size:14px;line-height:1.45;color:#070033}
+    #page-services .vm-node small{display:block;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#C2410C;margin-bottom:4px}
+    #page-services .vm-panel{background:#F8F8FC;border:1px solid #EEEEEE;border-radius:12px;padding:40px;display:flex;flex-wrap:wrap;gap:40px}
+    #page-services .vm-sl{flex:0 0 270px}
+    #page-services .vm-sr{flex:1 1 560px;display:flex;flex-wrap:wrap;gap:20px;min-width:0}
+    #page-services .vm-dot{width:44px;height:44px;border-radius:50%;background:#070033;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:13px;font-weight:500;margin-bottom:20px}
+    #page-services .vm-card{flex:1 1 300px;min-width:0;box-sizing:border-box;background:#fff;border:1px solid #EEEEEE;border-radius:10px;padding:28px;display:flex;flex-direction:column;gap:12px}
+    #page-services .vm-card:hover{border-color:rgba(255,102,50,.35)}
+    #page-services .vm-card.vm-wide{flex:1 1 100%}
+    #page-services .vm-card.vm-road{background:transparent;border:1px dashed #070033}
+    #page-services .vm-card h3{font-size:19px;line-height:1.3;margin:0;font-weight:600}
+    #page-services .vm-card p{margin:0;font-size:15px;line-height:1.6;color:#4A4A4A}
+    #page-services .vm-card p.nl{background:#FFF3EE;border-radius:6px;padding:10px 12px;color:#070033}
+    #page-services .vm-card p.why{color:#070033}
+    #page-services .vm-card p.cn{font-family:'DM Mono',monospace;font-size:12px;line-height:1.5;color:#C2410C;border-top:1px solid #EEEEEE;padding-top:12px;margin-top:auto}
+    #page-services .vm-pill{font-family:'DM Mono',monospace;font-size:11px;padding:4px 12px;border-radius:20px;background:#F4F4F8;color:#4A4A4A;border:1px solid #EEEEEE;display:inline-block;margin-right:6px}
+    #page-services .vm-pill.vm-a{background:#FFF3EE;color:#C2410C;border-color:rgba(255,102,50,.35)}
+    #page-services .vm-pill.vm-n{background:#fff;color:#070033;border:1px dashed #070033}
+    #page-services .vm-link{display:flex;flex-direction:column;align-items:center;padding:6px 0}
+    #page-services .vm-vl{width:2px;height:26px;background:#FF6632}
+    #page-services .vm-lbl{font-family:'DM Mono',monospace;font-size:12px;border:1px solid #EEEEEE;background:#fff;border-radius:20px;padding:8px 18px;text-align:center;max-width:560px}
+    #page-services .vm-step{flex:1 1 180px;min-width:0;background:#fff;border:1px solid #EEEEEE;border-radius:10px;padding:22px;display:flex;flex-direction:column;gap:10px}
+    #page-services .vm-step p{margin:0;font-size:14px;line-height:1.55;color:#4A4A4A}
+    #page-services .vm-sd{width:32px;height:32px;border-radius:50%;background:#FF6632;color:#fff;font-family:'DM Mono',monospace;font-weight:500;display:flex;align-items:center;justify-content:center;font-size:13px}
+    #page-services .vm-pill.status-pill { font-size: 11px; text-transform: none; letter-spacing: normal; padding: 4px 12px; vertical-align: baseline; }
+    #page-services .vm-faq { border-top: 1px solid #EEEEEE; max-width: 780px; }
+    @media(max-width:760px) { #page-services .vm-h2{font-size:32px}#page-services .vm-panel{padding:24px}#page-services .vm-wire{display:none} }
 
     /* ── FAQ (Services) ── */
     .faq-item { border-bottom: 1px solid #EEEEEE; }
@@ -968,310 +969,258 @@
      SERVICES PAGE
 ════════════════════════════════════════ -->
 <main id="page-services" class="page-section active" role="main">
+<!-- Services: the approved "Services (reorganized)" mockup, ported as is (2026-11-24). Only claim-rule wording differs. -->
+<div class="vm">
 
-  <!-- Services: built from the approved "Services (reorganized)" mockup (2026-11-24). -->
-  <section class="hero-section grid-texture" aria-label="Services header">
-    <div class="max-w-6xl mx-auto px-6 py-24 relative z-10">
-      <div class="max-w-3xl">
-        <p class="eyebrow mb-4 reveal">Services</p>
-        <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-ink leading-tight mb-6 reveal reveal-delay-1">Every yield signal, connected. <span class="text-accent">Each finding feeds the next.</span></h1>
-        <p class="text-lg text-muted leading-relaxed mb-3 max-w-2xl reveal reveal-delay-2">Valadisse reads the supply chain buyers see, checks it against what the publisher earned, and says what to do next. Less time decoding reports, more time on the fixes that matter to revenue.</p>
-        <p class="text-muted mb-9 reveal reveal-delay-2">No revenue share. No platform ties.</p>
-        <div class="reveal reveal-delay-3">
-          <a href="https://app.valadisse.com/scan" target="_blank" class="btn-primary">Run Your Free Scan →</a>
-          <p class="font-mono text-sm mt-4" style="color: rgba(74,74,74,0.7);">Free. No signup. Results in seconds.</p>
-        </div>
-      </div>
+<!-- HERO (white, grid texture, as on the homepage) -->
+<div id="top" style="position:relative;overflow:hidden;border-bottom:1px solid #EEEEEE;background-image:linear-gradient(rgba(7,0,51,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(7,0,51,.025) 1px,transparent 1px);background-size:40px 40px">
+<div aria-hidden="true" style="position:absolute;top:-200px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(255,102,50,.10) 0%,transparent 70%)"></div>
+<div class="vm-wrap" style="position:relative;padding-top:96px;padding-bottom:96px">
+<div style="max-width:800px">
+<p class="vm-eb">Services</p>
+<h1 class="vm-serif" style="font-size:60px;line-height:1.1;margin:0 0 24px">Every yield signal, connected. <span style="color:#FF6632">Each finding feeds the next.</span></h1>
+<p class="vm-lead" style="max-width:700px;margin-bottom:12px">Valadisse reads the supply chain buyers see, checks it against what the publisher earned, and says what to do next. Less time decoding reports, more time on the fixes that matter to revenue.</p>
+<p class="vm-lead" style="font-size:16px;margin-bottom:36px">No revenue share. No platform ties.</p>
+<a class="vm-btn" href="https://app.valadisse.com/scan" target="_blank">Run Your Free Scan →</a>
+<p style="font-family:'DM Mono',monospace;font-size:13px;color:#4A4A4A;margin:16px 0 0">Free. No signup. Results in seconds.</p>
+</div>
 
-      <div class="svc-flow reveal">
-        <div class="svc-col">
-          <div class="svc-node"><small>Input</small>ads.txt and sellers data, as buyers see it</div>
-          <div class="svc-node"><small>Input</small>The publisher's own ad server export</div>
-          <div class="svc-node"><small>Input</small>A rescan schedule: daily, weekly or monthly</div>
-        </div>
-        <div class="svc-wire" aria-hidden="true"></div>
-        <div class="svc-col">
-          <div class="svc-core">
-            <span class="svc-core-label">Valadisse</span>
-            <span class="font-serif svc-core-title">Scores, findings, and what changed</span>
-            <span class="svc-core-sub">One picture, in plain English.</span>
-          </div>
-        </div>
-        <div class="svc-wire" aria-hidden="true"></div>
-        <div class="svc-col">
-          <div class="svc-node"><small>Output</small>Weekly report and change alerts</div>
-          <div class="svc-node"><small>Output</small>Yield Assistant will answer questions and suggest next steps
-            <p class="mt-2"><span class="meta-pill status-pill" title="Coming soon items are in active development and are included in the plan as they ship.">Coming soon</span></p>
-          </div>
-          <div class="svc-node"><small>Output</small>Each rescan compared with the last, and the loop repeats</div>
-        </div>
-      </div>
-    </div>
-  </section>
+<div style="margin-top:72px;display:flex;flex-wrap:wrap;gap:16px 0;align-items:stretch">
+<div style="flex:1 1 260px;display:flex;flex-direction:column;gap:12px">
+<div class="vm-node"><small>Input</small>ads.txt and sellers data, as buyers see it</div>
+<div class="vm-node"><small>Input</small>The publisher's own ad server export</div>
+<div class="vm-node"><small>Input</small>A rescan schedule: daily, weekly or monthly</div>
+</div>
+<div class="vm-wire"></div>
+<div style="flex:1 1 260px;display:flex">
+<div style="flex:1;background:#070033;color:#fff;border-radius:10px;padding:28px;display:flex;flex-direction:column;justify-content:center;gap:8px">
+<span style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#FBAC41">Valadisse</span>
+<span class="vm-serif" style="font-size:28px;line-height:1.15">Scores, findings, and what changed</span>
+<span style="font-size:14px;line-height:1.5;color:#D9D8EC">One picture, in plain English.</span>
+</div>
+</div>
+<div class="vm-wire"></div>
+<div style="flex:1 1 260px;display:flex;flex-direction:column;gap:12px">
+<div class="vm-node"><small>Output</small>Weekly report and change alerts</div>
+<div class="vm-node"><small>Output</small>Yield Assistant will answer questions and suggest next steps<p style="margin:8px 0 0"><span class="meta-pill status-pill vm-pill vm-n" title="Coming soon items are in active development and are included in the plan as they ship.">Coming soon</span></p></div>
+<div class="vm-node"><small>Output</small>Each rescan compared with the last, and the loop repeats</div>
+</div>
+</div>
+</div>
+</div>
 
-  <!-- Canonical definition. Verbatim; check-claims pins it on Services. -->
-  <section class="py-12 border-b border-rule bg-gray-50" aria-label="What Valadisse is">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="max-w-3xl reveal">
-        <p class="eyebrow mb-3">What Valadisse is</p>
-        <p class="text-ink text-lg leading-relaxed">Valadisse is a programmatic ad monetization diagnostics platform for independent digital publishers. A free scan shows where inventory is being filtered out of demand, and paid plans add the full findings, scheduled monitoring and change alerts. Valadisse has no revenue share and no platform ties.</p>
-      </div>
-    </div>
-  </section>
+<!-- CANONICAL DEFINITION (verbatim; check-claims pins it) -->
+<div class="vm-wrap" style="padding-top:64px">
+<p class="vm-eb">What Valadisse is</p>
+<p class="vm-lead" style="max-width:780px;color:#070033">Valadisse is a programmatic ad monetization diagnostics platform for independent digital publishers. A free scan shows where inventory is being filtered out of demand, and paid plans add the full findings, scheduled monitoring and change alerts. Valadisse has no revenue share and no platform ties.</p>
+</div>
 
-  <!-- How the plans map onto the loop -->
-  <section class="pt-24 pb-12 px-6" aria-label="How the services fit together">
-    <div class="max-w-6xl mx-auto">
-      <div class="positioning-bar max-w-3xl reveal">
-        <p class="font-serif text-3xl md:text-4xl text-ink leading-snug">One loop, four stages. <span class="text-accent">Every Pricing item sits in one of them.</span></p>
-      </div>
-      <p class="text-lg text-muted leading-relaxed max-w-3xl mt-6 reveal"><strong class="text-ink">Starter</strong> runs it on demand and is built around Revenue Expansion. <strong class="text-ink">Pro</strong> runs it for you, includes everything in Starter, and is built around Yield Management &amp; Ad Ops.</p>
-      <div class="flex flex-wrap gap-2 mt-5 reveal"><span class="meta-pill">Starter</span><span class="meta-pill accent">Pro</span><span class="meta-pill status-pill" title="Coming soon items are in active development and are included in the plan as they ship.">Coming soon</span></div>
-    </div>
-  </section>
+<!-- POSITIONING + PLANS -->
+<div class="vm-wrap" style="padding-top:96px">
+<div style="border-left:3px solid #FF6632;padding-left:24px;max-width:860px">
+<p class="vm-serif" style="font-size:34px;line-height:1.3;margin:0">One loop, four stages. <span style="color:#FF6632">Every Pricing item sits in one of them.</span></p>
+</div>
+<p class="vm-lead" style="max-width:780px;margin-top:24px"><b style="color:#070033">Starter</b> runs it on demand and is built around Revenue Expansion. <b style="color:#070033">Pro</b> runs it for you, includes everything in Starter, and is built around Yield Management &amp; Ad Ops.</p>
+<div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:6px 0"><span class="vm-pill">Starter</span><span class="vm-pill vm-a">Pro</span><span class="meta-pill status-pill vm-pill vm-n" title="Coming soon items are in active development and are included in the plan as they ship.">Coming soon</span></div>
+</div>
 
-  <!-- Stage 1: See -->
-  <section class="px-6" aria-label="Stage 1: See">
-    <div class="max-w-6xl mx-auto">
-      <div class="svc-panel reveal">
-        <div class="svc-intro">
-          <div class="svc-dot">01</div>
-          <h2 class="font-serif text-4xl text-ink leading-tight mb-3">See</h2>
-          <p class="text-ink text-lg font-semibold leading-relaxed">What do buyers see in this supply chain?</p>
-          <p class="text-muted mt-2 leading-relaxed">Inventory can be filtered out of demand the publisher never sees bid. This stage shows where, and what changed.</p>
-        </div>
-        <div class="svc-cards">
-          <article class="svc-card">
-            <div class="flex flex-wrap gap-2"><span class="meta-pill">Starter</span></div>
-            <h3>Full Supply Chain Health scan</h3>
-            <p>A complete read of how buyers see the supply chain behind the publisher's ads.txt, delivered as a Supply Chain Health Score with the findings behind it. The free scan previews it; Starter goes to full depth.</p>
-            <p class="svc-nl"><strong>What you no longer do.</strong> Check ads.txt and seller records line by line.</p>
-            <p class="svc-why"><strong>Why it matters.</strong> Inventory that fails buyer checks can be filtered out of demand it never sees bid. Each fix removes a reason for buyers to pass.</p>
-            <p class="svc-cn">Connects to: Findings report, Scheduled monitoring</p>
-          </article>
-          <article class="svc-card">
-            <div class="flex flex-wrap gap-2"><span class="meta-pill">Starter</span></div>
-            <h3>Findings report with the missing exchanges named</h3>
-            <p>A written list of the premium exchanges the publisher has not declared, named one by one, each with a plain-English explanation. The free scan shows only the count.</p>
-            <p class="svc-nl"><strong>What you no longer do.</strong> Guess which exchanges are missing.</p>
-            <p class="svc-why"><strong>Why it matters.</strong> An undeclared exchange is demand that cannot reach the inventory at all. Naming it turns a vague gap into a specific fix.</p>
-            <p class="svc-cn">Connects to: Demand Diversity score, Yield Assistant</p>
-          </article>
-          <article class="svc-card wide">
-            <div class="flex flex-wrap gap-2"><span class="meta-pill">Starter</span></div>
-            <h3>Ads.txt change detection each time you scan</h3>
-            <p>Each rescan is compared with the previous one, and any change to declared sellers is flagged.</p>
-            <p class="svc-nl"><strong>What you no longer do.</strong> Compare ads.txt versions by hand after every edit.</p>
-            <p class="svc-why"><strong>Why it matters.</strong> A seller can be added or removed without anyone deciding to. Catching it at the next scan limits how long revenue is affected.</p>
-            <p class="svc-cn">Connects to: Weekly report, Change alerts</p>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
-  <div class="svc-link"><div class="svc-vl"></div><p class="svc-lbl">what buyers see is checked against what the publisher earned</p><div class="svc-vl"></div></div>
-  <!-- Stage 2: Understand -->
-  <section class="px-6" aria-label="Stage 2: Understand">
-    <div class="max-w-6xl mx-auto">
-      <div class="svc-panel reveal">
-        <div class="svc-intro">
-          <div class="svc-dot">02</div>
-          <h2 class="font-serif text-4xl text-ink leading-tight mb-3">Understand</h2>
-          <p class="text-ink text-lg font-semibold leading-relaxed">What is it costing, and where?</p>
-          <p class="text-muted mt-2 leading-relaxed">The publisher's own export turns public findings into real numbers by partner and by hour.</p>
-        </div>
-        <div class="svc-cards">
-          <article class="svc-card">
-            <div class="flex flex-wrap gap-2"><span class="meta-pill">Starter</span></div>
-            <h3>Ad server CSV upload</h3>
-            <p>Upload an ad server export and Valadisse charts revenue, eCPM and fill over time. It bridges what buyers can see and what the publisher earned, and it powers the scores beside it. Data is never used to train any model.</p>
-            <p class="svc-nl"><strong>What you no longer do.</strong> Stitch exports into spreadsheets to see trends.</p>
-            <p class="svc-why"><strong>Why it matters.</strong> Public data shows what buyers can see. The export shows what they actually paid, which is where revenue gaps become measurable.</p>
-            <p class="svc-cn">Connects to: Floor Optimization Index, Demand Diversity</p>
-          </article>
-          <article class="svc-card">
-            <div class="flex flex-wrap gap-2"><span class="meta-pill">Starter</span></div>
-            <h3>Floor Optimization Index and Demand Diversity scores</h3>
-            <p>The Floor Optimization Index rates, from 0 to 100, how evenly pricing holds across partners and hours of the day, with up to two plain-English drivers. Demand Diversity rates how exposed revenue is to any single partner. Both are early estimates from the publisher's own data, labeled with the days and impressions behind them.</p>
-            <p class="svc-nl"><strong>What you no longer do.</strong> Read raw eCPM and fill tables to judge whether floors are right.</p>
-            <p class="svc-why"><strong>Why it matters.</strong> A floor that is off in either direction rarely appears as a line item in standard reporting. When the score is low, the Floor Optimization Index adds an estimated revenue range.</p>
-            <p class="svc-cn">Connects to: Yield Assistant, Weekly report</p>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
-  <div class="svc-link"><div class="svc-vl"></div><p class="svc-lbl">scores and findings become a plain-English next step</p><div class="svc-vl"></div></div>
-  <!-- Stage 3: Act -->
-  <section class="px-6" aria-label="Stage 3: Act">
-    <div class="max-w-6xl mx-auto">
-      <div class="svc-panel reveal">
-        <div class="svc-intro">
-          <div class="svc-dot">03</div>
-          <h2 class="font-serif text-4xl text-ink leading-tight mb-3">Act</h2>
-          <p class="text-ink text-lg font-semibold leading-relaxed">What should be done next?</p>
-          <p class="text-muted mt-2 leading-relaxed">Findings are only worth the action they lead to. This stage sets priorities and answers follow-up questions.</p>
-        </div>
-        <div class="svc-cards">
-          <article class="svc-card">
-            <div class="flex flex-wrap gap-2"><span class="meta-pill accent">Pro</span></div>
-            <h3>Dedicated strategic onboarding session</h3>
-            <p>A working session to map priorities for the publisher's stack: what to monitor first, which findings to act on, and what to leave alone.</p>
-            <p class="svc-nl"><strong>What you no longer do.</strong> Decide alone what to monitor first.</p>
-            <p class="svc-why"><strong>Why it matters.</strong> Effort goes to the findings that carry the most revenue for this stack, not the loudest ones.</p>
-            <p class="svc-cn">Connects to: Scheduled monitoring, Change alerts</p>
-          </article>
-          <article class="svc-card">
-            <div class="flex flex-wrap gap-2"><span class="meta-pill accent">Pro</span><span class="meta-pill status-pill" title="Coming soon items are in active development and are included in the plan as they ship.">Coming soon</span></div>
-            <h3>Yield Assistant</h3>
-            <p>An AI-powered analyst in the dashboard that will answer yield questions in plain English. It will draw only on the publisher's own data, will say so when it does not have enough, and will recommend without changing anything in a live ad stack.</p>
-            <p class="svc-nl"><strong>What you will no longer do.</strong> Request a report to answer a yield question.</p>
-            <p class="svc-why"><strong>Why it matters.</strong> Findings will become next steps in plain English, so time will go to deciding, not digging.</p>
-            <p class="svc-cn">Connects to: scans, scores, alerts</p>
-          </article>
-          <article class="svc-card">
-            <div class="flex flex-wrap gap-2"><span class="meta-pill accent">Pro</span></div>
-            <h3>Early access to new scores and features</h3>
-            <p>Pro accounts see new scores and features before they reach Starter.</p>
-            <p class="svc-nl"><strong>What you no longer do.</strong> Wait for a new signal to reach every plan.</p>
-            <p class="svc-why"><strong>Why it matters.</strong> A new signal acted on earlier is revenue protected earlier.</p>
-            <p class="svc-cn">Connects to: every stage</p>
-          </article>
-          <article class="svc-card road">
-            <div class="flex flex-wrap gap-2"><span class="meta-pill accent">Pro</span><span class="meta-pill status-pill" title="Coming soon items are in active development and are included in the plan as they ship.">Coming soon</span></div>
-            <h3>Publisher-Controlled Curation</h3>
-            <p>Curated deal packages will be built through the publisher's existing supply partnerships. The publisher will set floors, control audience segments, own the deal IDs and keep the margin.</p>
-            <p class="svc-nl"><strong>What you will no longer do.</strong> Negotiate every package on someone else's terms.</p>
-            <p class="svc-why"><strong>Why it matters.</strong> Demand will be bought on the publisher's terms, and the publisher will keep the margin.</p>
-            <p class="svc-cn">Connects to: Floor Optimization Index, Demand Diversity</p>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
-  <div class="svc-link"><div class="svc-vl"></div><p class="svc-lbl">every change is watched, and every rescan feeds stage 01 again</p><div class="svc-vl"></div></div>
-  <!-- Stage 4: Stay ahead -->
-  <section class="px-6" aria-label="Stage 4: Stay ahead">
-    <div class="max-w-6xl mx-auto">
-      <div class="svc-panel reveal">
-        <div class="svc-intro">
-          <div class="svc-dot">04</div>
-          <h2 class="font-serif text-4xl text-ink leading-tight mb-3">Stay ahead</h2>
-          <p class="text-ink text-lg font-semibold leading-relaxed">What changed since last time?</p>
-          <p class="text-muted mt-2 leading-relaxed">A change to ads.txt or the supply chain can cost demand every day it goes unseen. Monitoring catches it when it starts.</p>
-        </div>
-        <div class="svc-cards">
-          <article class="svc-card">
-            <div class="flex flex-wrap gap-2"><span class="meta-pill accent">Pro</span></div>
-            <h3>Scheduled monitoring: daily, weekly or monthly, your choice</h3>
-            <p>Valadisse rescans the publisher's supply chain on the chosen schedule and compares each result with the last.</p>
-            <p class="svc-nl"><strong>What you no longer do.</strong> Rescan manually on a calendar reminder.</p>
-            <p class="svc-why"><strong>Why it matters.</strong> Problems are caught when they begin, so they are fixed sooner and cost less.</p>
-            <p class="svc-cn">Connects to: Change alerts, stage 01 rescan</p>
-          </article>
-          <article class="svc-card">
-            <div class="flex flex-wrap gap-2"><span class="meta-pill accent">Pro</span></div>
-            <h3>Change alerts</h3>
-            <p>An email the day ads.txt or the supply chain changes, naming what changed.</p>
-            <p class="svc-nl"><strong>What you no longer do.</strong> Find out from a revenue dip.</p>
-            <p class="svc-why"><strong>Why it matters.</strong> A change that costs demand is cheapest to reverse the day it happens.</p>
-            <p class="svc-cn">Connects to: Findings report, Yield Assistant</p>
-          </article>
-          <article class="svc-card wide">
-            <div class="flex flex-wrap gap-2"><span class="meta-pill">Starter</span></div>
-            <h3>Weekly report by email</h3>
-            <p>Every week, an email with the latest scan and what changed since the one before it.</p>
-            <p class="svc-nl"><strong>What you no longer do.</strong> Remember to check, or log in to find out.</p>
-            <p class="svc-why"><strong>Why it matters.</strong> Movement is visible every week, so an issue does not wait for a monthly summary.</p>
-            <p class="svc-cn">Connects to: Ads.txt change detection, scores</p>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- STAGE 1 -->
+<div class="vm-wrap" style="padding-top:48px">
+<div class="vm-panel">
+<div class="vm-sl">
+<div class="vm-dot">01</div>
+<h3 class="vm-serif" style="font-size:36px;line-height:1.1;margin:0 0 14px">See</h3>
+<p class="vm-lead" style="font-size:17px;color:#070033"><b>What do buyers see in this supply chain?</b></p>
+<p class="vm-lead" style="font-size:15px;margin-top:10px">Inventory can be filtered out of demand the publisher never sees bid. This stage shows where, and what changed.</p>
+</div>
+<div class="vm-sr">
+<div class="vm-card"><div><span class="vm-pill">Starter</span></div><h3>Full Supply Chain Health scan</h3>
+<p>A complete read of how buyers see the supply chain behind the publisher's ads.txt, delivered as a Supply Chain Health Score with the findings behind it. The free scan previews it; Starter goes to full depth.</p>
+<p class="nl"><b>What you no longer do.</b> Check ads.txt and seller records line by line.</p>
+<p class="why"><b>Why it matters.</b> Inventory that fails buyer checks can be filtered out of demand it never sees bid. Each fix removes a reason for buyers to pass.</p>
+<p class="cn">Connects to: Findings report, Scheduled monitoring</p></div>
+<div class="vm-card"><div><span class="vm-pill">Starter</span></div><h3>Findings report with the missing exchanges named</h3>
+<p>A written list of the premium exchanges the publisher has not declared, named one by one, each with a plain-English explanation. The free scan shows only the count.</p>
+<p class="nl"><b>What you no longer do.</b> Guess which exchanges are missing.</p>
+<p class="why"><b>Why it matters.</b> An undeclared exchange is demand that cannot reach the inventory at all. Naming it turns a vague gap into a specific fix.</p>
+<p class="cn">Connects to: Demand Diversity score, Yield Assistant</p></div>
+<div class="vm-card vm-wide"><div><span class="vm-pill">Starter</span></div><h3>Ads.txt change detection each time you scan</h3>
+<p>Each rescan is compared with the previous one, and any change to declared sellers is flagged.</p>
+<p class="nl"><b>What you no longer do.</b> Compare ads.txt versions by hand after every edit.</p>
+<p class="why"><b>Why it matters.</b> A seller can be added or removed without anyone deciding to. Catching it at the next scan limits how long revenue is affected.</p>
+<p class="cn">Connects to: Weekly report, Change alerts</p></div>
+</div>
+</div>
+</div>
 
-  <!-- Illustrative example -->
-  <section class="pt-24 px-6" aria-label="Illustrative example">
-    <div class="max-w-6xl mx-auto">
-      <p class="eyebrow mb-3 reveal">Illustrative example</p>
-      <h2 class="font-serif text-3xl md:text-4xl text-ink mb-4 max-w-3xl reveal">One finding, followed all the way through.</h2>
-      <p class="text-lg text-muted leading-relaxed max-w-2xl reveal">This is how the pieces work as one system. The scenario is illustrative.</p>
-      <div class="svc-flow svc-steps reveal">
-        <div class="svc-step"><div class="svc-sd">1</div><strong>Change alert</strong><p>A seller entry in ads.txt is removed. An email names it the same day.</p></div>
-        <div class="svc-wire" aria-hidden="true"></div>
-        <div class="svc-step"><div class="svc-sd">2</div><strong>Findings report</strong><p>The scan shows the exchange is now undeclared, with a plain-English explanation.</p></div>
-        <div class="svc-wire" aria-hidden="true"></div>
-        <div class="svc-step"><div class="svc-sd">3</div><strong>Scores</strong><p>Demand Diversity and the Floor Optimization Index show whether partner share and pricing moved.</p></div>
-        <div class="svc-wire" aria-hidden="true"></div>
-        <div class="svc-step"><div class="svc-sd">4</div><strong>Yield Assistant</strong><p>Will explain what it means and recommend the fix.</p><p><span class="meta-pill status-pill" title="Coming soon items are in active development and are included in the plan as they ship.">Coming soon</span></p></div>
-        <div class="svc-wire" aria-hidden="true"></div>
-        <div class="svc-step"><div class="svc-sd">5</div><strong>Scheduled monitoring</strong><p>The next rescan confirms the fix held, and the loop repeats.</p></div>
-      </div>
-    </div>
-  </section>
+<div class="vm-link"><div class="vm-vl"></div><div class="vm-lbl">what buyers see is checked against what the publisher earned</div><div class="vm-vl"></div></div>
 
-  <!-- FAQ. Plain answers; each one also becomes FAQPage JSON-LD on /services/. -->
-  <section class="pt-24" aria-label="Frequently asked questions">
-    <div class="max-w-3xl mx-auto px-6">
-      <p class="eyebrow mb-3 reveal">FAQ</p>
-      <h2 class="font-serif text-3xl text-ink mb-6 reveal reveal-delay-1">Common questions</h2>
-      <div class="border-t border-rule reveal">
-        <details class="faq-item">
-          <summary>What is ads.txt?</summary>
-          <p>ads.txt is a public file on a publisher's site that lists every company authorized to sell its ad inventory. Buyers check it before they bid, and supply that is not declared there is often filtered out before the auction starts.</p>
-        </details>
-        <details class="faq-item">
-          <summary>What is sellers.json?</summary>
-          <p>sellers.json is the matching file an exchange publishes, listing the sellers it represents. Buyers compare it with a publisher's ads.txt to confirm that the path from them to the publisher is real.</p>
-        </details>
-        <details class="faq-item">
-          <summary>Why do some bids never arrive?</summary>
-          <p>Buyers filter supply before an auction starts. A missing exchange, a long reseller chain, or duplicated or unverifiable entries in ads.txt can keep a buyer from bidding at all. Those skipped bids never reach the ad server, so standard reports do not show them.</p>
-        </details>
-        <details class="faq-item">
-          <summary>What does the free scan show, and what does Starter add?</summary>
-          <p>The free scan reads a site's ads.txt and returns a Supply Chain Health Score, a floor signal and how many premium exchanges are missing, with no signup. Starter names the missing exchanges, compares each rescan with the last, sends a weekly report by email, and calculates the Floor Optimization Index and Demand Diversity scores from an uploaded ad server report.</p>
-        </details>
-        <details class="faq-item">
-          <summary>Does Valadisse take a revenue share or have platform ties?</summary>
-          <p>No. Starter and Pro are a flat monthly price, and Advisory is priced by engagement. Valadisse takes no revenue share and has no affiliation with any exchange, platform or supply partner.</p>
-        </details>
-      </div>
-    </div>
-  </section>
+<!-- STAGE 2 -->
+<div class="vm-wrap">
+<div class="vm-panel">
+<div class="vm-sl">
+<div class="vm-dot">02</div>
+<h3 class="vm-serif" style="font-size:36px;line-height:1.1;margin:0 0 14px">Understand</h3>
+<p class="vm-lead" style="font-size:17px;color:#070033"><b>What is it costing, and where?</b></p>
+<p class="vm-lead" style="font-size:15px;margin-top:10px">The publisher's own export turns public findings into real numbers by partner and by hour.</p>
+</div>
+<div class="vm-sr">
+<div class="vm-card"><div><span class="vm-pill">Starter</span></div><h3>Ad server CSV upload</h3>
+<p>Upload an ad server export and Valadisse charts revenue, eCPM and fill over time. It bridges what buyers can see and what the publisher earned, and it powers the scores beside it. Data is never used to train any model.</p>
+<p class="nl"><b>What you no longer do.</b> Stitch exports into spreadsheets to see trends.</p>
+<p class="why"><b>Why it matters.</b> Public data shows what buyers can see. The export shows what they actually paid, which is where revenue gaps become measurable.</p>
+<p class="cn">Connects to: Floor Optimization Index, Demand Diversity</p></div>
+<div class="vm-card"><div><span class="vm-pill">Starter</span></div><h3>Floor Optimization Index and Demand Diversity scores</h3>
+<p>The Floor Optimization Index rates, from 0 to 100, how evenly pricing holds across partners and hours of the day, with up to two plain-English drivers. Demand Diversity rates how exposed revenue is to any single partner. Both are early estimates from the publisher's own data, labeled with the days and impressions behind them.</p>
+<p class="nl"><b>What you no longer do.</b> Read raw eCPM and fill tables to judge whether floors are right.</p>
+<p class="why"><b>Why it matters.</b> A floor that is off in either direction rarely appears as a line item in standard reporting. When the score is low, the Floor Optimization Index adds an estimated revenue range.</p>
+<p class="cn">Connects to: Yield Assistant, Weekly report</p></div>
+</div>
+</div>
+</div>
 
-  <!-- Advisory -->
-  <section class="pt-8 px-6" aria-label="Advisory">
-    <div class="max-w-6xl mx-auto">
-      <div class="svc-advisory reveal">
-        <div class="svc-advisory-main">
-          <p class="eyebrow mb-3">Advisory · Priced by engagement</p>
-          <h2 class="font-serif text-3xl md:text-4xl text-ink mb-4">When the fix is structural.</h2>
-          <p class="text-lg text-muted leading-relaxed">Supply path consolidation, curation strategy and identity gaps need scoping, not a plan. The system's findings are where it starts.</p>
-          <p class="text-muted leading-relaxed mt-3"><strong class="text-ink font-medium">Who this is for:</strong> Publishers running programmatic inventory declared in an ads.txt file. Engagements are scoped individually.</p>
-          <div class="mt-7"><a href="#" onclick="showPage('contact')" class="btn-primary btn-primary-dark">Discuss an Advisory Engagement</a></div>
-        </div>
-        <div class="svc-advisory-side">
-          <div class="svc-node svc-node-soft"><small>Advisory</small><strong>Identity &amp; Addressability Strategy</strong><br>Identity solution selection, first-party data strategy, cookieless audience packaging and implementation.</div>
-          <div class="svc-node svc-node-soft"><small>Advisory</small><strong>Market Intelligence</strong><br>Tracks AI and market developments affecting the publisher's stack and vertical, and turns them into guidance.</div>
-        </div>
-      </div>
-    </div>
-  </section>
+<div class="vm-link"><div class="vm-vl"></div><div class="vm-lbl">scores and findings become a plain-English next step</div><div class="vm-vl"></div></div>
 
-  <!-- Close band -->
-  <section class="pt-24 pb-16 px-6" aria-label="Services CTA">
-    <div class="max-w-6xl mx-auto">
-      <div class="git-band p-8 md:p-14 flex flex-col md:flex-row md:items-center gap-8 justify-between">
-        <div class="md:max-w-xl">
-          <h2 class="font-serif text-3xl md:text-4xl text-white mb-3">Every engagement starts with the free scan.</h2>
-          <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.7);"><strong class="text-white">Security &amp; Data.</strong> Data is encrypted in transit and at rest, shared only as needed to run the diagnostic, and never used to train any model.</p>
-        </div>
-        <a href="https://app.valadisse.com/scan" target="_blank" class="btn-primary">Run Your Free Scan →</a>
-      </div>
-    </div>
-  </section>
+<!-- STAGE 3 -->
+<div class="vm-wrap">
+<div class="vm-panel">
+<div class="vm-sl">
+<div class="vm-dot">03</div>
+<h3 class="vm-serif" style="font-size:36px;line-height:1.1;margin:0 0 14px">Act</h3>
+<p class="vm-lead" style="font-size:17px;color:#070033"><b>What should be done next?</b></p>
+<p class="vm-lead" style="font-size:15px;margin-top:10px">Findings are only worth the action they lead to. This stage sets priorities and answers follow-up questions.</p>
+</div>
+<div class="vm-sr">
+<div class="vm-card"><div><span class="vm-pill vm-a">Pro</span></div><h3>Dedicated strategic onboarding session</h3>
+<p>A working session to map priorities for the publisher's stack: what to monitor first, which findings to act on, and what to leave alone.</p>
+<p class="nl"><b>What you no longer do.</b> Decide alone what to monitor first.</p>
+<p class="why"><b>Why it matters.</b> Effort goes to the findings that carry the most revenue for this stack, not the loudest ones.</p>
+<p class="cn">Connects to: Scheduled monitoring, Change alerts</p></div>
+<div class="vm-card"><div style="display:flex;flex-wrap:wrap;gap:6px 0"><span class="vm-pill vm-a">Pro</span><span class="meta-pill status-pill vm-pill vm-n" title="Coming soon items are in active development and are included in the plan as they ship.">Coming soon</span></div><h3>Yield Assistant</h3>
+<p>An AI-powered analyst in the dashboard that will answer yield questions in plain English. It will draw only on the publisher's own data, will say so when it does not have enough, and will recommend without changing anything in a live ad stack.</p>
+<p class="nl"><b>What you will no longer do.</b> Request a report to answer a yield question.</p>
+<p class="why"><b>Why it matters.</b> Findings will become next steps in plain English, so time will go to deciding, not digging.</p>
+<p class="cn">Connects to: scans, scores, alerts</p></div>
+<div class="vm-card"><div><span class="vm-pill vm-a">Pro</span></div><h3>Early access to new scores and features</h3>
+<p>Pro accounts see new scores and features before they reach Starter.</p>
+<p class="nl"><b>What you no longer do.</b> Wait for a new signal to reach every plan.</p>
+<p class="why"><b>Why it matters.</b> A new signal acted on earlier is revenue protected earlier.</p>
+<p class="cn">Connects to: every stage</p></div>
+<div class="vm-card vm-road"><div style="display:flex;flex-wrap:wrap;gap:6px 0"><span class="vm-pill vm-a">Pro</span><span class="meta-pill status-pill vm-pill vm-n" title="Coming soon items are in active development and are included in the plan as they ship.">Coming soon</span></div><h3>Publisher-Controlled Curation</h3>
+<p>Curated deal packages will be built through the publisher's existing supply partnerships. The publisher will set floors, control audience segments, own the deal IDs and keep the margin.</p>
+<p class="nl"><b>What you will no longer do.</b> Negotiate every package on someone else's terms.</p>
+<p class="why"><b>Why it matters.</b> Demand will be bought on the publisher's terms, and the publisher will keep the margin.</p>
+<p class="cn">Connects to: Floor Optimization Index, Demand Diversity</p></div>
+</div>
+</div>
+</div>
 
+<div class="vm-link"><div class="vm-vl"></div><div class="vm-lbl">every change is watched, and every rescan feeds stage 01 again</div><div class="vm-vl"></div></div>
+
+<!-- STAGE 4 -->
+<div class="vm-wrap">
+<div class="vm-panel">
+<div class="vm-sl">
+<div class="vm-dot">04</div>
+<h3 class="vm-serif" style="font-size:36px;line-height:1.1;margin:0 0 14px">Stay ahead</h3>
+<p class="vm-lead" style="font-size:17px;color:#070033"><b>What changed since last time?</b></p>
+<p class="vm-lead" style="font-size:15px;margin-top:10px">A change to ads.txt or the supply chain can cost demand every day it goes unseen. Monitoring catches it when it starts.</p>
+</div>
+<div class="vm-sr">
+<div class="vm-card"><div><span class="vm-pill vm-a">Pro</span></div><h3>Scheduled monitoring: daily, weekly or monthly, your choice</h3>
+<p>Valadisse rescans the publisher's supply chain on the chosen schedule and compares each result with the last.</p>
+<p class="nl"><b>What you no longer do.</b> Rescan manually on a calendar reminder.</p>
+<p class="why"><b>Why it matters.</b> Problems are caught when they begin, so they are fixed sooner and cost less.</p>
+<p class="cn">Connects to: Change alerts, stage 01 rescan</p></div>
+<div class="vm-card"><div><span class="vm-pill vm-a">Pro</span></div><h3>Change alerts</h3>
+<p>An email the day ads.txt or the supply chain changes, naming what changed.</p>
+<p class="nl"><b>What you no longer do.</b> Find out from a revenue dip.</p>
+<p class="why"><b>Why it matters.</b> A change that costs demand is cheapest to reverse the day it happens.</p>
+<p class="cn">Connects to: Findings report, Yield Assistant</p></div>
+<div class="vm-card vm-wide"><div><span class="vm-pill">Starter</span></div><h3>Weekly report by email</h3>
+<p>Every week, an email with the latest scan and what changed since the one before it.</p>
+<p class="nl"><b>What you no longer do.</b> Remember to check, or log in to find out.</p>
+<p class="why"><b>Why it matters.</b> Movement is visible every week, so an issue does not wait for a monthly summary.</p>
+<p class="cn">Connects to: Ads.txt change detection, scores</p></div>
+</div>
+</div>
+</div>
+
+<!-- EXAMPLE -->
+<div class="vm-wrap" style="padding-top:96px">
+<p class="vm-eb">Illustrative example</p>
+<h2 class="vm-h2" style="max-width:780px">One finding, followed all the way through.</h2>
+<p class="vm-lead" style="max-width:700px">This is how the pieces work as one system. The scenario is illustrative.</p>
+<div style="display:flex;flex-wrap:wrap;gap:16px 0;margin-top:36px;align-items:stretch">
+<div class="vm-step"><div class="vm-sd">1</div><b>Change alert</b><p>A seller entry in ads.txt is removed. An email names it the same day.</p></div>
+<div class="vm-wire"></div>
+<div class="vm-step"><div class="vm-sd">2</div><b>Findings report</b><p>The scan shows the exchange is now undeclared, with a plain-English explanation.</p></div>
+<div class="vm-wire"></div>
+<div class="vm-step"><div class="vm-sd">3</div><b>Scores</b><p>Demand Diversity and the Floor Optimization Index show whether partner share and pricing moved.</p></div>
+<div class="vm-wire"></div>
+<div class="vm-step"><div class="vm-sd">4</div><b>Yield Assistant</b><p>Will explain what it means and recommend the fix.</p><p><span class="meta-pill status-pill vm-pill vm-n" title="Coming soon items are in active development and are included in the plan as they ship.">Coming soon</span></p></div>
+<div class="vm-wire"></div>
+<div class="vm-step"><div class="vm-sd">5</div><b>Scheduled monitoring</b><p>The next rescan confirms the fix held, and the loop repeats.</p></div>
+</div>
+</div>
+
+<!-- FAQ (each item also becomes FAQPage JSON-LD on /services/) -->
+<div class="vm-wrap" style="padding-top:96px">
+<p class="vm-eb">FAQ</p>
+<h2 class="vm-h2">Common questions</h2>
+<div class="vm-faq">
+<details class="faq-item">
+  <summary>What is ads.txt?</summary>
+  <p>ads.txt is a public file on a publisher's site that lists every company authorized to sell its ad inventory. Buyers check it before they bid, and supply that is not declared there is often filtered out before the auction starts.</p>
+</details>
+<details class="faq-item">
+  <summary>What is sellers.json?</summary>
+  <p>sellers.json is the matching file an exchange publishes, listing the sellers it represents. Buyers compare it with a publisher's ads.txt to confirm that the path from them to the publisher is real.</p>
+</details>
+<details class="faq-item">
+  <summary>Why do some bids never arrive?</summary>
+  <p>Buyers filter supply before an auction starts. A missing exchange, a long reseller chain, or duplicated or unverifiable entries in ads.txt can keep a buyer from bidding at all. Those skipped bids never reach the ad server, so standard reports do not show them.</p>
+</details>
+<details class="faq-item">
+  <summary>What does the free scan show, and what does Starter add?</summary>
+  <p>The free scan reads a site's ads.txt and returns a Supply Chain Health Score, a floor signal and how many premium exchanges are missing, with no signup. Starter names the missing exchanges, compares each rescan with the last, sends a weekly report by email, and calculates the Floor Optimization Index and Demand Diversity scores from an uploaded ad server report.</p>
+</details>
+<details class="faq-item">
+  <summary>Does Valadisse take a revenue share or have platform ties?</summary>
+  <p>No. Starter and Pro are a flat monthly price, and Advisory is priced by engagement. Valadisse takes no revenue share and has no affiliation with any exchange, platform or supply partner.</p>
+</details>
+</div>
+</div>
+
+<!-- ADVISORY -->
+<div class="vm-wrap" style="padding-top:96px">
+<div style="border:1px solid #EEEEEE;border-radius:12px;padding:48px;display:flex;flex-wrap:wrap;gap:40px;align-items:center">
+<div style="flex:1 1 420px">
+<p class="vm-eb">Advisory · Priced by engagement</p>
+<h2 class="vm-h2">When the fix is structural.</h2>
+<p class="vm-lead">Supply path consolidation, curation strategy and identity gaps need scoping, not a plan. Each engagement is scoped individually, and the system's findings are where it starts.</p>
+<p class="vm-lead" style="font-size:15px;margin-top:12px"><b style="color:#070033">Who this is for:</b> Publishers running programmatic inventory declared in an ads.txt file. Engagements are scoped individually.</p>
+<div style="margin-top:28px"><a class="vm-btn vm-dk" href="#" onclick="showPage('contact')">Discuss an Advisory Engagement</a></div>
+</div>
+<div style="flex:1 1 380px;display:flex;flex-direction:column;gap:16px">
+<div class="vm-node" style="padding:22px;background:#F8F8FC"><small>Advisory</small><b style="font-size:17px">Identity &amp; Addressability Strategy</b><br>Identity solution selection, first-party data strategy, cookieless audience packaging and implementation.</div>
+<div class="vm-node" style="padding:22px;background:#F8F8FC"><small>Advisory</small><b style="font-size:17px">Market Intelligence</b><br>Tracks AI and market developments affecting the publisher's stack and vertical, and turns them into guidance.</div>
+</div>
+</div>
+</div>
+
+<!-- CLOSE BAND -->
+<div class="vm-wrap" style="padding-top:96px;padding-bottom:64px">
+<div style="background:#070033;border-radius:12px;padding:56px;display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;align-items:center">
+<div style="flex:1 1 480px">
+<h2 class="vm-h2" style="color:#fff;margin-bottom:12px">Every engagement starts with the free scan.</h2>
+<p style="margin:0;font-size:15px;line-height:1.65;color:rgba(255,255,255,.7);max-width:600px"><b style="color:#fff">Security &amp; Data.</b> Data is encrypted in transit and at rest, shared only as needed to run the diagnostic, and never used to train any model.</p>
+</div>
+<a class="vm-btn" href="https://app.valadisse.com/scan" target="_blank">Run Your Free Scan →</a>
+</div>
+</div>
+
+</div>
 </main>
  
  
