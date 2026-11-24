@@ -5,3 +5,10 @@
 # scan rather than keep indexing a dead funnel.
 /intake        https://app.valadisse.com/scan  301!
 /intake.html   https://app.valadisse.com/scan  301!
+
+# site-src/index.html is the build source for the generated pages, not a page
+# of its own: send it home so it is never indexed as a duplicate.
+/site-src/*    /    301!
+
+# Pricing lives in the app; this gives it a valadisse.com address too.
+/pricing       https://app.valadisse.com/pricing    301!

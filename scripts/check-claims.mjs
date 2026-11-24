@@ -11,25 +11,29 @@
 //  5. A sentence describing a coming-soon feature is in the future tense.
 //  6. The pill count matches the CLAUDE.md table (change only together).
 //  8. No em dashes in visible site copy (HTML comments do not count).
-//  9. Committed blog output equals a fresh rebuild (build-blog.mjs --check).
+//  9. Committed blog and site-page output equals a fresh rebuild (build-blog.mjs --check).
+// 10. The canonical definition appears verbatim on Home and Services.
 //  7. Audience claims: no audio, podcast, app-first, newsletter-led or
 //     "all qualify" statements in visible copy until the tooling exists.
 import { readFile } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { CANONICAL_DEFINITION } from './build-pages.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const FILES = ['index.html', 'blog/index.html', 'scripts/build-blog.mjs'];
-const PAGES = ['index.html', 'blog/index.html'];
+// site-src/index.html is the source for Home, Services, How It Works and Contact;
+// the served pages are generated from it (scripts/build-pages.mjs).
+const FILES = ['site-src/index.html', 'blog/index.html', 'scripts/build-blog.mjs', 'scripts/build-pages.mjs'];
+const PAGES = ['site-src/index.html', 'blog/index.html'];
 
-const EXPECTED_COMING_SOON = 8;
+const EXPECTED_COMING_SOON = 4;
 
 // Coming-soon features: any sentence mentioning one must contain "will".
+// Scheduled monitoring, change alerts and the report-based scores shipped in the
+// app (PR 17, PR 27), so they are no longer listed here.
 const FUTURE_TENSE_PHRASES = [
-  'daily monitoring', 'same-day detection', 'scheduled monitoring',
-  'plain-English digest', 'curated deal packages', 'flag an anomaly',
-  'other Demand Diversity scores',
+  'same-day detection', 'plain-English digest', 'curated deal packages', 'flag an anomaly',
 ];
 
 const BANNED = [
@@ -56,9 +60,11 @@ const BANNED = [
 // Wording that must stay exactly as decided. Checked against visible text, so a
 // silent edit fails the build. Change these only together with CLAUDE.md.
 const REQUIRED = [
-  ['index.html', 'Who this is for: Publishers running programmatic inventory declared in an ads.txt file. Engagements are scoped individually.'],
+  ['services/index.html', 'Who this is for: Publishers running programmatic inventory declared in an ads.txt file. Engagements are scoped individually.'],
   ['index.html', 'Valadisse shows how many premium exchanges are missing from your declared sellers, free in seconds: no tag, no integration, no revenue share.'],
   ['index.html', 'Starter shows which exchanges are missing.'],
+  ['index.html', CANONICAL_DEFINITION],
+  ['services/index.html', CANONICAL_DEFINITION],
 ];
 
 // Visible-copy only (CSS class names do not count). Audio, podcast and app-first
@@ -85,7 +91,7 @@ for (const file of FILES) {
 }
 
 // Visible copy, on every page: no em dashes (HTML comments are not copy).
-const EM_DASH_FILES = ['index.html', 'privacy.html', 'terms.html', 'intake.html', 'blog/index.html', 'blog/buying-agents-will-soon-read-your-ad-products-first/index.html'];
+const EM_DASH_FILES = ['site-src/index.html', 'index.html', 'services/index.html', 'how-it-works/index.html', 'contact/index.html', 'privacy.html', 'terms.html', 'intake.html', 'blog/index.html', 'blog/buying-agents-will-soon-read-your-ad-products-first/index.html'];
 let emDashes = 0;
 for (const file of EM_DASH_FILES) {
   const visible = (await readFile(join(ROOT, file), 'utf8')).replace(/<!--[\s\S]*?-->/g, '');
@@ -144,9 +150,9 @@ for (const [file, phrase] of REQUIRED) {
 }
 if (pills !== EXPECTED_COMING_SOON) fail(`expected ${EXPECTED_COMING_SOON} "Coming soon" pills, found ${pills}`);
 
-// The committed blog pages must equal a fresh rebuild (generator, nav, CSS and footer
-// all come from scripts/build-blog.mjs and index.html). Run the rebuild after editing
-// index.html, blog-src/ or the generator.
+// The committed blog and site pages must equal a fresh rebuild (generator, nav, CSS
+// and footer all come from scripts/build-blog.mjs, scripts/build-pages.mjs and
+// site-src/index.html). Run the rebuild after editing any of them.
 {
   const r = spawnSync(process.execPath, [join(ROOT, 'scripts', 'build-blog.mjs'), '--check'], { encoding: 'utf8' });
   if (r.status !== 0) fail(`blog output differs from a rebuild: ${(r.stderr || r.stdout).trim()}`);
