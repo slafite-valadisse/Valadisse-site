@@ -119,7 +119,7 @@ const fonts = between(home, '<link rel="preconnect" href="https://fonts.googleap
 function rewriteLinks(html) {
   return html
     .replace(/<a\b[^>]*showPage\('([a-z-]+)'\)[^>]*>/g, (tag, id) => {
-      const href = id === 'home' ? '/' : `/${id}/`;
+      const href = id === 'home' ? '/' : `/#${id}`;
       return tag
         .replace(/href="#"/, `href="${href}"`)
         .replace(/\s+onclick="[^"]*"/, (m) => (m.includes('closeMobileMenu') ? ' onclick="closeMobileMenu();"' : ''))

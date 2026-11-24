@@ -5,8 +5,10 @@ one source for Home, Services, How It Works and Contact. `node scripts/build-blo
 generates the blog and, through `scripts/build-pages.mjs`, the served pages:
 `index.html`, `services/`, `how-it-works/` and `contact/`, each with its own title,
 description, canonical URL and JSON-LD (Organization on Home, FAQPage on Services,
-built from the FAQ in the source). Output is committed; never edit the generated
-pages by hand. The Google Search Console verification value goes in
+built from the FAQ in the source). Each generated file is the full one-page site
+opening on its own section; the top menu is unchanged and still switches sections
+in place, so never change the menu to get a page its URL. Output is committed;
+never edit the generated pages by hand. The Google Search Console verification value goes in
 `GOOGLE_SITE_VERIFICATION` in `scripts/build-pages.mjs`.
 
 The canonical definition (`CANONICAL_DEFINITION` in `scripts/build-pages.mjs`) is

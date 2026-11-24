@@ -1,12 +1,11 @@
 // Site pages generator, called by scripts/build-blog.mjs (zero dependencies).
 //
 // site-src/index.html is the one source for Home, Services, How It Works and
-// Contact. Opened directly it still works as the old one-page site (showPage
-// switches sections), which keeps local preview simple. What Netlify serves is
-// generated from it: one static file per page, each with only its own <main>,
-// its own title, description and canonical URL, real links between pages, and
-// JSON-LD. That gives search and AI answer tools a crawlable URL per
-// page instead of four sections hidden behind "#" links.
+// Contact. Each generated file is that same one-page site, unchanged in
+// navigation and behavior (the top menu still switches sections in place with
+// showPage), but opening on its own section and carrying its own title,
+// description, canonical URL and JSON-LD. That gives search and AI answer tools
+// a crawlable URL per page without touching the menu.
 //
 // Output is committed (the host needs no build step); `build-blog.mjs --check`
 // fails if it drifts from this generator or the source.
@@ -57,8 +56,6 @@ export const PAGES = [
       'Get in touch with Valadisse, or run the free ads.txt scan first and bring the findings to the conversation.',
   },
 ];
-
-const PATH_OF = Object.fromEntries(PAGES.map((p) => [p.id, p.path]));
 
 const esc = (s) =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -114,76 +111,43 @@ function setMeta(head, page, extra) {
   );
 }
 
-function rewriteLinks(html, current) {
-  return html
-    .replace(/<a\b[^>]*showPage\('([a-z-]+)'\)[^>]*>/g, (tag, id) => {
-      if (!PATH_OF[id]) throw new Error(`site-src/index.html: link to unknown page "${id}"`);
-      let t = tag
-        .replace(/href="#"/, `href="${PATH_OF[id]}"`)
-        .replace(/\s+onclick="[^"]*"/, '')
-        .replace(/\s+data-page="[^"]*"/, '');
-      if (/class="nav-link( active)?"/.test(t)) {
-        t = t.replace(/class="nav-link( active)?"/, id === current ? 'class="nav-link active" aria-current="page"' : 'class="nav-link"');
-      }
-      return t;
-    })
-    .replace(/src="logo/g, 'src="/logo')
-    .replace(/href="(privacy|terms)\.html"/g, 'href="/$1.html"');
-}
-
-// The one-page section switcher is not needed on real pages. Home keeps a small
-// redirect so old in-page links (/#services and the like) land on the new URLs.
-const HASH_REDIRECT = `// ── Old in-page links (/#services, /#how-it-works, /#contact) ──
-  (function () {
-    const to = { services: '/services/', 'how-it-works': '/how-it-works/', contact: '/contact/', 'stays-current': '/how-it-works/' };
-    const id = location.hash.slice(1);
-    if (to[id]) location.replace(to[id]);
-  })();
-
-  `;
+// The generated files sit at /services/ and the like, so relative asset paths
+// in the source must become absolute. Links and menu are left as they are.
+const absoluteAssets = (html) =>
+  html.replace(/src="logo/g, 'src="/logo').replace(/href="(privacy|terms)\.html"/g, 'href="/$1.html"');
 
 export function buildPages(source) {
   const headStart = source.indexOf('<head>');
   const headEnd = source.indexOf('</head>');
   const bodyStart = source.indexOf('<body>');
-  const firstMain = source.indexOf('<main id="page-');
-  if (headStart < 0 || headEnd < 0 || bodyStart < 0 || firstMain < 0) throw new Error('site-src/index.html: unexpected structure');
+  if (headStart < 0 || headEnd < 0 || bodyStart < 0) throw new Error('site-src/index.html: unexpected structure');
 
-  const mains = {};
-  for (const m of source.matchAll(/<main id="page-([a-z-]+)"[\s\S]*?<\/main>/g)) mains[m[1]] = m;
-  const lastMain = Object.values(mains).reduce((a, m) => Math.max(a, m.index + m[0].length), 0);
-  for (const p of PAGES) if (!mains[p.id]) throw new Error(`site-src/index.html: no <main id="page-${p.id}">`);
+  const ids = [...source.matchAll(/<main id="page-([a-z-]+)"/g)].map((m) => m[1]);
+  for (const p of PAGES) if (!ids.includes(p.id)) throw new Error(`site-src/index.html: no <main id="page-${p.id}">`);
+  const services = source.match(/<main id="page-services"[\s\S]*?<\/main>/)[0];
 
-  const stripBanners = (s) => s.replace(/<!-- ═+\s*[A-Z ]+ PAGE\s*═+ -->\s*/g, '');
   const head = source.slice(headStart, headEnd);
-  const chrome = stripBanners(source.slice(bodyStart, firstMain));
-  const tail = stripBanners(source.slice(lastMain));
-
-  const switcherStart = tail.indexOf('// ── Page meta per section');
-  const switcherEnd = tail.indexOf('// ── Nav scroll shadow');
-  if (switcherStart < 0 || switcherEnd < 0) throw new Error('site-src/index.html: cannot find the page switcher script');
-
   const out = {};
   for (const page of PAGES) {
-    const main = mains[page.id][0].replace(/class="page-section[^"]*"/, 'class="page-section active"');
     const ld = [];
     if (page.id === 'home') ld.push(jsonLd(organization()));
-    if (page.id === 'services') ld.push(jsonLd(faqPage(main)));
+    if (page.id === 'services') ld.push(jsonLd(faqPage(services)));
     if (page.id === 'home' && GOOGLE_SITE_VERIFICATION) {
       ld.push(`  <meta name="google-site-verification" content="${esc(GOOGLE_SITE_VERIFICATION)}">`);
     }
-    const script = tail.slice(0, switcherStart) + (page.id === 'home' ? HASH_REDIRECT : '') + tail.slice(switcherEnd);
-    const body = chrome.replace(
-      '<body>',
-      '<body>\n<!-- GENERATED by scripts/build-pages.mjs from site-src/index.html. Edit the source, then run node scripts/build-blog.mjs. -->',
-    );
-    out[page.file] =
-      source.slice(0, headStart) +
-      setMeta(head, page, ld.join('\n')) +
-      '</head>\n\n' +
-      rewriteLinks(body, page.id) +
-      rewriteLinks(main, page.id) + '\n\n' +
-      rewriteLinks(script, page.id);
+    // Open on this page's section, with its nav link marked active, exactly as
+    // showPage would leave it after a click.
+    const body = source
+      .slice(bodyStart)
+      .replace(
+        '<body>',
+        '<body>\n<!-- GENERATED by scripts/build-pages.mjs from site-src/index.html. Edit the source, then run node scripts/build-blog.mjs. -->',
+      )
+      .replace(/<main id="page-([a-z-]+)" class="page-section[^"]*"/g, (_, id) =>
+        `<main id="page-${id}" class="page-section${id === page.id ? ' active' : ''}"`)
+      .replace(/<a ([^>]*)class="nav-link( active)?"([^>]*data-page="([a-z-]+)")/g, (_, pre, __, post, id) =>
+        `<a ${pre}class="nav-link${id === page.id ? ' active' : ''}"${post}`);
+    out[page.file] = source.slice(0, headStart) + setMeta(head, page, ld.join('\n')) + absoluteAssets(body);
   }
   return out;
 }
