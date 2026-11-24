@@ -77,8 +77,9 @@ One status vocabulary, the same as the pricing cards in the app: **Coming soon**
 
 | Claim (future tense) | Where | Basis in the app code |
 |---|---|---|
-| Same-day anomaly alerts and detection will flag anomalies the day they appear | Home (differentiation), Services (Yield Management) | None for anomalies (a partner underdelivering, a floor misconfiguration, timeouts). Change alerts on ads.txt and the supply chain are live and are a separate claim |
-| Publisher-controlled curation: deal packages will be built through the publisher's supply partners | Home tile, Services | None; the scan only reports whether curation-ready sellers are declared |
+| Same-day anomaly alerts and detection will flag anomalies the day they appear | Home (differentiation) | None for anomalies (a partner underdelivering, a floor misconfiguration, timeouts). Change alerts on ads.txt and the supply chain are live and are a separate claim |
+| Publisher-controlled curation: deal packages will be built through the publisher's supply partners | Home tile, Services (Act stage) | None; the scan only reports whether curation-ready sellers are declared |
+| Yield Assistant will answer yield questions in plain English and suggest next steps | Services (hero flow, Act stage, legend, example step 4) | App pricing card marks it Coming soon; v1 not built |
 
 ### Removed (do not reinstate without a shipped feature behind it)
 

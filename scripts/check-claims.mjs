@@ -27,7 +27,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const FILES = ['site-src/index.html', 'blog/index.html', 'scripts/build-blog.mjs', 'scripts/build-pages.mjs'];
 const PAGES = ['site-src/index.html', 'blog/index.html'];
 
-const EXPECTED_COMING_SOON = 4;
+const EXPECTED_COMING_SOON = 7;
 
 // Coming-soon features: any sentence mentioning one must contain "will".
 // Scheduled monitoring, change alerts and the report-based scores shipped in the
