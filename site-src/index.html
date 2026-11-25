@@ -673,6 +673,16 @@
       .xp-arrow::before { border-left-color: #FF6632 !important; opacity: .7; }
     }
     @keyframes hmFlowH { to { background-position: 24px 0; } }
+    /* Explainer connectors drawn as SVG, the same lines as the Services diagram:
+       a faint base line, an orange dash flowing along it and two pulse dots.
+       .wired is set once drawn, so without JS the CSS arrows above still show. */
+    .xp-stage { position: relative; }
+    .xp-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 0; }
+    .xp-svg .base { fill: none; stroke: rgba(7,0,51,.16); stroke-width: 1.5; }
+    .xp-svg .hot { fill: none; stroke-width: 1.5; stroke-dasharray: 4 10; animation: svcDash 2.6s linear infinite; }
+    .xp-svg .pulse { fill: #FF6632; }
+    .xp-stage > .xp-node { z-index: 1; }
+    .xp-stage.wired .xp-arrow::after, .xp-stage.wired .xp-arrow::before, .xp-stage.wired .xp-down::after, .xp-stage.wired .xp-down::before { display: none; }
     /* CTA band glow */
     .hm-cta { position: relative; overflow: hidden; background: radial-gradient(120% 140% at 0% 0%, #1d1760 0%, #070033 55%) !important; }
     .hm-cta::before { content: ''; position: absolute; width: 640px; height: 640px; left: 50%; top: 50%; transform: translate(-50%,-50%); background: radial-gradient(closest-side, rgba(255,102,50,.30), transparent); filter: blur(10px); animation: hmBreathe 6s ease-in-out infinite; pointer-events: none; }
@@ -1807,6 +1817,7 @@
     setTimeout(initReveal, 50);
     // Sections drawn from measured positions need a redraw once visible
     if (window.__vdRedrawFlow) window.__vdRedrawFlow();
+    if (window.__vdRedrawXp) window.__vdRedrawXp();
  
     return false; // prevent anchor jump
   }
@@ -1937,6 +1948,72 @@
       if (b.classList.contains('xp-next')) tabs.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }));
     go(1);
+  })();
+
+  // ── Home explainer connectors: the Services diagram's lines, drawn between the boxes ──
+  (function () {
+    const NS = 'http://www.w3.org/2000/svg';
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const stages = [...document.querySelectorAll('#explainer .xp-stage')];
+    if (!stages.length) return;
+    const draw = (stage, si) => {
+      let svg = stage.querySelector(':scope > .xp-svg');
+      if (!svg) { svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', 'xp-svg'); svg.setAttribute('aria-hidden', 'true'); stage.prepend(svg); }
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      const fr = stage.getBoundingClientRect();
+      // A hidden step (or Home while another page shows) measures 0; the
+      // ResizeObserver below draws it once it has a size.
+      if (!fr.width || !fr.height) return;
+      svg.setAttribute('viewBox', '0 0 ' + fr.width + ' ' + fr.height);
+      const desktop = window.matchMedia('(min-width: 900px)').matches;
+      const box = (sel) => { const n = stage.querySelector(sel); if (!n) return null; const r = n.getBoundingClientRect(); return { l: r.left - fr.left, r: r.right - fr.left, t: r.top - fr.top, b: r.bottom - fr.top, cx: r.left - fr.left + r.width / 2, cy: r.top - fr.top + r.height / 2 }; };
+      const chain = ['.n-site', '.n-server', '.n-net', '.n-buy'].map(box);
+      const segs = [];
+      for (let i = 0; i < chain.length - 1; i++) {
+        const a = chain[i], b = chain[i + 1]; if (!a || !b) continue;
+        segs.push(desktop ? [a.r, a.cy, b.l, b.cy, 'h'] : [a.cx, a.b, b.cx, b.t, 'v']);
+      }
+      const buy = chain[3], rev = box('.n-rev');
+      if (desktop && buy && rev) segs.push([buy.cx, buy.b, buy.cx, rev.t, 'v']);
+      const defs = document.createElementNS(NS, 'defs'); svg.appendChild(defs);
+      segs.forEach((s, i) => {
+        const [x1, y1, x2, y2, dir] = s, id = 'xp' + si + '-' + i;
+        const m = dir === 'h' ? (x2 - x1) * 0.55 : (y2 - y1) * 0.55;
+        const d = dir === 'h' ? `M${x1} ${y1} C${x1 + m} ${y1} ${x2 - m} ${y2} ${x2} ${y2}` : `M${x1} ${y1} C${x1} ${y1 + m} ${x2} ${y2 - m} ${x2} ${y2}`;
+        // Gradient in page units: a straight line has a zero-size box, which
+        // would hide a box-relative gradient.
+        const g = document.createElementNS(NS, 'linearGradient');
+        g.setAttribute('id', id + 'g'); g.setAttribute('gradientUnits', 'userSpaceOnUse');
+        g.setAttribute('x1', x1); g.setAttribute('y1', y1); g.setAttribute('x2', x2); g.setAttribute('y2', y2);
+        g.innerHTML = '<stop offset="0" stop-color="#FF6632" stop-opacity=".35"/><stop offset="1" stop-color="#FF6632"/>';
+        defs.appendChild(g);
+        const base = document.createElementNS(NS, 'path'); base.setAttribute('d', d); base.setAttribute('class', 'base'); base.setAttribute('id', id); svg.appendChild(base);
+        const hot = document.createElementNS(NS, 'path'); hot.setAttribute('d', d); hot.setAttribute('class', 'hot'); hot.setAttribute('stroke', 'url(#' + id + 'g)'); svg.appendChild(hot);
+        if (!reduce) {
+          const dur = Math.min(4.2, Math.max(1.6, base.getTotalLength() / 30));
+          for (let j = 0; j < 2; j++) {
+            const dot = document.createElementNS(NS, 'circle'); dot.setAttribute('r', j ? '2.2' : '3.2'); dot.setAttribute('class', 'pulse'); if (j) dot.setAttribute('opacity', '.55');
+            const am = document.createElementNS(NS, 'animateMotion');
+            am.setAttribute('dur', dur + 's'); am.setAttribute('repeatCount', 'indefinite');
+            am.setAttribute('begin', (-(i * 0.7 + j * dur / 2)).toFixed(2) + 's');
+            am.setAttribute('calcMode', 'spline'); am.setAttribute('keyTimes', '0;1'); am.setAttribute('keySplines', '.4 0 .6 1');
+            const mp = document.createElementNS(NS, 'mpath'); mp.setAttribute('href', '#' + id); mp.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#' + id);
+            am.appendChild(mp); dot.appendChild(am); svg.appendChild(dot);
+          }
+        }
+      });
+      stage.classList.toggle('wired', segs.length > 0);
+    };
+    let rf;
+    const redraw = () => { cancelAnimationFrame(rf); rf = requestAnimationFrame(() => stages.forEach(draw)); };
+    // Redraw when a step is shown (tab switch), Home is shown from another page,
+    // fonts finish or the window resizes: each changes the stage's size.
+    if ('ResizeObserver' in window) { const ro = new ResizeObserver(redraw); stages.forEach((s) => ro.observe(s)); }
+    window.addEventListener('resize', redraw);
+    window.addEventListener('load', redraw);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(redraw);
+    window.__vdRedrawXp = redraw;
+    stages.forEach(draw);
   })();
 
   // ── Services page (the concept's own script) ──

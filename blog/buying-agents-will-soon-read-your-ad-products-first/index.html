@@ -664,6 +664,16 @@
       .xp-arrow::before { border-left-color: #FF6632 !important; opacity: .7; }
     }
     @keyframes hmFlowH { to { background-position: 24px 0; } }
+    /* Explainer connectors drawn as SVG, the same lines as the Services diagram:
+       a faint base line, an orange dash flowing along it and two pulse dots.
+       .wired is set once drawn, so without JS the CSS arrows above still show. */
+    .xp-stage { position: relative; }
+    .xp-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 0; }
+    .xp-svg .base { fill: none; stroke: rgba(7,0,51,.16); stroke-width: 1.5; }
+    .xp-svg .hot { fill: none; stroke-width: 1.5; stroke-dasharray: 4 10; animation: svcDash 2.6s linear infinite; }
+    .xp-svg .pulse { fill: #FF6632; }
+    .xp-stage > .xp-node { z-index: 1; }
+    .xp-stage.wired .xp-arrow::after, .xp-stage.wired .xp-arrow::before, .xp-stage.wired .xp-down::after, .xp-stage.wired .xp-down::before { display: none; }
     /* CTA band glow */
     .hm-cta { position: relative; overflow: hidden; background: radial-gradient(120% 140% at 0% 0%, #1d1760 0%, #070033 55%) !important; }
     .hm-cta::before { content: ''; position: absolute; width: 640px; height: 640px; left: 50%; top: 50%; transform: translate(-50%,-50%); background: radial-gradient(closest-side, rgba(255,102,50,.30), transparent); filter: blur(10px); animation: hmBreathe 6s ease-in-out infinite; pointer-events: none; }
