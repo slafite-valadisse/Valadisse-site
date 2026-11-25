@@ -27,13 +27,13 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const FILES = ['site-src/index.html', 'blog/index.html', 'scripts/build-blog.mjs', 'scripts/build-pages.mjs'];
 const PAGES = ['site-src/index.html', 'blog/index.html'];
 
-const EXPECTED_COMING_SOON = 7;
+const EXPECTED_COMING_SOON = 2;
 
 // Coming-soon features: any sentence mentioning one must contain "will".
 // Scheduled monitoring, change alerts and the report-based scores shipped in the
 // app (PR 17, PR 27), so they are no longer listed here.
 const FUTURE_TENSE_PHRASES = [
-  'same-day detection', 'plain-English digest', 'curated deal packages', 'flag an anomaly',
+  'plain-English digest', 'curated deal packages', 'Deal packages', 'learn your stack', 'buying trends',
 ];
 
 const BANNED = [
@@ -44,6 +44,10 @@ const BANNED = [
   'not standalone retainers', 'Available standalone', 'same monitoring that keeps the platform',
   'sees across every exchange', 'ad ops function', 'faster than enterprise vendors',
   'rolling out', 'rolls out', 'rolled out',
+  // Unbuilt (anomaly detection) and consultancy or money-first framing (2026-11-25 message map).
+  'anomaly', 'anomalies', 'same-day detection', 'boutique', 'playbook', 'consultancies', 'leaving on the table',
+  'we optimize', 'far larger than this one', 'small number of publishers', 'native optimizer',
+  'ranked fix list', 'what to fix first', '[Name]',
   'revenue range on every finding', 'revenue range to your results', 'annualised figure',
   'how much premium demand', 'revenue-impact ranges', 'every gap named',
   // One conditional revenue range per scan, never per finding or gap.
@@ -61,8 +65,7 @@ const BANNED = [
 // silent edit fails the build. Change these only together with CLAUDE.md.
 const REQUIRED = [
   ['services/index.html', 'Who this is for: Publishers running programmatic inventory declared in an ads.txt file. Engagements are scoped individually.'],
-  ['index.html', 'Valadisse shows how many premium exchanges are missing from your declared sellers, free in seconds: no tag, no integration, no revenue share.'],
-  ['index.html', 'Starter shows which exchanges are missing.'],
+  ['index.html', 'See how your ad inventory really sells, and what holds it back.'],
   ['index.html', CANONICAL_DEFINITION],
   ['services/index.html', CANONICAL_DEFINITION],
 ];
@@ -95,8 +98,8 @@ const EM_DASH_FILES = ['site-src/index.html', 'index.html', 'services/index.html
 let emDashes = 0;
 for (const file of EM_DASH_FILES) {
   const visible = (await readFile(join(ROOT, file), 'utf8')).replace(/<!--[\s\S]*?-->/g, '');
-  const n = (visible.match(/—|&mdash;/g) ?? []).length;
-  if (n) fail(`${file}: ${n} em dash(es) in visible copy`);
+  const n = (visible.match(/—|&mdash;|–|&ndash;/g) ?? []).length;
+  if (n) fail(`${file}: ${n} em or en dash(es) in visible copy or metadata`);
   emDashes += n;
 }
 
@@ -112,13 +115,16 @@ for (const file of PAGES) {
     const after = text.slice(m.index + m[0].length).replace(/^\s+/, '');
     const soleInP = /<p[^>]*>$/.test(before);
     let lastInRow = false;
-    if (before.endsWith('</span>')) {
+    // A pill row on Services cards: <span class="pills">...</span>
+    const row = before.lastIndexOf('<span class="pills"');
+    if (before.endsWith('</span>') && row >= 0 && !before.slice(row).includes('</span></span>') && /^<\/span>/.test(after)) lastInRow = true;
+    if (!lastInRow && before.endsWith('</span>')) {
       const open = before.lastIndexOf('<div');
       const close = before.lastIndexOf('</div>');
       lastInRow = open > close && /flex-wrap/.test(before.slice(open, before.indexOf('>', open)));
     }
     if (!soleInP && !lastInRow) fail(`${file}: pill is not alone in its block or last in its row: "...${snippet(text, m.index)}..."`);
-    if (!/^<\/(p|div)>/.test(after)) fail(`${file}: pill is not the last thing in its block: "...${snippet(text, m.index)}..."`);
+    if (!/^<\/(p|div)>/.test(after) && !(lastInRow && /^<\/span>/.test(after))) fail(`${file}: pill is not the last thing in its block: "...${snippet(text, m.index)}..."`);
   }
 
   const prose = text

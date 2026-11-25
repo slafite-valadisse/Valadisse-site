@@ -15,7 +15,7 @@
 import { readdir, readFile, writeFile as fsWrite, mkdir as fsMkdir } from 'node:fs/promises';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { buildPages, PAGES } from './build-pages.mjs';
+import { buildPages, PAGES, PAGES_UPDATED } from './build-pages.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://valadisse.com';
@@ -398,8 +398,8 @@ ${posts.map((p) => `    <item>
 
 // Sitemap + robots
 const urls = [
-  [`${SITE}/`, posts[0].date],
-  ...PAGES.filter((p) => p.id !== 'home').map((p) => [`${SITE}${p.path}`, null]),
+  [`${SITE}/`, [posts[0].date, PAGES_UPDATED].sort().pop()],
+  ...PAGES.filter((p) => p.id !== 'home').map((p) => [`${SITE}${p.path}`, PAGES_UPDATED]),
   [`${SITE}/blog/`, posts[0].date],
   ...posts.map((p) => [`${SITE}/blog/${p.slug}/`, p.date]),
   [`${SITE}/privacy`, null],

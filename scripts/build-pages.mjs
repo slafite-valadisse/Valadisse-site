@@ -17,10 +17,14 @@ const SITE = 'https://valadisse.com';
 // Empty means no tag is emitted.
 export const GOOGLE_SITE_VERIFICATION = '';
 
-// Verbatim, per the Services-Pricing decision (2026-11-23). check-claims pins it
-// on Home and Services; keep the visible copy in site-src/index.html identical.
+// Verbatim, per the Services/Pricing/SEO/GEO decision (2026-11-25): the Home hero's
+// supporting line, the Services FAQ answer and the Organization description.
+// check-claims pins it; keep the visible copy in site-src/index.html identical.
 export const CANONICAL_DEFINITION =
-  'Valadisse is a programmatic ad monetization diagnostics platform for independent digital publishers. A free scan shows where inventory is being filtered out of demand, and paid plans add the full findings, scheduled monitoring and change alerts. Valadisse has no revenue share and no platform ties.';
+  'Valadisse is a diagnostic service for independent digital publishers. It shows why ad inventory is being filtered out of buyer demand and what to fix.';
+
+// The day the site pages last changed in substance; the sitemap's lastmod for them.
+export const PAGES_UPDATED = '2026-11-25';
 
 export const PAGES = [
   {
@@ -29,7 +33,7 @@ export const PAGES = [
     path: '/',
     title: 'Valadisse | Ad monetization diagnostics for independent publishers',
     description:
-      'Free ads.txt scan for independent publishers. Find where inventory is filtered out of demand, then monitor it. No revenue share. No platform ties.',
+      'Valadisse shows independent publishers why ad inventory is filtered out of buyer demand and what to fix. Run a free scan.',
   },
   {
     id: 'services',
@@ -37,7 +41,7 @@ export const PAGES = [
     path: '/services/',
     title: 'Services | Valadisse ad monetization diagnostics',
     description:
-      'What the free ads.txt scan shows, what Starter and Pro add, and Advisory work scoped by engagement. No revenue share. No platform ties.',
+      'What the free scan shows, what Starter and Pro add, Yield Assistant for Pro, and Advisory scoped by engagement.',
   },
   {
     id: 'how-it-works',
@@ -45,7 +49,7 @@ export const PAGES = [
     path: '/how-it-works/',
     title: 'How It Works | Valadisse ad monetization diagnostics',
     description:
-      'Run the free ads.txt scan, then Starter for named findings and ad server report scores, then Pro for scheduled monitoring and change alerts.',
+      'Run the free ads.txt scan, then Starter for named exchanges and report scores, then Pro for monitoring, change alerts and Yield Assistant.',
   },
   {
     id: 'contact',
@@ -73,9 +77,12 @@ function organization() {
     url: `${SITE}/`,
     logo: `${SITE}/logo.png`,
     description: CANONICAL_DEFINITION,
-    email: 'hello@valadisse.com',
     sameAs: ['https://www.linkedin.com/company/valadisse/'],
   };
+}
+
+function webSite() {
+  return { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Valadisse', url: `${SITE}/` };
 }
 
 function faqPage(main) {
@@ -129,8 +136,7 @@ export function buildPages(source) {
   const head = source.slice(headStart, headEnd);
   const out = {};
   for (const page of PAGES) {
-    const ld = [];
-    if (page.id === 'home') ld.push(jsonLd(organization()));
+    const ld = [jsonLd(organization()), jsonLd(webSite())];
     if (page.id === 'services') ld.push(jsonLd(faqPage(services)));
     if (page.id === 'home' && GOOGLE_SITE_VERIFICATION) {
       ld.push(`  <meta name="google-site-verification" content="${esc(GOOGLE_SITE_VERIFICATION)}">`);
@@ -146,7 +152,12 @@ export function buildPages(source) {
       .replace(/<main id="page-([a-z-]+)" class="page-section[^"]*"/g, (_, id) =>
         `<main id="page-${id}" class="page-section${id === page.id ? ' active' : ''}"`)
       .replace(/<a ([^>]*)class="nav-link( active)?"([^>]*data-page="([a-z-]+)")/g, (_, pre, __, post, id) =>
-        `<a ${pre}class="nav-link${id === page.id ? ' active' : ''}"${post}`);
+        `<a ${pre}class="nav-link${id === page.id ? ' active' : ''}"${post}`)
+      // One H1 per URL: only this page's section keeps its H1; the others become H2.
+      .replace(/<main id="page-([a-z-]+)"[\s\S]*?<\/main>/g, (m, id) =>
+        id === page.id ? m : m.replace(/<h1(\s|>)/g, '<h2$1').replace(/<\/h1>/g, '</h2>'));
+    const h1s = (body.match(/<h1[\s>]/g) || []).length;
+    if (h1s !== 1) throw new Error(`${page.file}: expected one <h1>, found ${h1s}`);
     out[page.file] = source.slice(0, headStart) + setMeta(head, page, ld.join('\n')) + absoluteAssets(body);
   }
   return out;
