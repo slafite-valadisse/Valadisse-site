@@ -918,6 +918,24 @@
     .social-link { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; color: rgba(255,255,255,0.5); transition: color 0.15s; }
     .social-link:hover { color: #fff; }
     .social-link:focus-visible { outline: 2px solid #FF6632; outline-offset: 2px; color: #fff; border-radius: 4px; }
+
+    /* ── Brand shading (2026-11-25): pale navy-tinted page, alternating bands, white cards
+       with a soft ring and shadow so content lifts off the page instead of sitting on blank white. ── */
+    :root { --tint: #F5F4FA; --tint-2: #EDECF6; --warm: #FFF6F0; --card-ring: rgba(7,0,51,.08); }
+    body { background: var(--tint); }
+    #page-home .hero-section { background-color: var(--tint); border-bottom-color: rgba(7,0,51,.06); }
+    #page-home .xp { background: linear-gradient(180deg, var(--tint-2), var(--tint)); border-bottom-color: rgba(7,0,51,.06); }
+    #page-home .xp-stage { background-color: rgba(255,255,255,.55); box-shadow: 0 0 0 1px var(--card-ring); }
+    #page-home section[aria-label="Who this is for"] { background: var(--warm); }
+    #page-home section[aria-label="Why Valadisse exists"] { background: var(--tint-2); border-top-color: transparent; }
+    #page-home .border-rule { border-color: rgba(7,0,51,.06); }
+    .hm-card { border-color: var(--card-ring); }
+    #page-services { background: var(--tint); }
+    #page-services .hero::after { background: linear-gradient(transparent, var(--tint)); }
+    #page-services .plans { background: linear-gradient(180deg, var(--tint), var(--tint-2) 30%, var(--tint)); padding-block: 64px 48px; margin-top: 20px; }
+    #page-services .card { box-shadow: 0 0 0 1px var(--card-ring), var(--shadow); }
+    #page-services .faq details { background: #fff; box-shadow: 0 0 0 1px var(--card-ring); }
+    #page-services .advbox { background: linear-gradient(180deg, #fff, var(--warm)); box-shadow: 0 0 0 1px var(--card-ring), var(--shadow); }
   </style>
   <style>
   /* ── Blog ── */
