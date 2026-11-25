@@ -11,25 +11,29 @@
 //  5. A sentence describing a coming-soon feature is in the future tense.
 //  6. The pill count matches the CLAUDE.md table (change only together).
 //  8. No em dashes in visible site copy (HTML comments do not count).
-//  9. Committed blog output equals a fresh rebuild (build-blog.mjs --check).
+//  9. Committed blog and site-page output equals a fresh rebuild (build-blog.mjs --check).
+// 10. The canonical definition appears verbatim on Home and Services.
 //  7. Audience claims: no audio, podcast, app-first, newsletter-led or
 //     "all qualify" statements in visible copy until the tooling exists.
 import { readFile } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { CANONICAL_DEFINITION } from './build-pages.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const FILES = ['index.html', 'blog/index.html', 'scripts/build-blog.mjs'];
-const PAGES = ['index.html', 'blog/index.html'];
+// site-src/index.html is the source for Home, Services, How It Works and Contact;
+// the served pages are generated from it (scripts/build-pages.mjs).
+const FILES = ['site-src/index.html', 'blog/index.html', 'scripts/build-blog.mjs', 'scripts/build-pages.mjs'];
+const PAGES = ['site-src/index.html', 'blog/index.html'];
 
-const EXPECTED_COMING_SOON = 8;
+const EXPECTED_COMING_SOON = 2;
 
 // Coming-soon features: any sentence mentioning one must contain "will".
+// Scheduled monitoring, change alerts and the report-based scores shipped in the
+// app (PR 17, PR 27), so they are no longer listed here.
 const FUTURE_TENSE_PHRASES = [
-  'daily monitoring', 'same-day detection', 'scheduled monitoring',
-  'plain-English digest', 'curated deal packages', 'flag an anomaly',
-  'other Demand Diversity scores',
+  'plain-English digest', 'curated deal packages', 'Deal packages', 'learn your stack', 'buying trends',
 ];
 
 const BANNED = [
@@ -40,6 +44,10 @@ const BANNED = [
   'not standalone retainers', 'Available standalone', 'same monitoring that keeps the platform',
   'sees across every exchange', 'ad ops function', 'faster than enterprise vendors',
   'rolling out', 'rolls out', 'rolled out',
+  // Unbuilt (anomaly detection) and consultancy or money-first framing (2026-11-25 message map).
+  'anomaly', 'anomalies', 'same-day detection', 'boutique', 'playbook', 'consultancies', 'leaving on the table',
+  'we optimize', 'far larger than this one', 'small number of publishers', 'native optimizer',
+  'ranked fix list', 'what to fix first', '[Name]',
   'revenue range on every finding', 'revenue range to your results', 'annualised figure',
   'how much premium demand', 'revenue-impact ranges', 'every gap named',
   // One conditional revenue range per scan, never per finding or gap.
@@ -56,9 +64,10 @@ const BANNED = [
 // Wording that must stay exactly as decided. Checked against visible text, so a
 // silent edit fails the build. Change these only together with CLAUDE.md.
 const REQUIRED = [
-  ['index.html', 'Who this is for: Publishers running programmatic inventory declared in an ads.txt file. Engagements are scoped individually.'],
-  ['index.html', 'Valadisse shows how many premium exchanges are missing from your declared sellers, free in seconds: no tag, no integration, no revenue share.'],
-  ['index.html', 'Starter shows which exchanges are missing.'],
+  ['services/index.html', 'Who this is for: Publishers running programmatic inventory declared in an ads.txt file. Engagements are scoped individually.'],
+  ['index.html', 'See how your ad inventory really sells, and what holds it back.'],
+  ['index.html', CANONICAL_DEFINITION],
+  ['services/index.html', CANONICAL_DEFINITION],
 ];
 
 // Visible-copy only (CSS class names do not count). Audio, podcast and app-first
@@ -85,12 +94,12 @@ for (const file of FILES) {
 }
 
 // Visible copy, on every page: no em dashes (HTML comments are not copy).
-const EM_DASH_FILES = ['index.html', 'privacy.html', 'terms.html', 'intake.html', 'blog/index.html', 'blog/buying-agents-will-soon-read-your-ad-products-first/index.html'];
+const EM_DASH_FILES = ['site-src/index.html', 'index.html', 'services/index.html', 'how-it-works/index.html', 'contact/index.html', 'privacy.html', 'terms.html', 'intake.html', 'blog/index.html', 'blog/buying-agents-will-soon-read-your-ad-products-first/index.html'];
 let emDashes = 0;
 for (const file of EM_DASH_FILES) {
   const visible = (await readFile(join(ROOT, file), 'utf8')).replace(/<!--[\s\S]*?-->/g, '');
-  const n = (visible.match(/—|&mdash;/g) ?? []).length;
-  if (n) fail(`${file}: ${n} em dash(es) in visible copy`);
+  const n = (visible.match(/—|&mdash;|–|&ndash;/g) ?? []).length;
+  if (n) fail(`${file}: ${n} em or en dash(es) in visible copy or metadata`);
   emDashes += n;
 }
 
@@ -106,13 +115,16 @@ for (const file of PAGES) {
     const after = text.slice(m.index + m[0].length).replace(/^\s+/, '');
     const soleInP = /<p[^>]*>$/.test(before);
     let lastInRow = false;
-    if (before.endsWith('</span>')) {
+    // A pill row on Services cards: <span class="pills">...</span>
+    const row = before.lastIndexOf('<span class="pills"');
+    if (before.endsWith('</span>') && row >= 0 && !before.slice(row).includes('</span></span>') && /^<\/span>/.test(after)) lastInRow = true;
+    if (!lastInRow && before.endsWith('</span>')) {
       const open = before.lastIndexOf('<div');
       const close = before.lastIndexOf('</div>');
       lastInRow = open > close && /flex-wrap/.test(before.slice(open, before.indexOf('>', open)));
     }
     if (!soleInP && !lastInRow) fail(`${file}: pill is not alone in its block or last in its row: "...${snippet(text, m.index)}..."`);
-    if (!/^<\/(p|div)>/.test(after)) fail(`${file}: pill is not the last thing in its block: "...${snippet(text, m.index)}..."`);
+    if (!/^<\/(p|div)>/.test(after) && !(lastInRow && /^<\/span>/.test(after))) fail(`${file}: pill is not the last thing in its block: "...${snippet(text, m.index)}..."`);
   }
 
   const prose = text
@@ -144,9 +156,9 @@ for (const [file, phrase] of REQUIRED) {
 }
 if (pills !== EXPECTED_COMING_SOON) fail(`expected ${EXPECTED_COMING_SOON} "Coming soon" pills, found ${pills}`);
 
-// The committed blog pages must equal a fresh rebuild (generator, nav, CSS and footer
-// all come from scripts/build-blog.mjs and index.html). Run the rebuild after editing
-// index.html, blog-src/ or the generator.
+// The committed blog and site pages must equal a fresh rebuild (generator, nav, CSS
+// and footer all come from scripts/build-blog.mjs, scripts/build-pages.mjs and
+// site-src/index.html). Run the rebuild after editing any of them.
 {
   const r = spawnSync(process.execPath, [join(ROOT, 'scripts', 'build-blog.mjs'), '--check'], { encoding: 'utf8' });
   if (r.status !== 0) fail(`blog output differs from a rebuild: ${(r.stderr || r.stdout).trim()}`);
