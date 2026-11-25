@@ -12,3 +12,7 @@
 
 # Pricing lives in the app; this gives it a valadisse.com address too.
 /pricing       https://app.valadisse.com/pricing    301!
+
+# How It Works is a section of Services since 2026-11-25.
+/how-it-works   /services/#how-it-works   301!
+/how-it-works/  /services/#how-it-works   301!

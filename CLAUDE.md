@@ -1,9 +1,11 @@
 # Valadisse marketing site
 
 Static site, deployed by Netlify when `main` changes. `site-src/index.html` is the
-one source for Home, Services, How It Works and Contact. `node scripts/build-blog.mjs`
+one source for Home, Services and Contact. How It Works is a section of
+Services (`/services/#how-it-works`, with the plans and prices); `/how-it-works/`
+301s there and the menu item points there (Stephan, 2026-11-25). `node scripts/build-blog.mjs`
 generates the blog and, through `scripts/build-pages.mjs`, the served pages:
-`index.html`, `services/`, `how-it-works/` and `contact/`, each with its own title,
+`index.html`, `services/` and `contact/`, each with its own title,
 description, canonical URL and JSON-LD (Organization on Home, FAQPage on Services,
 built from the FAQ in the source). Each generated file is the full one-page site
 opening on its own section; the top menu is unchanged and still switches sections
@@ -15,6 +17,17 @@ The canonical definition (`CANONICAL_DEFINITION` in `scripts/build-pages.mjs`) i
 used verbatim on Home, on Services and in the Organization JSON-LD; check-claims
 pins it. The product lives in a
 separate repo (app.valadisse.com); the claims here have to stay true to it.
+
+## New pills and holiday pricing
+
+- A **New** pill (`<span class="new-pill" data-shipped="YYYY-MM-DD" hidden>New</span>`)
+  marks a feature from the Live table for 60 days after the date it shipped in the
+  app. The script shows it until then and removes it after, so it never goes stale.
+  Use the app's merge date. Never on anything Coming soon.
+- Prices on Services mirror the app's pricing card exactly, including the holiday
+  offer (50% off the first 6 months, through Dec 31, 2026 Pacific). Holiday lines
+  carry `data-holiday-until`; after that date the script swaps in the list price.
+  If the app's offer changes, change both together.
 
 ## Claims
 

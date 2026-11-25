@@ -1,7 +1,8 @@
 // Site pages generator, called by scripts/build-blog.mjs (zero dependencies).
 //
-// site-src/index.html is the one source for Home, Services, How It Works and
-// Contact. Each generated file is that same one-page site, unchanged in
+// site-src/index.html is the one source for Home, Services and Contact. How It
+// Works is a section of Services (/services/#how-it-works); /how-it-works/
+// redirects there. Each generated file is that same one-page site, unchanged in
 // navigation and behavior (the top menu still switches sections in place with
 // showPage), but opening on its own section and carrying its own title,
 // description, canonical URL and JSON-LD. That gives search and AI answer tools
@@ -41,15 +42,7 @@ export const PAGES = [
     path: '/services/',
     title: 'Services | Valadisse ad monetization diagnostics',
     description:
-      'What the free scan shows, what Starter and Pro add, Yield Assistant for Pro, and Advisory scoped by engagement.',
-  },
-  {
-    id: 'how-it-works',
-    file: 'how-it-works/index.html',
-    path: '/how-it-works/',
-    title: 'How It Works | Valadisse ad monetization diagnostics',
-    description:
-      'Run the free ads.txt scan, then Starter for named exchanges and report scores, then Pro for monitoring, change alerts and Yield Assistant.',
+      'What the free scan shows, what Starter and Pro add and cost, Yield Assistant for Pro, and Advisory scoped by engagement.',
   },
   {
     id: 'contact',

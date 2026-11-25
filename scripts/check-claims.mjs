@@ -94,7 +94,7 @@ for (const file of FILES) {
 }
 
 // Visible copy, on every page: no em dashes (HTML comments are not copy).
-const EM_DASH_FILES = ['site-src/index.html', 'index.html', 'services/index.html', 'how-it-works/index.html', 'contact/index.html', 'privacy.html', 'terms.html', 'intake.html', 'blog/index.html', 'blog/buying-agents-will-soon-read-your-ad-products-first/index.html'];
+const EM_DASH_FILES = ['site-src/index.html', 'index.html', 'services/index.html', 'contact/index.html', 'privacy.html', 'terms.html', 'intake.html', 'blog/index.html', 'blog/buying-agents-will-soon-read-your-ad-products-first/index.html'];
 let emDashes = 0;
 for (const file of EM_DASH_FILES) {
   const visible = (await readFile(join(ROOT, file), 'utf8')).replace(/<!--[\s\S]*?-->/g, '');
