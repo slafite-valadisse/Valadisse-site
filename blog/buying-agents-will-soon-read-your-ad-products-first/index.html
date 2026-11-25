@@ -95,6 +95,7 @@
 #page-services .btn.dk{background:var(--navy);box-shadow:0 8px 24px rgba(7,0,51,.22)}
 #page-services .pill{display:inline-flex;align-items:center;font:500 11px/1 var(--mono);padding:6px 11px;border-radius:999px;background:#F1F1F7;color:var(--muted);white-space:nowrap}
 #page-services .pill.pro{background:#FFF1EA;color:var(--orange-ink)}
+#page-services .pill.live{background:#E8F5EC;color:#1F6B3A}
 #page-services .pill.soon{background:#fff;color:var(--navy);box-shadow:inset 0 0 0 1px rgba(7,0,51,.45);border-radius:999px}
 #page-services .pills{display:flex;flex-wrap:wrap;gap:6px}
 #page-services .note{background:var(--navy);color:#D9D8EC;font:500 12px/1.4 var(--mono);letter-spacing:.04em}
@@ -364,27 +365,42 @@
     .nav-link.active { color: #070033; }
     .nav-link.active::after { width: 100%; }
  
-    /* Mobile menu */
+    /* Mobile menu: a panel at the top-right corner under the menu button, not a full-screen takeover (Stephan, 2026-11-25). Items and order unchanged. */
     #mobile-menu {
       display: none;
       position: fixed;
-      inset: 0;
+      top: var(--mm-top, 76px);
+      right: max(16px, env(safe-area-inset-right, 0px));
+      width: min(300px, calc(100vw - 32px));
+      max-height: calc(100vh - var(--mm-top, 76px) - 16px);
+      overflow-y: auto;
       background: #FFFFFF;
+      border: 1px solid rgba(7,0,51,.08);
+      border-radius: 16px;
+      box-shadow: 0 2px 4px rgba(7,0,51,.06), 0 18px 44px rgba(7,0,51,.14);
       z-index: 100;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
+      align-items: stretch;
+      padding: 8px;
+      transform-origin: top right;
     }
-    #mobile-menu.open { display: flex; }
+    #mobile-menu.open { display: flex; animation: mmIn .18s cubic-bezier(.2,.7,.2,1); }
+    @keyframes mmIn { from { opacity: 0; transform: translateY(-6px) scale(.98); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { #mobile-menu.open { animation: none; } }
+    #mobile-close { display: none; }
     .mobile-nav-link {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 2rem;
+      font-family: 'Instrument Sans', system-ui, sans-serif;
+      font-size: 15px;
+      font-weight: 500;
       color: #070033;
       text-decoration: none;
-      transition: color 0.15s;
+      padding: 11px 14px;
+      border-radius: 10px;
+      transition: background 0.15s, color 0.15s;
     }
-    .mobile-nav-link:hover { color: #FF6632; }
+    .mobile-nav-link:hover, .mobile-nav-link:focus-visible { background: #F7F7FB; color: #C2410C; }
+    .mobile-nav-link.mm-sep { margin-top: 6px; border-top: 1px solid rgba(7,0,51,.08); border-radius: 0 0 10px 10px; padding-top: 15px; }
+    #mobile-menu .btn-primary { margin: 8px 6px 6px; justify-content: center; }
  
     /* ── Buttons ── */
     .btn-primary {
@@ -524,6 +540,74 @@
       .xp-arrow::before { content: ''; position: absolute; right: -40px; top: calc(50% - 4px); border-left: 7px solid #C9C9D6; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
     }
     @media (prefers-reduced-motion: reduce) { .xp.js .xp-step.on { animation: none; } }
+
+    /* ── Home: same visual language as Services (cards, lift, motion), 2026-11-25 ── */
+    #page-home { --hm-shadow: 0 1px 2px rgba(7,0,51,.05), 0 10px 30px rgba(7,0,51,.06); --hm-lift: 0 2px 4px rgba(7,0,51,.06), 0 18px 44px rgba(7,0,51,.10); --hm-ease: cubic-bezier(.2,.7,.2,1); }
+    #page-home .hero-section::before { width: 760px; height: 760px; top: -260px; right: -220px; background: radial-gradient(circle, rgba(255,102,50,.16), transparent 65%); animation: hmBreathe 7s ease-in-out infinite; }
+    @keyframes hmBreathe { 50% { opacity: .6; transform: scale(.96); } }
+    .hm-hero-grid { display: grid; gap: 48px; align-items: center; }
+    @media (min-width: 1024px) { .hm-hero-grid { grid-template-columns: minmax(0,1.2fr) minmax(0,.8fr); gap: 56px; } }
+    /* Example scan card */
+    .hm-scan { background: rgba(255,255,255,.94); backdrop-filter: blur(6px); border-radius: 20px; box-shadow: var(--hm-lift); border: 1px solid rgba(7,0,51,.06); overflow: hidden; max-width: 440px; width: 100%; }
+    .hm-scan-top { display: flex; align-items: center; gap: 6px; padding: 12px 16px; border-bottom: 1px solid rgba(7,0,51,.07); background: #FAFAFD; }
+    .hm-scan-top i { width: 9px; height: 9px; border-radius: 50%; background: #E2E1EC; }
+    .hm-url { margin-left: 8px; font: 500 12px/1 'DM Mono', monospace; color: #4A4A55; }
+    .hm-tag { margin-left: auto; font: 500 10px/1 'DM Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: #C2410C; background: #FFF1EA; padding: 5px 8px; border-radius: 999px; }
+    .hm-scan-body { padding: 22px 20px 18px; display: grid; grid-template-columns: 128px minmax(0,1fr); gap: 20px; align-items: center; }
+    .hm-ring { position: relative; width: 128px; height: 128px; }
+    .hm-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .hm-ring .trk { fill: none; stroke: #EFEFF5; stroke-width: 10; }
+    .hm-ring .val { fill: none; stroke: url(#hmRing); stroke-width: 10; stroke-linecap: round; stroke-dasharray: 326.7; stroke-dashoffset: 117.6; transition: stroke-dashoffset 1.6s var(--hm-ease); }
+    .hm-ring-n { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+    .hm-ring-n b { font: 400 36px/1 'DM Serif Display', Georgia, serif; color: #070033; }
+    .hm-ring-n span { font: 500 9.5px/1.25 'DM Mono', monospace; letter-spacing: .06em; text-transform: uppercase; color: #6B6A80; margin-top: 4px; max-width: 80px; }
+    .hm-rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    .hm-rows li { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 13.5px; color: #4A4A55; padding-bottom: 10px; border-bottom: 1px dashed rgba(7,0,51,.10); }
+    .hm-rows li:last-child { border-bottom: 0; padding-bottom: 0; }
+    .hm-rows b { font-weight: 600; color: #070033; white-space: nowrap; }
+    .hm-rows b.warn { color: #9A3412; }
+    .hm-lines { grid-column: 1 / -1; position: relative; border-radius: 12px; background: #F7F7FB; padding: 12px 14px; font: 12px/1.7 'DM Mono', monospace; color: #6B6A80; overflow: hidden; }
+    .hm-lines span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .hm-lines span.gap { color: #9B1C1C; }
+    .hm-lines::after { content: ''; position: absolute; left: 0; right: 0; top: -40%; height: 40%; background: linear-gradient(transparent, rgba(255,102,50,.18), transparent); animation: hmSweep 3.2s ease-in-out infinite; }
+    @keyframes hmSweep { to { top: 100%; } }
+    .hm-scan-foot { margin: 0; padding: 0 20px 16px; font: 11px/1.4 'DM Mono', monospace; color: #6B6A80; }
+    @media (max-width: 420px) { .hm-scan-body { grid-template-columns: 1fr; justify-items: center; } .hm-rows { width: 100%; } }
+    /* Cards with lift, as on Services */
+    .hm-card { position: relative; background: #fff; border-radius: 18px; padding: 28px; box-shadow: var(--hm-shadow); border: 1px solid rgba(7,0,51,.06); transition: transform .3s var(--hm-ease), box-shadow .3s var(--hm-ease); overflow: hidden; }
+    .hm-card::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: linear-gradient(90deg, #FBAC41, #FF6632); transform: scaleX(0); transform-origin: left; transition: transform .45s var(--hm-ease); }
+    .hm-num { display: inline-flex; width: 36px; height: 36px; align-items: center; justify-content: center; border-radius: 12px; background: linear-gradient(145deg, #1C1470, #070033 60%); color: #FFB59B; font: 500 12px/1 'DM Mono', monospace; margin-bottom: 18px; }
+    .hm-check { flex: none; width: 28px; height: 28px; border-radius: 50%; background: #FFF1EA; color: #C2410C; display: inline-flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; }
+    @media (hover: hover) and (pointer: fine) {
+      .hm-card:hover { transform: translateY(-3px); box-shadow: var(--hm-lift); }
+      .hm-card:hover::before { transform: scaleX(1); }
+      #page-home .service-tile:hover { box-shadow: var(--hm-lift); border-color: transparent; transform: translateY(-3px); }
+      .xp-node:not(.hub) { transition: transform .25s var(--hm-ease), box-shadow .25s var(--hm-ease); }
+      .xp-node:not(.hub):hover { transform: translateY(-2px); box-shadow: var(--hm-lift); }
+    }
+    /* What You Get: a journey line across the four stages */
+    .hm-journey { position: relative; }
+    #page-home .service-tile { border-radius: 16px; border-color: rgba(7,0,51,.08); box-shadow: var(--hm-shadow); position: relative; z-index: 1; }
+    @media (min-width: 1024px) {
+      .hm-journey::before { content: ''; position: absolute; left: 4%; right: 4%; top: 50%; height: 2px; background: repeating-linear-gradient(90deg, rgba(255,102,50,.55) 0 6px, transparent 6px 16px); background-size: 32px 2px; animation: hmFlow 1.6s linear infinite; z-index: 0; }
+    }
+    @keyframes hmFlow { to { background-position: 32px 0; } }
+    /* Explainer connectors flow like the Services diagram */
+    .xp-arrow::after { background: repeating-linear-gradient(180deg, #FF6632 0 5px, transparent 5px 12px) !important; background-size: 2px 24px !important; animation: hmFlowV 1.4s linear infinite; opacity: .7; }
+    @keyframes hmFlowV { to { background-position: 0 24px; } }
+    @media (min-width: 900px) {
+      .xp-arrow::after { background: repeating-linear-gradient(90deg, #FF6632 0 5px, transparent 5px 12px) !important; background-size: 24px 2px !important; animation-name: hmFlowH; }
+      .xp-arrow::before { border-left-color: #FF6632 !important; opacity: .7; }
+    }
+    @keyframes hmFlowH { to { background-position: 24px 0; } }
+    /* CTA band glow */
+    .hm-cta { position: relative; overflow: hidden; background: radial-gradient(120% 140% at 0% 0%, #1d1760 0%, #070033 55%) !important; }
+    .hm-cta::before { content: ''; position: absolute; width: 640px; height: 640px; left: 50%; top: 50%; transform: translate(-50%,-50%); background: radial-gradient(closest-side, rgba(255,102,50,.30), transparent); filter: blur(10px); animation: hmBreathe 6s ease-in-out infinite; pointer-events: none; }
+    .hm-cta > * { position: relative; }
+    @media (prefers-reduced-motion: reduce) {
+      #page-home *, #page-home *::before, #page-home *::after { animation: none !important; }
+      .hm-ring .val { transition: none; }
+    }
 
     /* ── Positioning statement ── */
     .positioning-bar {
@@ -889,7 +973,7 @@
   </div>
 </nav>
 
-<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+<div id="mobile-menu" aria-label="Menu">
   <button id="mobile-close" style="position:absolute;top:20px;right:24px;" aria-label="Close menu">
     <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
       <path d="M6 6L22 22M22 6L6 22" stroke="#070033" stroke-width="2" stroke-linecap="round"/>
@@ -906,12 +990,12 @@
        Pricing -- there's no separate signup page on the marketing site
        itself; the real Starter/Pro/Advisory forms live on that section
        of the app. -->
-  <a href="https://app.valadisse.com/login" class="mobile-nav-link" onclick="closeMobileMenu();">Sign in</a>
+  <a href="https://app.valadisse.com/login" class="mobile-nav-link mm-sep" onclick="closeMobileMenu();">Sign in</a>
   <a href="https://app.valadisse.com/#pricing" class="mobile-nav-link" onclick="closeMobileMenu();">Create account</a>
   <a
     href="https://app.valadisse.com/scan"
     target="_blank"
-    class="btn-primary mt-4"
+    class="btn-primary"
     onclick="closeMobileMenu();"
   >Run Your Free Scan</a>
 </div>
@@ -1054,10 +1138,11 @@
   });
   const hamburger = document.getElementById('hamburger-btn');
   const mobileMenu = document.getElementById('mobile-menu');
-  function openMobileMenu() { mobileMenu.classList.add('open'); hamburger.classList.add('open'); hamburger.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
-  function closeMobileMenu() { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+  function openMobileMenu() { const bar = hamburger.closest('nav'); if (bar) mobileMenu.style.setProperty('--mm-top', Math.round(bar.getBoundingClientRect().bottom + 8) + 'px'); mobileMenu.classList.add('open'); hamburger.classList.add('open'); hamburger.setAttribute('aria-expanded', 'true'); }
+  function closeMobileMenu() { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded', 'false'); }
   hamburger.addEventListener('click', () => (mobileMenu.classList.contains('open') ? closeMobileMenu() : openMobileMenu()));
-  document.getElementById('mobile-close').addEventListener('click', closeMobileMenu);
+  document.addEventListener('click', (e) => { if (mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) closeMobileMenu(); });
+  window.addEventListener('resize', () => { if (mobileMenu.classList.contains('open')) closeMobileMenu(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMobileMenu(); });
 </script>
 </body>

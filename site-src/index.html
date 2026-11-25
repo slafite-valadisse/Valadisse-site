@@ -104,6 +104,7 @@
 #page-services .btn.dk{background:var(--navy);box-shadow:0 8px 24px rgba(7,0,51,.22)}
 #page-services .pill{display:inline-flex;align-items:center;font:500 11px/1 var(--mono);padding:6px 11px;border-radius:999px;background:#F1F1F7;color:var(--muted);white-space:nowrap}
 #page-services .pill.pro{background:#FFF1EA;color:var(--orange-ink)}
+#page-services .pill.live{background:#E8F5EC;color:#1F6B3A}
 #page-services .pill.soon{background:#fff;color:var(--navy);box-shadow:inset 0 0 0 1px rgba(7,0,51,.45);border-radius:999px}
 #page-services .pills{display:flex;flex-wrap:wrap;gap:6px}
 #page-services .note{background:var(--navy);color:#D9D8EC;font:500 12px/1.4 var(--mono);letter-spacing:.04em}
@@ -373,27 +374,42 @@
     .nav-link.active { color: #070033; }
     .nav-link.active::after { width: 100%; }
  
-    /* Mobile menu */
+    /* Mobile menu: a panel at the top-right corner under the menu button, not a full-screen takeover (Stephan, 2026-11-25). Items and order unchanged. */
     #mobile-menu {
       display: none;
       position: fixed;
-      inset: 0;
+      top: var(--mm-top, 76px);
+      right: max(16px, env(safe-area-inset-right, 0px));
+      width: min(300px, calc(100vw - 32px));
+      max-height: calc(100vh - var(--mm-top, 76px) - 16px);
+      overflow-y: auto;
       background: #FFFFFF;
+      border: 1px solid rgba(7,0,51,.08);
+      border-radius: 16px;
+      box-shadow: 0 2px 4px rgba(7,0,51,.06), 0 18px 44px rgba(7,0,51,.14);
       z-index: 100;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
+      align-items: stretch;
+      padding: 8px;
+      transform-origin: top right;
     }
-    #mobile-menu.open { display: flex; }
+    #mobile-menu.open { display: flex; animation: mmIn .18s cubic-bezier(.2,.7,.2,1); }
+    @keyframes mmIn { from { opacity: 0; transform: translateY(-6px) scale(.98); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { #mobile-menu.open { animation: none; } }
+    #mobile-close { display: none; }
     .mobile-nav-link {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 2rem;
+      font-family: 'Instrument Sans', system-ui, sans-serif;
+      font-size: 15px;
+      font-weight: 500;
       color: #070033;
       text-decoration: none;
-      transition: color 0.15s;
+      padding: 11px 14px;
+      border-radius: 10px;
+      transition: background 0.15s, color 0.15s;
     }
-    .mobile-nav-link:hover { color: #FF6632; }
+    .mobile-nav-link:hover, .mobile-nav-link:focus-visible { background: #F7F7FB; color: #C2410C; }
+    .mobile-nav-link.mm-sep { margin-top: 6px; border-top: 1px solid rgba(7,0,51,.08); border-radius: 0 0 10px 10px; padding-top: 15px; }
+    #mobile-menu .btn-primary { margin: 8px 6px 6px; justify-content: center; }
  
     /* ── Buttons ── */
     .btn-primary {
@@ -533,6 +549,74 @@
       .xp-arrow::before { content: ''; position: absolute; right: -40px; top: calc(50% - 4px); border-left: 7px solid #C9C9D6; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
     }
     @media (prefers-reduced-motion: reduce) { .xp.js .xp-step.on { animation: none; } }
+
+    /* ── Home: same visual language as Services (cards, lift, motion), 2026-11-25 ── */
+    #page-home { --hm-shadow: 0 1px 2px rgba(7,0,51,.05), 0 10px 30px rgba(7,0,51,.06); --hm-lift: 0 2px 4px rgba(7,0,51,.06), 0 18px 44px rgba(7,0,51,.10); --hm-ease: cubic-bezier(.2,.7,.2,1); }
+    #page-home .hero-section::before { width: 760px; height: 760px; top: -260px; right: -220px; background: radial-gradient(circle, rgba(255,102,50,.16), transparent 65%); animation: hmBreathe 7s ease-in-out infinite; }
+    @keyframes hmBreathe { 50% { opacity: .6; transform: scale(.96); } }
+    .hm-hero-grid { display: grid; gap: 48px; align-items: center; }
+    @media (min-width: 1024px) { .hm-hero-grid { grid-template-columns: minmax(0,1.2fr) minmax(0,.8fr); gap: 56px; } }
+    /* Example scan card */
+    .hm-scan { background: rgba(255,255,255,.94); backdrop-filter: blur(6px); border-radius: 20px; box-shadow: var(--hm-lift); border: 1px solid rgba(7,0,51,.06); overflow: hidden; max-width: 440px; width: 100%; }
+    .hm-scan-top { display: flex; align-items: center; gap: 6px; padding: 12px 16px; border-bottom: 1px solid rgba(7,0,51,.07); background: #FAFAFD; }
+    .hm-scan-top i { width: 9px; height: 9px; border-radius: 50%; background: #E2E1EC; }
+    .hm-url { margin-left: 8px; font: 500 12px/1 'DM Mono', monospace; color: #4A4A55; }
+    .hm-tag { margin-left: auto; font: 500 10px/1 'DM Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: #C2410C; background: #FFF1EA; padding: 5px 8px; border-radius: 999px; }
+    .hm-scan-body { padding: 22px 20px 18px; display: grid; grid-template-columns: 128px minmax(0,1fr); gap: 20px; align-items: center; }
+    .hm-ring { position: relative; width: 128px; height: 128px; }
+    .hm-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .hm-ring .trk { fill: none; stroke: #EFEFF5; stroke-width: 10; }
+    .hm-ring .val { fill: none; stroke: url(#hmRing); stroke-width: 10; stroke-linecap: round; stroke-dasharray: 326.7; stroke-dashoffset: 117.6; transition: stroke-dashoffset 1.6s var(--hm-ease); }
+    .hm-ring-n { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+    .hm-ring-n b { font: 400 36px/1 'DM Serif Display', Georgia, serif; color: #070033; }
+    .hm-ring-n span { font: 500 9.5px/1.25 'DM Mono', monospace; letter-spacing: .06em; text-transform: uppercase; color: #6B6A80; margin-top: 4px; max-width: 80px; }
+    .hm-rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    .hm-rows li { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 13.5px; color: #4A4A55; padding-bottom: 10px; border-bottom: 1px dashed rgba(7,0,51,.10); }
+    .hm-rows li:last-child { border-bottom: 0; padding-bottom: 0; }
+    .hm-rows b { font-weight: 600; color: #070033; white-space: nowrap; }
+    .hm-rows b.warn { color: #9A3412; }
+    .hm-lines { grid-column: 1 / -1; position: relative; border-radius: 12px; background: #F7F7FB; padding: 12px 14px; font: 12px/1.7 'DM Mono', monospace; color: #6B6A80; overflow: hidden; }
+    .hm-lines span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .hm-lines span.gap { color: #9B1C1C; }
+    .hm-lines::after { content: ''; position: absolute; left: 0; right: 0; top: -40%; height: 40%; background: linear-gradient(transparent, rgba(255,102,50,.18), transparent); animation: hmSweep 3.2s ease-in-out infinite; }
+    @keyframes hmSweep { to { top: 100%; } }
+    .hm-scan-foot { margin: 0; padding: 0 20px 16px; font: 11px/1.4 'DM Mono', monospace; color: #6B6A80; }
+    @media (max-width: 420px) { .hm-scan-body { grid-template-columns: 1fr; justify-items: center; } .hm-rows { width: 100%; } }
+    /* Cards with lift, as on Services */
+    .hm-card { position: relative; background: #fff; border-radius: 18px; padding: 28px; box-shadow: var(--hm-shadow); border: 1px solid rgba(7,0,51,.06); transition: transform .3s var(--hm-ease), box-shadow .3s var(--hm-ease); overflow: hidden; }
+    .hm-card::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: linear-gradient(90deg, #FBAC41, #FF6632); transform: scaleX(0); transform-origin: left; transition: transform .45s var(--hm-ease); }
+    .hm-num { display: inline-flex; width: 36px; height: 36px; align-items: center; justify-content: center; border-radius: 12px; background: linear-gradient(145deg, #1C1470, #070033 60%); color: #FFB59B; font: 500 12px/1 'DM Mono', monospace; margin-bottom: 18px; }
+    .hm-check { flex: none; width: 28px; height: 28px; border-radius: 50%; background: #FFF1EA; color: #C2410C; display: inline-flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; }
+    @media (hover: hover) and (pointer: fine) {
+      .hm-card:hover { transform: translateY(-3px); box-shadow: var(--hm-lift); }
+      .hm-card:hover::before { transform: scaleX(1); }
+      #page-home .service-tile:hover { box-shadow: var(--hm-lift); border-color: transparent; transform: translateY(-3px); }
+      .xp-node:not(.hub) { transition: transform .25s var(--hm-ease), box-shadow .25s var(--hm-ease); }
+      .xp-node:not(.hub):hover { transform: translateY(-2px); box-shadow: var(--hm-lift); }
+    }
+    /* What You Get: a journey line across the four stages */
+    .hm-journey { position: relative; }
+    #page-home .service-tile { border-radius: 16px; border-color: rgba(7,0,51,.08); box-shadow: var(--hm-shadow); position: relative; z-index: 1; }
+    @media (min-width: 1024px) {
+      .hm-journey::before { content: ''; position: absolute; left: 4%; right: 4%; top: 50%; height: 2px; background: repeating-linear-gradient(90deg, rgba(255,102,50,.55) 0 6px, transparent 6px 16px); background-size: 32px 2px; animation: hmFlow 1.6s linear infinite; z-index: 0; }
+    }
+    @keyframes hmFlow { to { background-position: 32px 0; } }
+    /* Explainer connectors flow like the Services diagram */
+    .xp-arrow::after { background: repeating-linear-gradient(180deg, #FF6632 0 5px, transparent 5px 12px) !important; background-size: 2px 24px !important; animation: hmFlowV 1.4s linear infinite; opacity: .7; }
+    @keyframes hmFlowV { to { background-position: 0 24px; } }
+    @media (min-width: 900px) {
+      .xp-arrow::after { background: repeating-linear-gradient(90deg, #FF6632 0 5px, transparent 5px 12px) !important; background-size: 24px 2px !important; animation-name: hmFlowH; }
+      .xp-arrow::before { border-left-color: #FF6632 !important; opacity: .7; }
+    }
+    @keyframes hmFlowH { to { background-position: 24px 0; } }
+    /* CTA band glow */
+    .hm-cta { position: relative; overflow: hidden; background: radial-gradient(120% 140% at 0% 0%, #1d1760 0%, #070033 55%) !important; }
+    .hm-cta::before { content: ''; position: absolute; width: 640px; height: 640px; left: 50%; top: 50%; transform: translate(-50%,-50%); background: radial-gradient(closest-side, rgba(255,102,50,.30), transparent); filter: blur(10px); animation: hmBreathe 6s ease-in-out infinite; pointer-events: none; }
+    .hm-cta > * { position: relative; }
+    @media (prefers-reduced-motion: reduce) {
+      #page-home *, #page-home *::before, #page-home *::after { animation: none !important; }
+      .hm-ring .val { transition: none; }
+    }
 
     /* ── Positioning statement ── */
     .positioning-bar {
@@ -874,8 +958,8 @@
   </div>
 </nav>
  
-<!-- Mobile full-screen menu -->
-<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+<!-- Mobile menu: corner panel under the menu button -->
+<div id="mobile-menu" aria-label="Menu">
   <button id="mobile-close" style="position:absolute;top:20px;right:24px;" aria-label="Close menu">
     <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
       <path d="M6 6L22 22M22 6L6 22" stroke="#070033" stroke-width="2" stroke-linecap="round"/>
@@ -892,12 +976,12 @@
        Pricing -- there's no separate signup page on the marketing site
        itself; the real Starter/Pro/Advisory forms live on that section
        of the app. -->
-  <a href="https://app.valadisse.com/login" class="mobile-nav-link" onclick="closeMobileMenu();">Sign in</a>
+  <a href="https://app.valadisse.com/login" class="mobile-nav-link mm-sep" onclick="closeMobileMenu();">Sign in</a>
   <a href="https://app.valadisse.com/#pricing" class="mobile-nav-link" onclick="closeMobileMenu();">Create account</a>
   <a
     href="https://app.valadisse.com/scan"
     target="_blank"
-    class="btn-primary mt-4"
+    class="btn-primary"
     onclick="closeMobileMenu();"
   >Run Your Free Scan</a>
 </div>
@@ -910,7 +994,8 @@
 
   <!-- Hero. Headline chosen by Stephan, 2026-11-25. The supporting line is the canonical definition (CANONICAL_DEFINITION in scripts/build-pages.mjs); check-claims pins it. -->
   <section class="hero-section grid-texture" aria-label="Hero">
-    <div class="max-w-6xl mx-auto px-6 py-24 md:py-32 relative z-10">
+    <div class="max-w-6xl mx-auto px-6 py-20 md:py-28 relative z-10">
+      <div class="hm-hero-grid">
       <div class="max-w-3xl">
         <p class="eyebrow mb-6 reveal">Ad Monetization Diagnostics</p>
         <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-ink leading-tight mb-6 reveal reveal-delay-1">See how your ad inventory really sells,<em class="text-accent not-italic"> and what holds it back.</em></h1>
@@ -920,6 +1005,21 @@
         </div>
         <p class="text-sm mt-4 font-mono reveal reveal-delay-4" style="color: rgba(74,74,74,0.7);">Free. No signup. Results in seconds.</p>
       </div>
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="hmRing" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#FBAC41"/><stop offset="1" stop-color="#FF6632"/></linearGradient></defs></svg>
+      <figure class="hm-scan reveal reveal-delay-3" aria-label="Illustrative example of a free scan result" style="margin:0">
+        <div class="hm-scan-top" aria-hidden="true"><i></i><i></i><i></i><span class="hm-url">yoursite.com</span><span class="hm-tag">Example</span></div>
+        <div class="hm-scan-body">
+          <div class="hm-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="trk" cx="60" cy="60" r="52"/><circle class="val" cx="60" cy="60" r="52"/></svg><div class="hm-ring-n"><b data-count="64">64</b><span>Supply Chain Health</span></div></div>
+          <ul class="hm-rows">
+            <li><span>Floor signal</span><b class="warn">Neutral</b></li>
+            <li><span>Premium exchanges missing</span><b data-count="4">4</b></li>
+            <li><span>Estimated range if fixed</span><b>In your scan</b></li>
+          </ul>
+          <div class="hm-lines" aria-hidden="true"><span>exchange-a.com, 10482, DIRECT</span><span>exchange-b.com, 7731, RESELLER</span><span class="gap">premium-exchange.com: not declared</span><span>exchange-c.com, 55120, DIRECT</span></div>
+        </div>
+        <figcaption class="hm-scan-foot">Illustrative example. Your scan shows your own results.</figcaption>
+      </figure>
+      </div>
     </div>
   </section>
 
@@ -927,19 +1027,19 @@
   <section class="xp" id="explainer" aria-label="How your ad setup looks to buyers">
     <div class="max-w-6xl mx-auto px-6">
       <div class="xp-tabs" role="tablist" aria-label="Steps" hidden>
-        <button type="button" role="tab" data-go="1" aria-selected="true">1. How it looks today</button>
-        <button type="button" role="tab" data-go="2" aria-selected="false">2. What is hard to see</button>
+        <button type="button" role="tab" data-go="1" aria-selected="true">1. What most publishers see</button>
+        <button type="button" role="tab" data-go="2" aria-selected="false">2. What can stay hidden</button>
         <button type="button" role="tab" data-go="3" aria-selected="false">3. How Valadisse helps</button>
       </div>
 
       <div class="xp-step" data-step="1" role="tabpanel">
         <div class="xp-head">
-          <p class="xp-eb">How it looks today</p>
-          <h2>Your ads are running and the payments arrive.</h2>
-          <p>Ads fill, reports look normal and nothing is flagged.</p>
+          <p class="xp-eb">What most publishers see</p>
+          <h2>Ads are running and the payments arrive.</h2>
+          <p>For most independent publishers, reports look normal and nothing gets flagged.</p>
         </div>
         <div class="xp-stage">
-          <div class="xp-node n-dash"><b>Your reports</b><small>What you check each month.</small><div class="chip ok"><i>Looks fine</i>Everything looks healthy.</div></div>
+          <div class="xp-node n-dash"><b>Your reports</b><small>What you check each month.</small><div class="chip ok"><i>Looks fine</i>Nothing stands out.</div></div>
           <div class="xp-node n-ads"><b>Your ads.txt file</b><small>The public list of who may sell your ad space.</small><div class="chip ok"><i>Looks fine</i>The file is in place.</div></div>
           <div class="xp-node n-site xp-arrow"><b>Your site</b><small>Visitors load pages with ads.</small><div class="chip ok"><i>Looks fine</i>Ads show on every page.</div></div>
           <div class="xp-node n-server xp-arrow"><b>Your ad server</b><small>Decides which ad shows.</small><div class="chip ok"><i>Looks fine</i>Ad requests fill.</div></div>
@@ -952,19 +1052,19 @@
 
       <div class="xp-step" data-step="2" role="tabpanel">
         <div class="xp-head">
-          <p class="xp-eb">What is hard to see</p>
+          <p class="xp-eb">What can stay hidden</p>
           <h2>Running is not the same as being found.</h2>
-          <p>Buyers can only bid on ad space they can find and verify. Quiet gaps shrink the demand that reaches you.</p>
+          <p>Buyers can only bid on ad space they can find and verify. Gaps are common, easy to miss, and can shrink the demand that reaches a site.</p>
         </div>
         <div class="xp-stage">
           <div class="xp-node n-dash"><span class="pin bad">2</span><b>Your reports</b><small>What you check each month.</small><div class="chip bad"><i>Hard to see</i>Reports show what sold, not what never received a bid.</div></div>
           <div class="xp-node n-ads"><span class="pin bad">1</span><b>Your ads.txt file</b><small>The public list of who may sell your ad space.</small><div class="chip bad"><i>Hard to see</i>Buyers check this list before they bid. Gaps can quietly turn them away.</div></div>
-          <div class="xp-node n-ghost off"><b>Buyers who cannot bid</b><small>Not listed in your ads.txt.</small><div class="chip bad"><i>Hard to see</i>You never see these buyers, and they never see you.</div></div>
+          <div class="xp-node n-ghost off"><b>Buyers who may not bid</b><small>When a path is missing from ads.txt.</small><div class="chip bad"><i>Hard to see</i>If they cannot verify a seller, they move on, and no report shows it.</div></div>
           <div class="xp-node n-site xp-arrow"><b>Your site</b><small>Visitors load pages with ads.</small></div>
           <div class="xp-node n-server xp-arrow"><b>Your ad server</b><small>Decides which ad shows.</small></div>
-          <div class="xp-node n-net xp-arrow"><span class="pin bad">3</span><b>Ad networks</b><small>Connect you to buyers.</small><div class="chip bad"><i>Hard to see</i>Some premium demand cannot reach you at all.</div></div>
+          <div class="xp-node n-net xp-arrow"><span class="pin bad">3</span><b>Ad networks</b><small>Connect you to buyers.</small><div class="chip bad"><i>Hard to see</i>Some premium demand may not reach you at all.</div></div>
           <div class="xp-node n-buy"><b>Buyers</b><small>Decide what to pay.</small></div>
-          <div class="xp-node n-rev"><b>Your revenue</b><div class="chip bad"><i>The cost</i>Lower than it could be, and no report tells you.</div></div>
+          <div class="xp-node n-rev"><b>Your revenue</b><div class="chip bad"><i>The cost</i>It can be lower than it should be, with no report to say so.</div></div>
         </div>
         <div class="xp-foot"><button type="button" class="xp-next" data-go="3">How does Valadisse help?</button></div>
       </div>
@@ -972,7 +1072,7 @@
       <div class="xp-step" data-step="3" role="tabpanel">
         <div class="xp-head">
           <p class="xp-eb">How Valadisse helps</p>
-          <h2>Valadisse checks from the outside and shows what to fix.</h2>
+          <h2>Valadisse checks from the outside and shows what, if anything, to fix.</h2>
           <p>Each gap gets a plain-English finding. Nothing to install, and nothing in your stack changes.</p>
         </div>
         <div class="xp-stage">
@@ -999,18 +1099,18 @@
       <p class="eyebrow mb-3 reveal">Why Valadisse</p>
       <h2 class="font-serif text-3xl text-ink mb-12 reveal reveal-delay-1">Built for what reports can&rsquo;t show.</h2>
       <div class="grid md:grid-cols-3 gap-6">
-        <div class="p-8 rounded-xl border border-rule hover:border-accent transition-colors duration-200 reveal reveal-delay-1">
-          <p class="font-mono text-xs text-accent uppercase tracking-widest mb-3">01</p>
+        <div class="hm-card reveal reveal-delay-1">
+          <span class="hm-num">01</span>
           <h3 class="font-serif text-xl text-ink mb-3">Sees what buyers see</h3>
           <p class="text-muted leading-relaxed text-sm">Valadisse reads your supply chain from the outside, across every seller you declare.</p>
         </div>
-        <div class="p-8 rounded-xl border border-rule hover:border-accent transition-colors duration-200 reveal reveal-delay-2">
-          <p class="font-mono text-xs text-accent uppercase tracking-widest mb-3">02</p>
+        <div class="hm-card reveal reveal-delay-2">
+          <span class="hm-num">02</span>
           <h3 class="font-serif text-xl text-ink mb-3">Built on your own data</h3>
           <p class="text-muted leading-relaxed text-sm">Findings come from your ads.txt file and, on Starter, your own ad server export. No generic checklist.</p>
         </div>
-        <div class="p-8 rounded-xl border border-rule hover:border-accent transition-colors duration-200 reveal reveal-delay-3">
-          <p class="font-mono text-xs text-accent uppercase tracking-widest mb-3">03</p>
+        <div class="hm-card reveal reveal-delay-3">
+          <span class="hm-num">03</span>
           <h3 class="font-serif text-xl text-ink mb-3">Independent by design</h3>
           <p class="text-muted leading-relaxed text-sm">Flat monthly plans. No revenue share and no platform ties, so every finding serves your yield.</p>
         </div>
@@ -1021,13 +1121,13 @@
   <!-- Who this is for -->
   <section class="py-16 bg-gray-50" aria-label="Who this is for">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="max-w-2xl mx-auto">
+      <div>
         <p class="eyebrow mb-4 reveal">Who This Is For</p>
         <h2 class="font-serif text-2xl md:text-3xl text-ink mb-10 reveal reveal-delay-1">Built for publishers like these</h2>
-        <div class="space-y-5 mb-8">
-          <div class="flex gap-4 items-start reveal reveal-delay-1"><span class="check-mark mt-0.5">✓</span><p class="text-ink">Limited in-house ad ops or programmatic headcount</p></div>
-          <div class="flex gap-4 items-start reveal reveal-delay-2"><span class="check-mark mt-0.5">✓</span><p class="text-ink">Running programmatic inventory declared in an ads.txt file</p></div>
-          <div class="flex gap-4 items-start reveal reveal-delay-3"><span class="check-mark mt-0.5">✓</span><p class="text-ink">Community-driven publishers, the primary fit</p></div>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="hm-card flex gap-4 items-center reveal reveal-delay-1" style="padding:20px 22px"><span class="hm-check" aria-hidden="true">✓</span><p class="text-ink">Limited in-house ad ops or programmatic headcount</p></div>
+          <div class="hm-card flex gap-4 items-center reveal reveal-delay-2" style="padding:20px 22px"><span class="hm-check" aria-hidden="true">✓</span><p class="text-ink">Running programmatic inventory declared in an ads.txt file</p></div>
+          <div class="hm-card flex gap-4 items-center reveal reveal-delay-3" style="padding:20px 22px"><span class="hm-check" aria-hidden="true">✓</span><p class="text-ink">Community-driven publishers, the primary fit</p></div>
         </div>
       </div>
     </div>
@@ -1043,7 +1143,7 @@
         </div>
         <a href="/services/" onclick="return showPage('services')" class="btn-ghost">See all services →</a>
       </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="hm-journey grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <a href="/services/" onclick="return showPage('services')" class="service-tile reveal reveal-delay-1">
           <p class="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">01 See &middot; Free scan, Starter</p>
           <h3 class="font-sans font-semibold text-ink text-sm mb-2">What buyers see</h3>
@@ -1080,7 +1180,7 @@
   </section>
 
   <!-- Home CTA band -->
-  <section class="py-20 bg-ink" aria-label="Call to action">
+  <section class="py-20 bg-ink hm-cta" aria-label="Call to action">
     <div class="max-w-6xl mx-auto px-6 text-center">
       <h2 class="font-serif text-3xl md:text-4xl text-white mb-4">Find out how much of your inventory buyers can reach.</h2>
       <p class="text-white/60 mb-8">The free scan includes an estimated range per thousand impressions if the gaps are fixed. An estimate, not a guarantee.</p>
@@ -1223,7 +1323,7 @@
   <div class="sdot" aria-hidden="true">03</div>
   <div class="shead"><p class="eb">Stage 03 &middot; Act</p><h3>What should be done next?</h3><p class="i">Priorities set, questions answered.</p></div>
   <article class="ai" aria-label="Yield Assistant, the AI yield analyst">
-  <div class="ai-top"><span class="ai-badge"><svg class="spark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l1.9 5.6 5.6 1.9-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.9z"/><path d="M19 15l.8 2.2 2.2.8-2.2.8L19 21l-.8-2.2-2.2-.8 2.2-.8z"/></svg>AI</span><span class="pill pro">Pro</span></div>
+  <div class="ai-top"><span class="ai-badge"><svg class="spark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l1.9 5.6 5.6 1.9-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.9z"/><path d="M19 15l.8 2.2 2.2.8-2.2.8L19 21l-.8-2.2-2.2-.8 2.2-.8z"/></svg>AI</span><span class="pill pro">Pro</span><span class="pill live">Live</span></div>
   <div class="ai-grid">
     <div>
       <h4>Yield Assistant</h4>
@@ -1727,17 +1827,17 @@
   const mobileClose = document.getElementById('mobile-close');
  
   function openMobileMenu() {
+    const bar = hamburger.closest('nav');
+    if (bar) mobileMenu.style.setProperty('--mm-top', Math.round(bar.getBoundingClientRect().bottom + 8) + 'px');
     mobileMenu.classList.add('open');
     hamburger.classList.add('open');
     hamburger.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
   }
  
   function closeMobileMenu() {
     mobileMenu.classList.remove('open');
     hamburger.classList.remove('open');
     hamburger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
   }
  
   hamburger.addEventListener('click', () => {
@@ -1748,7 +1848,12 @@
     }
   });
  
-  mobileClose.addEventListener('click', closeMobileMenu);
+  if (mobileClose) mobileClose.addEventListener('click', closeMobileMenu);
+  // Close on a click or tap outside the panel.
+  document.addEventListener('click', (e) => {
+    if (mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) closeMobileMenu();
+  });
+  window.addEventListener('resize', () => { if (mobileMenu.classList.contains('open')) closeMobileMenu(); });
  
   // Close on Escape key
   document.addEventListener('keydown', (e) => {
@@ -1925,6 +2030,31 @@
   }
   document.getElementById('replay').addEventListener('click',play);
 })();
+
+  // ── Home: example scan card counts up once it is in view ──
+  (function () {
+    const card = document.querySelector('#page-home .hm-scan');
+    if (!card) return;
+    const ring = card.querySelector('.hm-ring .val');
+    const nums = [...card.querySelectorAll('[data-count]')];
+    const C = 326.7;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    nums.forEach((n) => { n.textContent = '0'; });
+    ring.style.strokeDashoffset = String(C);
+    const run = () => {
+      requestAnimationFrame(() => { ring.style.strokeDashoffset = String(C * (1 - 64 / 100)); });
+      const t0 = performance.now();
+      const tick = (t) => {
+        const p = Math.min(1, (t - t0) / 1400), e = 1 - Math.pow(1 - p, 3);
+        nums.forEach((n) => { n.textContent = String(Math.round(+n.dataset.count * e)); });
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    if (!('IntersectionObserver' in window)) return run();
+    const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); setTimeout(run, 350); } }, { threshold: 0.35 });
+    io.observe(card);
+  })();
 
 </script>
  

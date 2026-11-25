@@ -173,10 +173,11 @@ const blogScript = `
   });
   const hamburger = document.getElementById('hamburger-btn');
   const mobileMenu = document.getElementById('mobile-menu');
-  function openMobileMenu() { mobileMenu.classList.add('open'); hamburger.classList.add('open'); hamburger.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
-  function closeMobileMenu() { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+  function openMobileMenu() { const bar = hamburger.closest('nav'); if (bar) mobileMenu.style.setProperty('--mm-top', Math.round(bar.getBoundingClientRect().bottom + 8) + 'px'); mobileMenu.classList.add('open'); hamburger.classList.add('open'); hamburger.setAttribute('aria-expanded', 'true'); }
+  function closeMobileMenu() { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded', 'false'); }
   hamburger.addEventListener('click', () => (mobileMenu.classList.contains('open') ? closeMobileMenu() : openMobileMenu()));
-  document.getElementById('mobile-close').addEventListener('click', closeMobileMenu);
+  document.addEventListener('click', (e) => { if (mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) closeMobileMenu(); });
+  window.addEventListener('resize', () => { if (mobileMenu.classList.contains('open')) closeMobileMenu(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMobileMenu(); });
 </script>`;
 
