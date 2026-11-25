@@ -137,8 +137,8 @@
 #page-services .hero::before{content:"";position:absolute;width:760px;height:760px;right:-220px;top:-260px;background:radial-gradient(circle,rgba(255,102,50,.16),transparent 65%);pointer-events:none}
 #page-services .hero::after{content:"";position:absolute;inset:auto 0 0 0;height:140px;background:linear-gradient(transparent,#fff);pointer-events:none}
 #page-services .hero .inner{position:relative;z-index:1;padding-block:clamp(48px,7.5vw,84px) 60px}
-#page-services .hero h1{font:400 clamp(34px,5vw,52px)/1.06 var(--serif);margin:0 0 22px;max-width:15ch;text-wrap:balance;letter-spacing:-.01em}
-#page-services .hero h1 span{color:var(--orange)}
+#page-services .hero :is(h1,h2[data-h1]){font:400 clamp(34px,5vw,52px)/1.06 var(--serif);margin:0 0 22px;max-width:15ch;text-wrap:balance;letter-spacing:-.01em}
+#page-services .hero :is(h1,h2[data-h1]) span{color:var(--orange)}
 #page-services .hero .lead{margin-bottom:10px}
 #page-services .hero .sub{color:var(--navy);font-weight:500;margin:0 0 30px}
 #page-services .hero small{display:block;font:13px/1.4 var(--mono);color:var(--soft);margin-top:14px}
@@ -1272,7 +1272,7 @@
 <header class="hero">
   <div class="inner">
     <p class="eb">Services</p>
-    <h2>Every yield signal, connected. <span>Each finding feeds the next.</span></h2>
+    <h2 data-h1>Every yield signal, connected. <span>Each finding feeds the next.</span></h2>
     <p class="lead">Valadisse checks what buyers see against what you earn, and shows what to fix.</p>
     <a class="btn" href="https://app.valadisse.com/scan" target="_blank">Run Your Free Scan →</a>
     <small>Free. No signup. Results in seconds.</small>
@@ -1621,7 +1621,7 @@
   <section class="py-14 border-b border-rule" aria-label="Contact header">
     <div class="max-w-6xl mx-auto px-6 text-center">
       <p class="eyebrow mb-4 reveal">Contact</p>
-      <h2 class="font-serif text-4xl md:text-5xl text-ink mb-4 reveal reveal-delay-1">Start the conversation</h2>
+      <h2 data-h1 class="font-serif text-4xl md:text-5xl text-ink mb-4 reveal reveal-delay-1">Start the conversation</h2>
       <p class="text-muted text-lg max-w-xl mx-auto leading-relaxed reveal reveal-delay-2">Run the free scan first to have the findings in hand. It takes seconds.</p>
     </div>
   </section>

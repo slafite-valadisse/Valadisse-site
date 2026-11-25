@@ -148,7 +148,7 @@ export function buildPages(source) {
         `<a ${pre}class="nav-link${id === page.id ? ' active' : ''}"${post}`)
       // One H1 per URL: only this page's section keeps its H1; the others become H2.
       .replace(/<main id="page-([a-z-]+)"[\s\S]*?<\/main>/g, (m, id) =>
-        id === page.id ? m : m.replace(/<h1(\s|>)/g, '<h2$1').replace(/<\/h1>/g, '</h2>'));
+        id === page.id ? m : m.replace(/<h1(\s|>)/g, '<h2 data-h1$1').replace(/<\/h1>/g, '</h2>'));
     const h1s = (body.match(/<h1[\s>]/g) || []).length;
     if (h1s !== 1) throw new Error(`${page.file}: expected one <h1>, found ${h1s}`);
     out[page.file] = source.slice(0, headStart) + setMeta(head, page, ld.join('\n')) + absoluteAssets(body);
