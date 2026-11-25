@@ -57,8 +57,9 @@ One status vocabulary, the same as the pricing cards in the app: **Coming soon**
   found, and it is a CPM rate range: no dollar total is claimed from a domain
   scan alone.
 - Pro's call to action on the site is "Start Pro" (Stephan, 2026-11-25: no
-  "founding" wording). It links to the app's pricing card, which still gates
-  Pro behind an application until the app changes. No "Apply Now" variant.
+  "founding" wording). It links to the app's sign-up with the Pro intent
+  (/signup?plan=pro), which leads to Pro checkout, the same way Starter's
+  Get started does (app PR 33). No "Apply Now" variant.
 - No onboarding session anywhere: Pro is presented as a service that runs on
   its own schedule (rescans, change alerts, Yield Assistant), not as a call.
 - Scope: Valadisse works from the ads.txt file a site publishes and, for
