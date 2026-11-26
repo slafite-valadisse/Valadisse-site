@@ -10,8 +10,10 @@
 # of its own: send it home so it is never indexed as a duplicate.
 /site-src/*    /    301!
 
-# Pricing lives in the app; this gives it a valadisse.com address too.
-/pricing       https://app.valadisse.com/pricing    301!
+# Pricing lives in the app's home page (the app has no /pricing route, so
+# pointing there returned a 404). Same target the site's own links use.
+/pricing       https://app.valadisse.com/#pricing    301!
+/pricing/      https://app.valadisse.com/#pricing    301!
 
 # How It Works is a section of Services since 2026-11-25.
 /how-it-works   /services/#how-it-works   301!
