@@ -5,7 +5,7 @@
 // Writes blog/index.html, blog/<slug>/index.html, blog/feed.xml, sitemap.xml,
 //        robots.txt, the "Recent platform and market updates" list inside
 //        site-src/index.html (between the RECENT-POSTS markers), and then the
-//        site pages (index.html, services/, how-it-works/, contact/) through
+//        site pages (index.html, services/, contact/) through
 //        scripts/build-pages.mjs.
 //
 // The blog pages borrow CSS, Tailwind config, nav and footer from site-src/index.html
@@ -416,7 +416,7 @@ ${urls.map(([u, d]) => `  <url><loc>${u}</loc>${d ? `<lastmod>${d}</lastmod>` : 
 );
 await writeFile(join(ROOT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
 
-// Home: three newest posts into the How It Works block
+// Three newest posts into the RECENT-POSTS block, if the source has one
 const recent = posts.slice(0, 3);
 const list = `<!-- RECENT-POSTS:START -->
         <ul class="divide-y divide-rule border-y border-rule">

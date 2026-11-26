@@ -1,9 +1,11 @@
 # Valadisse marketing site
 
 Static site, deployed by Netlify when `main` changes. `site-src/index.html` is the
-one source for Home, Services, How It Works and Contact. `node scripts/build-blog.mjs`
+one source for Home, Services and Contact. How It Works is a section of
+Services (`/services/#how-it-works`, with the plans and prices); `/how-it-works/`
+301s there and the menu item points there (Stephan, 2026-11-25). `node scripts/build-blog.mjs`
 generates the blog and, through `scripts/build-pages.mjs`, the served pages:
-`index.html`, `services/`, `how-it-works/` and `contact/`, each with its own title,
+`index.html`, `services/` and `contact/`, each with its own title,
 description, canonical URL and JSON-LD (Organization on Home, FAQPage on Services,
 built from the FAQ in the source). Each generated file is the full one-page site
 opening on its own section; the top menu is unchanged and still switches sections
@@ -15,6 +17,17 @@ The canonical definition (`CANONICAL_DEFINITION` in `scripts/build-pages.mjs`) i
 used verbatim on Home, on Services and in the Organization JSON-LD; check-claims
 pins it. The product lives in a
 separate repo (app.valadisse.com); the claims here have to stay true to it.
+
+## New pills and holiday pricing
+
+- A **New** pill (`<span class="new-pill" data-shipped="YYYY-MM-DD" hidden>New</span>`)
+  marks a feature from the Live table for 60 days after the date it shipped in the
+  app. The script shows it until then and removes it after, so it never goes stale.
+  Use the app's merge date. Never on anything Coming soon.
+- Prices on Services mirror the app's pricing card exactly, including the holiday
+  offer (50% off the first 6 months, through Dec 31, 2026 Pacific). Holiday lines
+  carry `data-holiday-until`; after that date the script swaps in the list price.
+  If the app's offer changes, change both together.
 
 ## Claims
 
@@ -43,10 +56,12 @@ One status vocabulary, the same as the pricing cards in the app: **Coming soon**
   finding or per gap. It is conditional on correcting the issues the scan
   found, and it is a CPM rate range: no dollar total is claimed from a domain
   scan alone.
-- Pro's call to action is "Apply for Founding Access" until every Coming soon
-  feature ships. Pro is not offered as a self-serve purchase here or in the
-  app before then. Every Founding Cohort or Founding Access button and label
-  reads exactly "Apply for Founding Access"; there is no "Apply Now" variant.
+- Pro's call to action on the site is "Start Pro" (Stephan, 2026-11-25: no
+  "founding" wording). It links to the app's sign-up with the Pro intent
+  (/signup?plan=pro), which leads to Pro checkout, the same way Starter's
+  Get started does (app PR 33). No "Apply Now" variant.
+- No onboarding session anywhere: Pro is presented as a service that runs on
+  its own schedule (rescans, change alerts, Yield Assistant), not as a call.
 - Scope: Valadisse works from the ads.txt file a site publishes and, for
   Starter, the ad server reports a customer uploads. No claim about ad formats,
   devices or "integrated strategy"; check-claims bans them.
@@ -64,7 +79,6 @@ One status vocabulary, the same as the pricing cards in the app: **Coming soon**
 | Starter names the missing exchanges and shows the same top findings as the free scan | Home, Services, How It Works | App, Starter plan |
 | Change detection: each rescan is compared against the last, so a change to declared sellers is flagged when the publisher scans (on demand, in Starter) | Home, Services, How It Works | App scan comparison; listed under Starter in the app's pricing claims |
 | Upload a Google Ad Manager export and chart revenue, eCPM and fill | How It Works | App `/reports` and dashboard upload |
-| Onboarding session to map priorities (Pro, set up by hand) | Services, How It Works | Manual service |
 | Advisory engagements are scoped individually and priced by engagement: vendor stack review, contract and revenue-share review, identity and addressability strategy, a neutral second opinion | Services, How It Works | Manual service; matches the app's Advisory card and lead form |
 | Identity and addressability, and market intelligence (advisory work) | Home, Services | Manual service. Market intelligence is not on the app's Advisory card; confirm before expanding |
 | Community-driven publishers are the primary audience | Home (Who this is for) | Positioning decision (Stephan, 2026-10-21). The scan and the report upload work from any site's ads.txt and a Google Ad Manager export; nothing is built for a specific publisher type |
@@ -95,4 +109,4 @@ on top of any tier" and "not standalone retainers"; "the only practice" and
 "no display-first practice can match"; "ad ops function, without the
 overhead"; "continuous" monitoring; acting on developments faster than
 enterprise vendors; indexes built on IAB standards (unverifiable as worded);
-"the same monitoring that keeps the platform current"; "US-based" as a requirement or description of the audience (anywhere: copy, meta, footer); any revenue floor, band or "secondary pool" for the audience ("$500K+", "$250K to $5M+"; Stephan, 2026-11-10: the audience is stated without a dollar figure); the claim that all four ICPs qualify ("audio/podcast, app-first, newsletter-led, or community-driven publishers all qualify", "any distribution model"); every audio, podcast, streaming, DAI and app-first statement (the Audio & Podcast Yield service and tile, "including audio", "audio sellers included", "tell us you're audio-first", the DAI and podcast experience sentence, "display, native, audio, or video"); newsletter-led as a named audience; "how much premium demand" (the free scan counts exchanges, it does not size demand); "revenue-impact ranges", "revenue range on every finding", "revenue range to your results" and "complete findings" with "every gap named" (Starter shows the same top findings and the same single CPM opportunity card as free, and adds the exchange names); "annualised figure". Same-day anomaly alerts or detection (a partner underdelivering, a floor misconfiguration, timeouts; change alerts on ads.txt and the supply chain are the live claim); "a ranked fix list" and "what to fix first" (the scan does not rank findings). None of these come back until the tooling for that publisher type exists; `scripts/check-claims.mjs` enforces it.
+"the same monitoring that keeps the platform current"; "US-based" as a requirement or description of the audience (anywhere: copy, meta, footer); any revenue floor, band or "secondary pool" for the audience ("$500K+", "$250K to $5M+"; Stephan, 2026-11-10: the audience is stated without a dollar figure); the claim that all four ICPs qualify ("audio/podcast, app-first, newsletter-led, or community-driven publishers all qualify", "any distribution model"); every audio, podcast, streaming, DAI and app-first statement (the Audio & Podcast Yield service and tile, "including audio", "audio sellers included", "tell us you're audio-first", the DAI and podcast experience sentence, "display, native, audio, or video"); newsletter-led as a named audience; "how much premium demand" (the free scan counts exchanges, it does not size demand); "revenue-impact ranges", "revenue range on every finding", "revenue range to your results" and "complete findings" with "every gap named" (Starter shows the same top findings and the same single CPM opportunity card as free, and adds the exchange names); "annualised figure". Same-day anomaly alerts or detection (a partner underdelivering, a floor misconfiguration, timeouts; change alerts on ads.txt and the supply chain are the live claim); "a ranked fix list" and "what to fix first" (the scan does not rank findings). The Pro onboarding session and all "founding" wording ("Apply for Founding Access", "Founding Cohort"; Stephan, 2026-11-25). None of these come back until the tooling for that publisher type exists; `scripts/check-claims.mjs` enforces it.
